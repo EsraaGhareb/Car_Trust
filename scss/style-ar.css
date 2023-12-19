@@ -1,0 +1,130 @@
+
+body, html{
+    font-family: 'Tajawal' !important;
+    direction: rtl !important;
+}
+
+.owl-carousel{
+    direction: ltr !important;
+}
+.displayClass {
+    display: none !important;
+  }
+  .footer .btn.btn-link{
+    text-align: right;
+  }
+  .blog{
+    text-align: right;
+  }
+  .form-select{
+    background-position: left .75rem center;
+  }
+  .navbar .dropdown-toggle::after{
+    margin-right:0 !important;
+  }
+
+  #library .nav-pills i , #whyUs .text i, #news i ,.otherLibrary li i{
+  transform: rotate(180deg) !important;
+  }
+  .dropdown-item{
+    text-align: right;
+  }
+  .navbar .navbar-nav .nav-link{
+    font-family: 'Tajawal' !important;
+  }
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6{
+    font-family: 'Tajawal' !important;
+  }
+  .carousel-caption{
+    text-align: right;
+  }
+  .carousel-caption h1{
+    font-size: 45px;
+    margin-bottom: 32px !important;
+  }
+  .carousel-caption p{
+    font-size: 18px !important;
+  }
+  .carousel-inner img {
+    transform: scaleX(1);
+}
+#aboutUs p{
+  text-align: right;
+}
+#services .photo1{
+  left: auto;
+  right: 50px;
+}
+#services .photo3{
+  left: auto;
+  right:  -30px;
+}
+#services p{
+  padding: 10px !important;
+}
+@media screen and (max-width: 1200px) {
+    .displayClass {
+      display: block !important;
+    }
+  }
+  @media screen and (max-width: 991px) {
+    .displayClass {
+      display: none !important;
+    }
+    a.nav-link.dropdown-toggle::before{
+      right: 135px;
+    }
+    .displayClass .nav-item.dropdown a::before{
+      right: 110px;
+    }
+    .carousel-indicators {
+      display: none;
+    }
+    .carousel-item img {
+      height: 400px;
+    }
+    .carousel-caption h1 {
+      font-size: 24px;
+    }
+    .carousel-caption p {
+      font-size: 14px !important;
+      margin-bottom: 16px !important;
+    }
+  
+    footer {
+      padding: 0px 0;
+    }
+    footer .pt-5 {
+      padding: 0 !important;
+    }
+    footer h5 {
+      margin-top: 30px;
+    }
+    .footer .copyright {
+      font-size: 13px;
+    }
+    .responsiveLogo {
+      display: block !important;
+      height: 70px;
+      width: 80px;
+    }
+    .displayClass {
+      display: block !important;
+      padding-bottom: 20px;
+      padding-right: 20px;
+    }
+    .displayClass .socailMedia {
+      margin-top: 16px;
+      padding-right: 20px;
+    }
+    .largeScreen {
+      display: none !important;
+    }
+    .navbar .navbar-nav {
+      padding-bottom: 0 !important;
+    }
+    .dropdown-menu[data-bs-popper]{
+        right: 0;
+        left: auto;
+    }
+  }

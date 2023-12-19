@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Car Trust</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600&family=Saira:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Alpine JS  -->
+<script src="//unpkg.com/alpinejs" defer></script>
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="./scss/style.css" rel="stylesheet">
+    <link href="./scss/style-ar.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <!-- <div class="spinner-grow text-primary" role="status"></div> -->
+        <img class="img-fluid" src="./img/logo.png" />
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar Start -->
+
+    <div class="container-fluid px-0">
+        <div class="headerBg fixed-top">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-dark py-lg-0 px-lg-5">
+                    <a href="index.html" class="navbar-brand ms-4 ms-lg-0 largeScreen">
+                        <img class="img-fluid" src="./img/logo.png" />
+                    </a>
+                    <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+                        <img class="img-fluid responsiveLogo" src="./img/logo.png" />
+                    </a>
+                    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav p-4 p-lg-0 m-auto">
+                            <a href="index.html" class="nav-item nav-link active"> الرئيسية</a>
+                            <a href="#footer" class="nav-item nav-link">مواقعنا </a>
+                            <a href="#aboutUs" class="nav-item nav-link"> من نحن </a>
+                            <a href="#services" class="nav-item nav-link">خدماتنا </a>
+                            <a href="#footer" class="nav-item nav-link"> تواصل معنا</a>
+                        </div>
+                        <div class="ms-auto d-flex align-items-center displayClass">
+                            <div class="nav-item dropdown mx-2">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i class="fas fa-globe"></i>
+                                    عربي
+                                </a>
+                                <div class="dropdown-menu m-0">
+                                    <a href="index.html" class="dropdown-item">
+                                        <img class="img-fluid" src="./img/en.png" style="width: 30px; height: 30px;" />
+                                        English
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mx-4">
+                                <a class="btn btn-primary my-2" href="login.html">
+                                    <span class="mx-2">دخول / تسجيل</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ms-auto d-flex align-items-center largeScreen">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="fas fa-globe"></i>
+                                عربي
+                            </a>
+                            <div class="dropdown-menu m-3">
+                                <a href="index.html" class="dropdown-item">
+                                    <img class="img-fluid" src="./img/en.png" style="width: 30px; height: 30px;" />
+                                    English</a>
+                            </div>
+                        </div>
+                        <a class="btn btn-primary" href="login.html">
+                            <span class="mx-2">دخول / تسجيل</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="img/carousel-1.jpg" alt="Image" id="silder">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-5 col-md-12 col-sm-12">
+                                    <h1 class="display-4 text-white mb-3 animated slideInDown title">
+                                        <span class="blueColor">قيم سيارتك...</span>
+                                        <br />
+                                        بتسعيره السوق
+                                    </h1>
+                                    <p class="fs-5 text-white mb-5 animated slideInDown">
+                                        احجز خدمة تسعير المركبات الأن
+                                    </p>
+                                    <a class="btn btn-primary animated slideInDown toggleBtn">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        <span class="mx-2">
+                                            ابدأ خدمة التقييم الآن
+                                        </span>
+                                        <i class="fas fa-arrow-left"></i>
+                                    </a>
+                                </div>
+                                <div class="col-lg-7 col-ms-12 col-sm-12">
+                                    <div class="carForm  rounded-3 p-3 mx-5" x-data="getVecheilsInfo()" x-init="fetchVecheilManufacturers()">
+                                        <form action="#">
+                                            <div class="form-step-wrapper" >
+                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                    <h5>تفاصيل المركبه</h5>
+                                                    <a href="#"> الرجوع للقائمة <i class="bi bi-chevron-left"></i> </a>
+                                                </div>
+                                                <div class="collapse-item">
+                                                    <div class="collapse-top d-flex justify-content-between">
+                                                        <h5>الشركة المصنعه</h5>
+                                                        <a data-bs-toggle="collapse" href="#collapseManufacturers" role="button" aria-expanded="false" aria-controls="collapseManufacturers">عرض الكل <i class="bi bi-chevron-down"></i></a>
+
+                                                    </div>
+                                                    <div class="collapse-body overflow-auto collapse show" id="collapseManufacturers">
+                                                        <div class="d-flex gap-1 my-3 vecheils-list">
+                                                            <template x-if="!isEmpty">
+                                                                <template x-for="(VecheilManufacturer , index) in VecheilManufacturers">
+                                                                    <div class="form-check vecheil-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="vecheilCheckRadio" :id="`vecheilcheck-${index}`" :value="`${VecheilManufacturer.name}_${VecheilManufacturer.id}`" x-model="VecheilManufacturer_val" x-on:change="fetchVecheilModels(VecheilManufacturer.id)">
+                                                                        <label class="form-check-label" :for="`vecheilcheck-${index}`">
+                                                                            <img :alt="VecheilManufacturer.name" width="100px" class="d-block" :src="VecheilManufacturer.make_logo" :data-src="VecheilManufacturer.make_logo" onerror="this.src='https://placehold.co/400'"/>
+                                                                            <span x-text="VecheilManufacturer.name"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </template>
+                                                            </template>
+                                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="collapse-item" x-show="modelShow">
+                                                    <div class="collapse-top d-flex justify-content-between">
+                                                        <h5>الموديل</h5>
+                                                        <a data-bs-toggle="collapse" href="#collapseModels" role="button" aria-expanded="false" aria-controls="collapseModels">عرض الكل <i class="bi bi-chevron-down"></i></a>
+
+                                                    </div>
+                                                    <div class="collapse-body overflow-auto collapse show" id="collapseModels">
+                                                        <div class="d-flex gap-1 my-3 models-list">
+                                                            <template x-if="!isEmpty">
+                                                                <template x-for="(VecheilModel , index) in VecheilModels">
+                                                                    <div class="form-check model-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="modelCheckRadio" :id="`vecheilModel-${index}`"
+                                                                            :value="`${VecheilModel.name}_${VecheilModel.id}`" x-model="VecheilModel_val"
+                                                                            x-on:change="fetchModelYears()">
+                                                                        <label class="form-check-label" :for="`vecheilModel-${index}`">
+                                                                             <span x-text="VecheilModel.name"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </template>
+                                                            </template>
+                                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="collapse-item" x-show="yearShow">
+                                                    <div class="collapse-top d-flex justify-content-between">
+                                                        <h5>السنة</h5>
+                                                        <a data-bs-toggle="collapse" href="#collapseYears" role="button" aria-expanded="false" aria-controls="collapseYears">عرض الكل <i class="bi bi-chevron-down"></i></a>
+
+                                                    </div>
+                                                    <div class="collapse-body overflow-auto collapse shadow" id="collapseYears">
+                                                        <div class="d-flex gap-1 my-3 years-list">
+                                                            <template x-if="!isEmpty">
+                                                                <template x-for="(VecheilYear , index) in VecheilYears">
+                                                                    <div class="form-check year-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="modelYearCheckRadio" :id="`modelYear-${index}`" :value="VecheilYear.name"
+                                                                            x-on:change="fetchModelTrims(VecheilManufacturer_id,VecheilModel_id,`${VecheilYear.id}`)">
+                                                                        <label class="form-check-label" :for="`modelYear-${index}`">
+                                                                             <span x-text="VecheilYear.name"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </template>
+                                                            </template>
+                                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="collapse-item" x-show="trimShow">
+                                                    <div class="collapse-top d-flex justify-content-between">
+                                                        <h5>الطراز</h5>
+                                                        <a data-bs-toggle="collapse" href="#collapseTrims" role="button" aria-expanded="false" aria-controls="collapseTrims">عرض الكل <i class="bi bi-chevron-down"></i></a>
+
+                                                    </div>
+                                                    <div class="collapse-body overflow-auto collapse show" id="collapseTrims">
+                                                        <div class="d-flex gap-1 my-3 years-list">
+                                                            <template x-if="!isEmpty">
+                                                                <template x-for="(VecheilTrim , index) in VecheilTrims">
+                                                                    <div class="form-check model-trim">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="trimCheckRadio" :id="`trimCheck-${index}`">
+                                                                        <label class="form-check-label" :for="`trimCheck-${index}`">
+                                                                             <span x-text="VecheilTrim.name"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </template>
+                                                            </template>
+                                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="img/carousel-1.jpg" alt="Image" id="silder">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-5 col-md-12 col-sm-12">
+                                    <h1 class="display-4 text-white mb-3 animated slideInDown title">
+                                        <span class="blueColor">قيم سيارتك...</span>
+                                        <br />
+                                        بتسعيره السوق
+                                    </h1>
+                                    <p class="fs-5 text-white mb-5 animated slideInDown">
+                                        احجز خدمة تسعير المركبات الأن
+                                    </p>
+                                    <a class="btn btn-primary animated slideInDown toggleBtn">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        <span class="mx-2">
+                                            ابدأ خدمة التقييم الآن
+                                        </span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                                <div class="col-lg-7 col-ms-12 col-sm-12">
+                                    <div class="carForm">
+                                        <h1>[فورم]</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="img/carousel-1.jpg" alt="Image" id="silder">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-5 col-md-12 col-sm-12">
+                                    <h1 class="display-4 text-white mb-3 animated slideInDown title">
+                                        <span class="blueColor">قيم سيارتك...</span>
+                                        <br />
+                                        بتسعيره السوق
+                                    </h1>
+                                    <p class="fs-5 text-white mb-5 animated slideInDown">
+                                        احجز خدمة تسعير المركبات الأن
+                                    </p>
+                                    <a class="btn btn-primary animated slideInDown toggleBtn">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        <span class="mx-2">
+                                            ابدأ خدمة التقييم الآن
+                                        </span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                                <div class="col-lg-7 col-ms-12 col-sm-12">
+                                    <div class="carForm">
+                                        <h1>[فورم]</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+    <!--AboutUs Start-->
+    <section id="aboutUs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <h1>من نحن</h1>
+                    <p class="more_description">
+                        كارترست هي شركة نوعية رائدة في مجال تقنية المركبات والمتخصصة في تقديم برامج فحص وتقييم المركبات
+                        باستخدام الذكاء الصناعي والتعلم الآلي ورؤية الكمبيوتر
+                        تخدم كار ترست عملاء التجزئة والشركات من خلال أنظمة التكنولوجيا المتقدمة جنبًا إلى جنب مع الخبرة
+                        البشرية والميكانيكية والتقنية </p>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="h-100 d-flex justify-content-center align-items-center">
+                        <h2 class="description">
+                            الثقة و راحلة البال عند اقتناء مركبة مستعملة
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--AboutUs End-->
+
+    <!--Why US Start-->
+    <section id="whyUs">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-3 col-sm-12 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="card">
+                        <img src="img/icons/Shield - check.png" alt="Image description" />
+                        <p>ضمان الأعطال</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="card">
+                        <img src="img/icons/Search.png" alt="Image description" />
+                        <p>فحص السيارات</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="card">
+                        <img src="img/icons/Dollar.png" alt="Image description" />
+                        <p>السعر السوقي</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Why US End-->
+
+    <!--Services Start-->
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <h1>خدمات كارترست </h1>
+                    <p>
+                        نحن نعمل جاهدين ونسعى بكل قوة لتوفير تجربة مميزة تمنح عملائنا الثقة الكاملة وتخلصهم من أي قلق أو
+                        توتر عند اقتناء مركبة مستعملة. فنحن ندرك تمامًا أهمية الشعور بالاطمئنان والاطلاع على كافة
+                        التفاصيل والمعلومات اللازمة قبل اتخاذ قرار الشراء. لذا، نقوم بعمل فحص دقيق وشامل لجميع المركبات
+                        المستعملة المتوفرة في مجموعتنا، ونقدم تقارير شاملة تشمل تاريخ الصيانة والخدمة، وحالة المحرك
+                        والهيكل، وسجل الحوادث إن وجد، وأي معلومات أخرى ذات صلة. </p>
+                    <ul class="fa-ul">
+                        <div class="info wow fadeInUp" data-wow-delay="0.5s">
+                            <div>
+                                <i><img src="img/icons/car 2.png"></i>
+                            </div>
+                            <div>
+                                <p>
+                                    الفحص الحراري
+                                </p>
+                            </div>
+                        </div>
+                        <div class="info wow fadeInUp" data-wow-delay="0.5s">
+                            <div>
+                                <i><img src="img/icons/star 5.png"></i>
+                            </div>
+                            <div>
+                                <p>
+                                    فحص 360 بإستخدام الذكاء الإصطناعي </p>
+                            </div>
+                        </div>
+                        <div class="info wow fadeInUp" data-wow-delay="0.5s">
+                            <div>
+                                <i><img src="img/icons/Search3.png"></i>
+                            </div>
+                            <div>
+                                <p>
+                                    فحص ما قبل الشراء
+                                </p>
+                            </div>
+                        </div>
+                        <div class="info wow fadeInUp" data-wow-delay="0.5s">
+                            <div>
+                                <i><img src="img/icons/Bullish.png"></i>
+                            </div>
+                            <div>
+                                <p>
+                                    خدمات الشركات
+                                </p>
+                            </div>
+                        </div>
+                        <div class="info  wow fadeInUp" data-wow-delay="0.5s">
+                            <div>
+                                <i><img src="img/icons/Love.png"></i>
+                            </div>
+                            <div>
+                                <p>
+                                    خدمات العملاء المميزين </p>
+                            </div>
+                        </div>
+                        <div class="info  wow fadeInUp" data-wow-delay="0.5s">
+                            <div>
+                                <i><img src="img/icons/USD-Dollar.png"></i>
+                            </div>
+                            <div>
+                                <p>
+                                    تسعير المركبة
+                                </p>
+                            </div>
+                        </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="photos">
+                        <div class="photo2">
+                            <img src="img/Rectangle 2.png" alt="Image 2">
+                        </div>
+                        <div class="photo1">
+                            <img src="img/Rectangle 1.png" alt="Image 1">
+                        </div>
+
+                        <div class="photo3" class="card">
+                            <img src="img/icons/check 1.png" class="img-fluid text-center">
+                            <h1>3.4K</h1>
+                            <p style="text-align: center; line-height: 20px;">عميل راضي
+                                عن خدماتنا</p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--Services end-->
+
+    <!--vision start-->
+    <section id="vision">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                    <div class="card-container wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="vision-card">
+                            <div class="card-details">
+                                <img src="img/icons/Vector.png" alt="Image description" />
+                                <h1>رؤيتنا</h1>
+                                <p>تحقيـق مسـتقبل فـي المملكـة العربية السـعودية يتمكن فيه الجميـع بـكل سـهولة من اقتناء
+                                    مركبات آمنة، موثوقة، صديقة للبيئة وبأسـعار مناسـبة.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-container wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="vision-card">
+                            <div class="card-details">
+                                <img src="img/icons/vision.png" alt="Image description" />
+                                <h1>مهمتنا</h1>
+                                <p>الارتقـاء بقطـاع المركبات المسـتعملة فـي المملكة، وذلك عبر ابتـكار وتطويـر منتجـات
+                                    وخدمات تركز علـى تحقيق مصلحة العميـل، مـع الحـرص الدؤوب على تطبيـق المعايير العالمية
+                                    وإحداث نقلـة نوعيـة فـي نظـرة المجتمع فيما يتعلق بشـراء المركبات وبيعه
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+    <!--vision end-->
+
+
+    <!-- Footer Start -->
+    <footer id="footer">
+        <div class="container-fluid text-white-50 footer pt-5 wow fadeIn px-0" data-wow-delay="0.1s">
+            <div class="bg"></div>
+            <div class="container pt-5 footerContent">
+                <div class="row">
+                    <div class="col-lg-2 col-md-6 mb-2">
+                        <h5 class="text-light mb-4">لمحة عامة</h5>
+                        <a class="btn btn-link" href="">من نحن</a>
+                        <a class="btn btn-link" href="">الاسئلة المتكررة</a>
+                        <a class="btn btn-link" href="">الخصوصية</a>
+                        <a class="btn btn-link" href="">الشروط و الأحكام</a>
+                        <a href="index.html"> <img class="img-fluid mb-3" src="./img/logo.png" /></a>
+                    </div>
+                    <div class="col-lg-2 col-md-6 mb-2">
+                        <h5 class="text-light mb-4">اتصل بنا</h5>
+                        <ul class="contactInfo">
+                            <li>
+                                <a>
+                                    <img class="img-fluid" src="./img/icons/COCO/Twocolors/Call - Calling.png" />
+                                    <span>966920033331</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <img class="img-fluid" src="./img/icons/arrow.png" />
+                                    <span>Info@Carttrust.Sa</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <img class="img-fluid" src="./img/icons/COCO/Twocolors/Location.png" />
+                                    <span>
+                                        مبنى رقم 6723 شارع الامير سلطان
+                                        حي الروضة جدة الرمز البريدي 23431
+                                        المملكة العربية السعودية
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <img src="./img/mad.png" class="img-fluid" />
+                        <div class="d-flex py-2">
+                            <a class="btn btn-square me-1" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square me-1" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-square me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-2">
+                        <h5 class="text-light mb-4">امسح لنسخة على جوالك</h5>
+                        <a class="btn btn-link" href=""><img class="img-fluid" src="./img/icons/qrCode.png" /></a>
+                        <a class="btn btn-link download" href="">حمل ملف الشركة <i class="fas fa-download"></i></a>
+                        <a class="btn btn-link download" href="">حمل التطبيق</a>
+                        <div class="d-flex apps">
+                            <a class="btn btn-link" href=""><img class="img-fluid" src="./img/icons/apple.png" /></a>
+                            <a class="btn btn-link" href=""><img class="img-fluid" src="./img/icons/google.png" /></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-12 mb-2">
+                        <form>
+                            <h4>تواصل معنا </h4>
+                            <input class="form-control mb-3" type="text" placeholder="أسمك بالكامل" />
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <input class="form-control mb-3" type="text" placeholder="رقم الهاتف " />
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <input class="form-control mb-3" type="email" placeholder="البريد الإلكتروني" />
+                                </div>
+                            </div>
+                            <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="4"
+                                name="اكتب رسالتك" placeholder="اكتب رسالتك"></textarea>
+                            </textarea>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="social">
+                                    <a class="btn btn-square me-1" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square me-1" href=""><i class="fab fa-youtube"></i></a>
+                                    <a class="btn btn-square me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                                <button type="submit" class="btn btn-primary ">ارسال</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="copyright mt-3">
+                    <div class="row">
+                        <p>كل الحقوق محفوظة لدى شركة ثقة المركبة للتجارة @ 2021</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.js"></script>
+    <script src="lib/parallax/parallax.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('alpine:init', () => {
+        console.log("Alpine is here");
+            Alpine.data('getVecheilsInfo', () => ({
+                VecheilManufacturers:{}, 
+                VecheilManufacturer_val:"",
+                VecheilManufacturer_id:"",
+                VecheilModels:{}, 
+                VecheilModel_val:"",
+                VecheilModel_id:"",
+                VecheilYears:{}, 
+                VecheilTrims:{}, 
+                isEmpty: true,
+                modelShow: false,
+                yearShow: false,
+                trimShow: false,
+                baseUrl: "https://partner-api.cartrust.sa",
+                fetchVecheilManufacturers() {        
+                    const endpointUrl = `/api/v2/manufacturers`;
+                    const fullUrl = this.baseUrl + endpointUrl; 
+                    fetch(fullUrl)
+                        .then((res) => res.json())
+                        .then((data) =>  {
+                            // console.log(data)
+                            if(data.status == true){
+                                if(data.manufacturers != "" || data.manufacturers != null){
+                                    this.VecheilManufacturers = data.manufacturers;
+                                    this.isEmpty = false;
+                                    // console.log(this.VecheilManufacturers)
+                                } 
+                            }
+                        });
+                },fetchVecheilModels(manufacturerId) {
+                     
+                    const endpointUrl = `/api/v2/models/manufacturer/${manufacturerId}?priced_models=${manufacturerId}`;
+                    const fullUrl = this.baseUrl + endpointUrl;  
+                    
+                    fetch(fullUrl)
+                         .then((res) => res.json())
+                         .then((data) =>  {
+                            //  console.log('models',data)
+                             if(data.status == true){
+                                 if(data.models != "" || data.models != null){
+                                     this.VecheilModels = data.models;
+                                     this.VecheilManufacturer_id = this.VecheilManufacturer_val.split('_')[1];
+                                     this.isEmpty = false;
+                                     this.modelShow = true;
+                                    //  console.log(this.VecheilModels)
+                                   
+                                 } 
+                             }
+                         });
+                 },fetchModelYears() { 
+                    const endpointUrl = `/api/v2/years`;
+                    const fullUrl = this.baseUrl + endpointUrl;  
+                    
+                    fetch(fullUrl)
+                         .then((res) => res.json())
+                         .then((data) =>  {
+                            //  console.log('years',data)
+                             if(data.status == true){
+                                 if(data.years != "" || data.years != null){
+                                     this.VecheilYears = data.years;
+                                     this.VecheilModel_id = this.VecheilModel_val.split('_')[1];
+                                     this.isEmpty = false;
+                                     this.yearShow = true;
+                                    //  console.log(this.VecheilYears)
+                                    // console.log(this.VecheilManufacturer_id)
+                                    //  console.log(this.VecheilModel_id)
+                                 } 
+                             }
+                         });
+                 },fetchModelTrims(manufacturerId,modelId,year) { 
+                    const endpointUrl = `/api/v2/trims/make/${manufacturerId}/model/${modelId}/year/${year}`;
+                    const fullUrl = this.baseUrl + endpointUrl;  
+                    
+                    fetch(fullUrl)
+                         .then((res) => res.json())
+                         .then((data) =>  {
+                            //  console.log('trims',data)
+                             if(data.status == true){
+                                 if(data.trims != "" || data.trims != null){
+                                     this.VecheilTrims = data.trims;
+                                     this.isEmpty = false;
+                                     this.trimShow = true
+                                    //  console.log(this.VecheilTrims)
+                                 } 
+                             }
+                         });
+                 }
+        
+        
+            }))
+        
+        })
+        </script>
+</body>
+
+</html>
