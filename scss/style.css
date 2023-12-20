@@ -67,32 +67,38 @@ body {
   margin-bottom: 30px;
 }
 
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
   font-family: "Tajawal", sans-serif;
 }
 
-.btn.btn-primary {
-  border-radius: 0 !important;
-  background-color: transparent;
-  padding: 10px 28px !important;
-  border-color: #fff !important;
-  color: #fff;
-  border-radius: 8px !important;
-  font-size: 18px;
-  box-shadow: none;
-  line-height: 20px;
-}
 .btn.btn-primary:hover {
   background-color: #F2F2F2 !important;
   box-shadow: none;
   color: #1CA3D5 !important;
 }
 
-.btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
+.btn-check:checked + .btn-primary:focus,
+.btn-check:active + .btn-primary:focus,
+.btn-primary:active:focus,
+.btn-primary.active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
   box-shadow: none !important;
 }
 
-.btn-square, .btn-sm-square, .btn-lg-square {
+.btn-square,
+.btn-sm-square,
+.btn-lg-square {
   background-color: #1CA3D5 !important;
   box-shadow: none;
   outline: none;
@@ -102,7 +108,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin-left: 0 !important;
 }
 
-.navbar, .headerBg {
+.navbar,
+.headerBg {
   background-color: transparent !important;
   padding: 16px 0;
 }
@@ -134,7 +141,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   height: 100% !important;
 }
 
-.nav-item.dropdown, .nav-link {
+.nav-item.dropdown,
+.nav-link {
   color: #fff !important;
   font-size: 16px;
 }
@@ -143,7 +151,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   font-size: 18px;
 }
 
-.navbar .navbar-nav .nav-link:hover, .navbar .navbar-nav .nav-link.active {
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active {
   color: #1CA3D5 !important;
   position: relative;
 }
@@ -217,7 +226,7 @@ a.nav-link.dropdown-toggle.active::after {
 .carousel-caption p {
   font-size: 18px !important;
 }
-.carousel-caption .btn.btn-primary {
+.carousel-caption .caption-btn {
   background-color: #1CA3D5 !important;
   border: none !important;
   font-size: 28px;
@@ -226,24 +235,30 @@ a.nav-link.dropdown-toggle.active::after {
   align-items: end;
   padding: 20px !important;
 }
-.carousel-caption .btn.btn-primary:hover {
+.carousel-caption .caption-btn:hover {
   background-color: transparent !important;
   border: 1px solid #fff !important;
   color: #fff !important;
 }
 
-.carousel-control-prev, .carousel-control-next {
+.carousel-control-prev,
+.carousel-control-next {
   width: 5%;
 }
 
 .carForm {
   background: rgba(255, 255, 255, 0.8);
 }
-.carForm h1 {
-  color: #fff !important;
-}
 .carForm ::-webkit-scrollbar {
   height: 0;
+}
+.carForm .form-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+.carForm a {
+  color: #000;
+  font-weight: 500;
 }
 .carForm .form-check {
   padding: 0;
@@ -252,9 +267,24 @@ a.nav-link.dropdown-toggle.active::after {
   font-weight: 600;
   font-size: 16px;
 }
+.carForm .form-check label {
+  font-weight: 500;
+  cursor: pointer;
+}
+.carForm .form-check-input:checked + label {
+  color: #0299f8;
+}
 .carForm .form-check-input {
   opacity: 0;
   display: none;
+}
+.carForm .carColor .form-check-input + label {
+  border: 2px solid transparent;
+  padding: 2px 7px;
+  border-radius: 5px;
+}
+.carForm .carColor .form-check-input:checked + label {
+  border-color: #0299f8;
 }
 .carForm .vecheils-list .vecheil-check img {
   height: 100px !important;
@@ -265,6 +295,9 @@ a.nav-link.dropdown-toggle.active::after {
   margin: 2px;
   border-radius: 10px;
   border: 2px solid #aaa;
+}
+.carForm .vecheils-list .form-check-input:checked + label {
+  color: #000;
 }
 .carForm .vecheils-list .form-check-input:checked + label img {
   border-color: #0299f8;
@@ -282,6 +315,35 @@ a.nav-link.dropdown-toggle.active::after {
 .carForm .models-list .form-check-input:checked + label,
 .carForm .years-list .form-check-input:checked + label {
   border-color: #0299f8;
+}
+.carForm .btns-submit-step .btn {
+  min-width: 200px;
+}
+.carForm .color-sq {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+.bg-red {
+  background-color: red;
+}
+
+.bg-green {
+  background-color: #126639;
+}
+
+.bg-blue {
+  background-color: blue;
+}
+
+.bg-gray {
+  background-color: gray;
+}
+
+.bg-black {
+  background-color: black;
 }
 
 #aboutUs {
@@ -562,7 +624,8 @@ form .btn.btn-primary {
   .topHead .info.address {
     display: none !important;
   }
-  .carousel-control-prev, .carousel-control-next {
+  .carousel-control-prev,
+  .carousel-control-next {
     display: flex;
   }
   .displayClass {
@@ -635,10 +698,12 @@ form .btn.btn-primary {
   .navbar-collapse {
     background-color: #231F20 !important;
   }
-  .carousel-control-prev, .carousel-control-next {
+  .carousel-control-prev,
+  .carousel-control-next {
     display: none;
   }
-  .navbar, .headerBg {
+  .navbar,
+  .headerBg {
     padding: 10px 0;
   }
   .carousel-caption {
