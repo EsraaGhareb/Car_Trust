@@ -32,17 +32,17 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Alpine JS  -->
     <script src="//unpkg.com/alpinejs" defer></script>
+     <script src="js/alpineCode.js" ></script>
+
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
     <link href="./scss/style.css" rel="stylesheet">
     <link href="./scss/style-ar.css" rel="stylesheet">
 
-    <!-- Alpine JS  -->
-    <script src="js/alpineCode.js"></script>
 
 </head>
 
-<body x-data="getVecheilsInfo()" x-init="checkLoggedUser()">
+<body x-data="getVecheilsInfo()" x-cloak x-init="checkLoggedUser()">
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -114,10 +114,16 @@
                             <span class="mx-2">دخول / تسجيل</span>
                         </a>
 
-                        <a href="profile.html" class="text-white" x-show="isAuthedUser">
-                            <i class="bi bi-person-circle fs-5"></i>
-                            <span class="mx-auto">ملفي الشخصي</span>
-                        </a>
+                       <div class="d-flex gap-2 align-items-center">
+                            <a href="profile.html" class="text-white" x-show="isAuthedUser">
+                                <i class="bi bi-person-circle fs-5"></i>
+                                <span class="mx-auto">ملفي الشخصي</span>
+                            </a>
+                            <button class="btn btn-primary" x-on:click="logOut()" x-show="isAuthedUser"> 
+                                <i class="bi bi-box-arrow-left fs-5"></i>
+                                <span class="mx-auto">تسجيل الخروج</span>
+                            </button>
+                       </div>
                     </div>
                 </nav>
             </div>
@@ -161,7 +167,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-7 col-ms-12 col-sm-12">
-                                    <div class="carForm  rounded-3 p-3 mx-md-5 mt-4 mb-2"
+                                    <div class="carForm  rounded-3 p-3 mx-md-5 mt-4 mb-5"
                                         x-init="fetchVecheilManufacturers()">
                                         <form action="#">
                                             <div class="form-step-wrapper step-1" x-show="showPrevStep">
@@ -1371,6 +1377,7 @@
                 checkAuth() {
                     this.VecheilYear_id = this.VecheilYear_val.split('_')[1];
                     this.VecheilTrim_id = this.VecheilTrim_val.split('_')[1];
+                    console.log(retrieveAuth())
                     if (retrieveAuth().isAuthenticated) {
                         paymentDetails.manufacturer_id = this.VecheilManufacturer_id;
                         paymentDetails.model_id = this.VecheilModel_id;
@@ -1384,6 +1391,7 @@
 
                 },
                 checkLoggedUser() {
+                    console.log(retrieveAuth())
                     if (retrieveAuth().isAuthenticated) {
                         this.isAuthedUser = true;
 
@@ -1391,6 +1399,30 @@
                         this.isAuthedUser = false;
                     }
 
+                },
+                logOut(){
+                    const endpointUrl = `/api/v2/logout`;
+                    const fullUrl = this.baseUrl + endpointUrl;
+
+                     // Make a POST request
+                     fetch(fullUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + retrieveAuth().access_token
+                        },
+                        
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            
+                            reject();
+                            location.href = "login.html"
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            // Handle errors
+                        });
                 },
                 postData() {
                     const endpointUrl = `/api/v2/request-otp`;

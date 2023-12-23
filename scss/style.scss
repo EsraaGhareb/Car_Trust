@@ -289,9 +289,26 @@ z-index: 0;
   background: #fff;
 
   ::-webkit-scrollbar {
-    height: 2px;
-
+    width: 14px;
+    height: 3px;
   }
+  
+  /* Define the track (the area where the thumb doesn't cover) */
+  ::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color of the track */
+  }
+  
+  /* Define the thumb (the draggable handle) */
+  ::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color of the thumb */
+    border-radius: 6px; /* Rounded corners of the thumb */
+  }
+  
+  /* Define the corners of the scrollbar */
+  ::-webkit-scrollbar-corner {
+    background-color: #f1f1f1; /* Color of the corners */
+  }
+   
 
   .form-title {
     font-size: 18px;
