@@ -95,7 +95,7 @@ body, html{
       padding: 0px 0;
     }
     footer .pt-5 {
-      padding: 0 !important;
+      padding-top: 0 !important;
     }
     footer h5 {
       margin-top: 30px;

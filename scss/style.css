@@ -137,6 +137,10 @@ h6,
   padding: 4px;
 }
 
+.carousel-caption {
+  padding-top: 130px;
+}
+
 .carousel-item img {
   height: 100% !important;
 }
@@ -168,14 +172,6 @@ a.nav-link.dropdown-toggle.active::after {
 
 .text-white {
   color: #fff;
-}
-.text-white i {
-  border: 1px solid #fff;
-  border-radius: 50%;
-  height: 30px;
-  width: 30px;
-  line-height: 30px;
-  text-align: center;
 }
 
 .socailMedia a {
@@ -219,6 +215,9 @@ a.nav-link.dropdown-toggle.active::after {
 
 .carousel-caption {
   text-align: left;
+  position: relative;
+  min-height: 100vh;
+  z-index: 1;
 }
 .carousel-caption h1 {
   font-size: 32px;
@@ -241,16 +240,21 @@ a.nav-link.dropdown-toggle.active::after {
   color: #fff !important;
 }
 
+.carousel-inner .carousel-item > img {
+  position: absolute;
+  z-index: 0;
+}
+
 .carousel-control-prev,
 .carousel-control-next {
   width: 5%;
 }
 
 .carForm {
-  background: rgba(255, 255, 255, 0.8);
+  background: #fff;
 }
 .carForm ::-webkit-scrollbar {
-  height: 0;
+  height: 2px;
 }
 .carForm .form-title {
   font-size: 18px;
@@ -344,6 +348,57 @@ a.nav-link.dropdown-toggle.active::after {
 
 .bg-black {
   background-color: black;
+}
+
+#Payment {
+  padding: 40px 0;
+  margin-top: -200px;
+}
+#Payment .payment-sec {
+  margin: 40px 0;
+  background: #fff;
+  z-index: 11;
+  position: relative;
+  border: 1px solid #AAA;
+}
+#Payment .payment-sec .order-details,
+#Payment .payment-sec .payment-method {
+  height: 100%;
+  border: 1px solid #AAA;
+}
+#Payment .payment-sec .order-details .form-control,
+#Payment .payment-sec .payment-method .form-control {
+  padding: 12px;
+  margin: 13px 0;
+  border: 1px solid #aaa;
+}
+#Payment .payment-sec .payment-check .form-check {
+  padding: 10px;
+  margin: 13px 0;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding-inline-start: 3em;
+}
+#Payment .payment-sec .payment-check .form-check label {
+  color: #000;
+}
+#Payment .payment-sec .payment-check .form-check .form-check-input {
+  float: inline-start;
+  height: 20px;
+  width: 20px;
+  margin-top: 0.4em;
+  border: 2px solid;
+  margin-inline-start: -2em;
+}
+#Payment .payment-sec .payment-check .form-check .form-check-input:checked {
+  border: 3px solid #fff !important;
+  box-shadow: 0 0 0 1px #0299f8;
+}
+#Payment .payment-sec .payment-check .form-check .form-check-input:checked + label {
+  color: #0299f8;
+}
+#Payment .payment-sec .card-num {
+  background: url(../img/card.svg) left 10px center/35px no-repeat;
 }
 
 #aboutUs {
@@ -467,6 +522,45 @@ a.nav-link.dropdown-toggle.active::after {
   margin-bottom: 0;
   color: #31353B;
   font-size: 16px;
+}
+
+#aboutUs {
+  background-color: #2C2D92;
+  color: #fff;
+  padding: 40px 0;
+}
+#aboutUs p {
+  text-align: left;
+}
+#aboutUs h2, #aboutUs h1 {
+  color: #fff;
+}
+
+#photoServices img {
+  border-radius: 8px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+#photoServices p {
+  font-size: 18px;
+  color: #000;
+}
+#photoServices .soon {
+  color: #CF181D;
+}
+
+#certification {
+  margin: 40px auto 0;
+  text-align: center;
+  background-color: #EEEEEE;
+  padding: 80px 0;
+}
+#certification h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+#certification img {
+  padding: 16px;
 }
 
 footer {
@@ -631,9 +725,6 @@ form .btn.btn-primary {
   .displayClass {
     display: none !important;
   }
-  .carousel-item img {
-    height: 500px !important;
-  }
   .carousel-caption h1 {
     font-size: 24px;
   }
@@ -651,7 +742,7 @@ form .btn.btn-primary {
     padding: 0px 0;
   }
   .navbar .navbar-nav .nav-link.active::after footer .pt-5 {
-    padding: 0 !important;
+    padding-top: 0 !important;
   }
   .navbar .navbar-nav .nav-link.active::after footer h5 {
     margin-top: 30px;
@@ -724,7 +815,6 @@ form .btn.btn-primary {
     font-size: 16px;
     align-items: center;
     padding: 12px !important;
-    margin-bottom: 30px;
   }
   #whyUs {
     padding-bottom: 20px;

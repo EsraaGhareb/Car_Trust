@@ -37,10 +37,12 @@
     <link href="./scss/style.css" rel="stylesheet">
     <link href="./scss/style-ar.css" rel="stylesheet">
 
+    <!-- Alpine JS  -->
+    <script src="js/alpineCode.js"></script>
 
 </head>
 
-<body>
+<body x-data="getVecheilsInfo()" x-init="checkLoggedUser()">
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -89,6 +91,10 @@
                                 <a class="btn btn-primary my-2" href="login.html">
                                     <span class="mx-2">دخول / تسجيل</span>
                                 </a>
+                                <!-- <a href="profile.html"> 
+                                    <i class="bi bi-person-circle"></i>
+                                    <span class="mx-auto">ملفي الشخصي</span>
+                                </a> -->
                             </div>
                         </div>
                     </div>
@@ -104,8 +110,13 @@
                                     English</a>
                             </div>
                         </div>
-                        <a class="btn btn-primary" href="login.html">
+                        <a class="btn btn-primary" href="login.html" x-show="!isAuthedUser">
                             <span class="mx-2">دخول / تسجيل</span>
+                        </a>
+
+                        <a href="profile.html" class="text-white" x-show="isAuthedUser">
+                            <i class="bi bi-person-circle fs-5"></i>
+                            <span class="mx-auto">ملفي الشخصي</span>
                         </a>
                     </div>
                 </nav>
@@ -150,7 +161,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-7 col-ms-12 col-sm-12">
-                                    <div class="carForm  rounded-3 p-3 mx-5 mb-2" x-data="getVecheilsInfo()"
+                                    <div class="carForm  rounded-3 p-3 mx-md-5 mt-4 mb-2"
                                         x-init="fetchVecheilManufacturers()">
                                         <form action="#">
                                             <div class="form-step-wrapper step-1" x-show="showPrevStep">
@@ -249,7 +260,8 @@
                                                                         <input class="form-check-input" type="radio"
                                                                             name="modelYearCheckRadio"
                                                                             :id="`modelYear-${index}`"
-                                                                            :value="VecheilYear.name"
+                                                                            :value="`${VecheilYear.name}_${VecheilYear.id}`"
+                                                                            x-model="VecheilYear_val"
                                                                             x-on:change="fetchModelTrims(VecheilManufacturer_id,VecheilModel_id,`${VecheilYear.id}`)">
                                                                         <label class="form-check-label"
                                                                             :for="`modelYear-${index}`">
@@ -280,7 +292,8 @@
                                                                         <input class="form-check-input" type="radio"
                                                                             name="trimCheckRadio"
                                                                             :id="`trimCheck-${index}`"
-                                                                            :value="VecheilTrim.name"
+                                                                            :value="`${VecheilTrim.name}_${VecheilTrim.id}`"
+                                                                            x-model="VecheilTrim_val"
                                                                             x-on:change="showBtns = true">
                                                                         <label class="form-check-label"
                                                                             :for="`trimCheck-${index}`">
@@ -294,12 +307,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="btns-submit-step" x-show="showBtns">
-                                                    <div class="d-flex gap-3 justify-content-center py-2">
+                                                    <div class="d-flex gap-3 justify-content-center py-2 flex-wrap">
                                                         <button type="button" class="btn btn-primary btn-lg"
                                                             x-on:click="showNextStep = true; showPrevStep = false">
                                                             التالي <i class="bi bi-arrow-left"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-outline-dark btn-lg" x-on:click="showCarNotFoundStep = true; showPrevStep = false"> لم تجد
+                                                        <button type="button" class="btn btn-outline-dark btn-lg"
+                                                            x-on:click="showCarNotFoundStep = true; showPrevStep = false">
+                                                            لم تجد
                                                             سيارتك</button>
                                                     </div>
                                                 </div>
@@ -310,15 +325,15 @@
                                                     <h5> المعلومات </h5>
                                                     <a href="#"> الرجوع للقائمة <i class="bi bi-chevron-left"></i> </a>
                                                 </div>
-                                                <input type="text" placeholder="ادخل قراءه العداد بشكل صحيح"
-                                                    class="form-control mb-3">
+                                                <input type="text" x-model="paymentDetails.mileage"
+                                                    placeholder="ادخل قراءه العداد بشكل صحيح" class="form-control mb-3">
                                                 <div class="carAccidentStatus mb-3">
                                                     <h5 class="form-title">الحوادث</h5>
                                                     <div class="d-flex gap-4 overflow-auto">
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="accidentCheck" id="no-accident"
-                                                                value="no-accident">
+                                                                name="accidentCheck" id="no-accident" value="no"
+                                                                x-model="paymentDetails.accidents">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="no-accident">
@@ -340,8 +355,8 @@
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="accidentCheck" id="low-accident"
-                                                                value="low-accident">
+                                                                name="accidentCheck" id="low-accident" value="low"
+                                                                x-model="paymentDetails.accidents">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="low-accident">
@@ -362,8 +377,8 @@
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="accidentCheck" id="mid-accident"
-                                                                value="mid-accident">
+                                                                name="accidentCheck" id="mid-accident" value="medium"
+                                                                x-model="paymentDetails.accidents">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="mid-accident">
@@ -387,8 +402,8 @@
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="accidentCheck" id="high-accident"
-                                                                value="high-accident">
+                                                                name="accidentCheck" id="high-accident" value="major"
+                                                                x-model="paymentDetails.accidents">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="high-accident">
@@ -431,7 +446,8 @@
                                                     <div class="d-flex gap-4 overflow-auto">
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="colorCheck" id="white-car" value="white Car">
+                                                                name="colorCheck" id="white-car" value="white"
+                                                                x-model="paymentDetails.color">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center "
                                                                 for="white-car">
@@ -441,7 +457,8 @@
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="colorCheck" id="black-car" value="black Car">
+                                                                name="colorCheck" id="black-car" value="black"
+                                                                x-model="paymentDetails.color">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="black-car">
@@ -450,7 +467,8 @@
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="colorCheck" id="gray-car" value="gray Car">
+                                                                name="colorCheck" id="gray-car" value="gray"
+                                                                x-model="paymentDetails.color">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="gray-car">
@@ -459,7 +477,8 @@
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="colorCheck" id="blue-car" value="blue Car">
+                                                                name="colorCheck" id="blue-car" value="blue"
+                                                                x-model="paymentDetails.color">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="blue-car">
@@ -468,7 +487,8 @@
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="colorCheck" id="red-car" value="red Car">
+                                                                name="colorCheck" id="red-car" value="red"
+                                                                x-model="paymentDetails.color">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="red-car">
@@ -477,7 +497,8 @@
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="colorCheck" id="green-car" value="green Car">
+                                                                name="colorCheck" id="green-car" value="green"
+                                                                x-model="paymentDetails.color">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="green-car">
@@ -494,7 +515,8 @@
 
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="UsageCheck" id="personal-car" value="Personal">
+                                                                name="UsageCheck" id="personal-car" value="Personal"
+                                                                x-model="paymentDetails.purpose_of_use">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="personal-car">
@@ -504,7 +526,8 @@
 
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="UsageCheck" id="company-car" value="Company">
+                                                                name="UsageCheck" id="company-car" value="Company"
+                                                                x-model="paymentDetails.purpose_of_use">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="company-car">
@@ -514,7 +537,8 @@
 
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="UsageCheck" id="rent-car" value="Rent">
+                                                                name="UsageCheck" id="rent-car" value="Rent"
+                                                                x-model="paymentDetails.purpose_of_use">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="rent-car">
@@ -524,7 +548,8 @@
 
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="UsageCheck" id="police-car" value="Police">
+                                                                name="UsageCheck" id="police-car" value="Police"
+                                                                x-model="paymentDetails.purpose_of_use">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="police-car">
@@ -541,8 +566,8 @@
 
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="IncomingCheck" id="saudiAgent-car"
-                                                                value="saudiAgent">
+                                                                name="IncomingCheck" id="saudiAgent-car" value="yes"
+                                                                x-model="paymentDetails.Service_Contract">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="saudiAgent-car">
@@ -552,8 +577,8 @@
 
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="IncomingCheck" id="notSaudiAgent-car"
-                                                                value="notSaudiAgent">
+                                                                name="IncomingCheck" id="notSaudiAgent-car" value="no"
+                                                                x-model="paymentDetails.Service_Contract">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="notSaudiAgent-car">
@@ -572,7 +597,8 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="maintenanceLogCheck" id="AvailMaintainLog-car"
-                                                                value="Available">
+                                                                value="available"
+                                                                x-model="paymentDetails.maintenance_history">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="AvailMaintainLog-car">
@@ -583,7 +609,8 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="maintenanceLogCheck" id="notAvailMaintainLog-car"
-                                                                value="not Available">
+                                                                value="not_available"
+                                                                x-model="paymentDetails.maintenance_history">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="notAvailMaintainLog-car">
@@ -602,7 +629,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="CartrustChecked" id="CartrustChecked-car"
-                                                                value="yes">
+                                                                value="yes" x-model="paymentDetails.certified">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="CartrustChecked-car">
@@ -613,7 +640,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="CartrustChecked" id="CartrustNotChecked-car"
-                                                                value="no">
+                                                                value="no" x-model="paymentDetails.certified">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="CartrustNotChecked-car">
@@ -632,7 +659,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="WarrantyInfoCheck" id="manufactureCompany"
-                                                                value="manufacture Company">
+                                                                value="manufacturer" x-model="paymentDetails.warranty">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="manufactureCompany">
@@ -643,7 +670,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="WarrantyInfoCheck" id="CarTrustWarranty"
-                                                                value="CarTrust">
+                                                                value="car_trust" x-model="paymentDetails.warranty">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="CarTrustWarranty">
@@ -653,10 +680,20 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="WarrantyInfoCheck" id="OthersWarranty"
-                                                                value="others">
+                                                                value="others" x-model="paymentDetails.warranty">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="OthersWarranty">
+                                                                غير ذلك
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="WarrantyInfoCheck" id="noWarranty" value="no"
+                                                                x-model="paymentDetails.warranty">
+                                                            <label
+                                                                class="form-check-label d-flex gap-2 align-items-center"
+                                                                for="noWarranty">
                                                                 غير ذلك
                                                             </label>
                                                         </div>
@@ -671,7 +708,8 @@
 
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="carModifiedCheck" id="carModified" value="yes">
+                                                                name="carModifiedCheck" id="carModified" value="yes"
+                                                                x-model="paymentDetails.modified">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="carModified">
@@ -681,7 +719,8 @@
 
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="carModifiedCheck" id="carNotModified" value="no">
+                                                                name="carModifiedCheck" id="carNotModified" value="no"
+                                                                x-model="paymentDetails.modified">
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="carNotModified">
@@ -694,10 +733,10 @@
 
                                                 </div>
                                                 <div class="btns-submit-step">
-                                                    <div class="d-flex gap-3 justify-content-center py-2">
-                                                        <button type="button" class="btn btn-primary btn-lg"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#EnterPhoneModal">التالي <i
+                                                    <div class="d-flex gap-3 justify-content-center py-2 flex-wrap">
+                                                        <button type="button"
+                                                            class="go-payment-btn btn btn-primary btn-lg"
+                                                            x-on:click="checkAuth()">التالي <i
                                                                 class="bi bi-arrow-left"></i></button>
                                                         <button class="btn btn-outline-dark btn-lg">
                                                             تراجع</button>
@@ -714,20 +753,18 @@
                                                 </div>
                                                 <input type="text" placeholder="الشركة المصنعة"
                                                     class="form-control py-3 mb-3">
-                                                <input type="text" placeholder="الموديل"
-                                                    class="form-control py-3 mb-3">
-                                                <input type="text" placeholder="السنة"
-                                                    class="form-control py-3 mb-3">
+                                                <input type="text" placeholder="الموديل" class="form-control py-3 mb-3">
+                                                <input type="text" placeholder="السنة" class="form-control py-3 mb-3">
                                                 <input type="text" placeholder="طراز المركبة"
                                                     class="form-control py-3 mb-3">
-                                            
+
                                                 <div class="btns-submit-step">
-                                                    <div class="d-flex gap-3 justify-content-center py-2"> 
+                                                    <div class="d-flex gap-3 justify-content-center py-2">
                                                         <button type="submit" class="btn btn-primary btn-lg">
                                                             إرسال</button>
                                                     </div>
                                                 </div>
-                                                </form>
+                                            </form>
                                         </div>
 
                                     </div>
@@ -808,19 +845,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
+                    <div class="h-100 d-flex justify-content-center align-items-center">
+                        <h2 class="description">
+                            الثقة و راحلة البال عند اقتناء مركبة مستعملة
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
                     <h1>من نحن</h1>
                     <p class="more_description">
                         كارترست هي شركة نوعية رائدة في مجال تقنية المركبات والمتخصصة في تقديم برامج فحص وتقييم المركبات
                         باستخدام الذكاء الصناعي والتعلم الآلي ورؤية الكمبيوتر
                         تخدم كار ترست عملاء التجزئة والشركات من خلال أنظمة التكنولوجيا المتقدمة جنبًا إلى جنب مع الخبرة
                         البشرية والميكانيكية والتقنية </p>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="h-100 d-flex justify-content-center align-items-center">
-                        <h2 class="description">
-                            الثقة و راحلة البال عند اقتناء مركبة مستعملة
-                        </h2>
-                    </div>
                 </div>
             </div>
         </div>
@@ -988,7 +1025,51 @@
 
     </section>
     <!--vision end-->
+    <section id="photoServices">
+        <div class="container">
+             <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <img src="./img/s1.png" class="img-fluid"/>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p>فحص ما قبل الشراء 305 </p>
+                        <p class="soon">قريبا</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <img src="./img/s2.png" class="img-fluid"/>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p>فحص ما قبل السبق</p>
+                        <p class="soon">قريبا</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <img src="./img/s1.png" class="img-fluid"/>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p>دليل الأسعار</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <img src="./img/s2.png" class="img-fluid"/>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p>ضمانات المركبات المستعملة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
 
+    <section id="certification">
+        <div class="container">
+            <h1>الإعتمادات</h1>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <img src="./img/iso.png"/>
+                    <img src="./img/tuv.png"/>
+                    <img src="./img/saac.png"/>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer Start -->
     <footer id="footer">
@@ -1091,24 +1172,54 @@
 
     <!-- Modals -->
 
+    <!--Enter OTP Modal -->
+    <div class="modal fade" id="EnterOTPModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="EnterOTPModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column gap-4 justify-content-center text-center">
+                    <h1 class="modal-title fs-5" id="EnterOTPModalLabel">
+                        أدخل كود التفعيل لإكمال العملية
+                    </h1>
+
+                    <form @submit.prevent="postOtpData">
+                        <div class="form-group mb-3 w-50 mx-auto">
+                            <input type="text" placeholder="xxxx" name="otp" x-model="modalFormData.otp"
+                                class="form-control text-center py-2" />
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg" x-on:click="popUpOpen=false">
+                            تحقق
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--Enter Phone Modal -->
-    <div class="modal fade" id="EnterPhoneModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="EnterPhoneModalLabel"
-        aria-hidden="true" >
-        
+    <div class="modal fade" id="EnterPhoneModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="EnterPhoneModalLabel" aria-hidden="true">
+
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
-                <div class="modal-body d-flex flex-column gap-4 justify-content-center text-center">
+                <div class="modal-body d-flex flex-column gap-4 justify-content-center text-center"
+                    x-data="{ popUpOpen: false,formData: { phone: '' }}">
                     <h1 class="modal-title fs-5" id="EnterPhoneModalLabel">أدخل رقم
                         جوالك لإكمال العملية</h1>
                     <p class="text-black-50">يرجي إدخال رقم الجوال حتي تتمكن من
                         إكمال عملية التقييم</p>
-                    <form action="#" class=" d-flex flex-column gap-4 justify-content-center w-50 mx-auto">
+                    <form @submit.prevent="postData"
+                        class=" d-flex flex-column gap-4 justify-content-center w-50 mx-auto">
                         <div class="form-group">
-                            <input type="text" placeholder="012345678910" class="form-control text-center">
+
+                            <input class="form-control text-center" type="tel" x-model="formData.phone"
+                                placeholder="الهاتف المحمول" />
                         </div>
-                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-                            data-bs-target="#EnterPhoneModal">تسجيل الدخول</button>
+                        <button type="submit" class="btn btn-primary btn-lg">تسجيل الدخول</button>
+                        <div class="alert alert-danger" role="alert" x-show="inVaild">
+                            رقم هاتف غير صحيح
+                        </div>
                     </form>
 
 
@@ -1128,6 +1239,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
     <script>
         document.addEventListener('alpine:init', () => {
             console.log("Alpine is here");
@@ -1138,6 +1250,10 @@
                 VecheilModels: {},
                 VecheilModel_val: "",
                 VecheilModel_id: "",
+                VecheilYear_val: "",
+                VecheilYear_id: "",
+                VecheilTrim_val: "",
+                VecheilTrim_id: "",
                 VecheilYears: {},
                 VecheilTrims: {},
                 isEmpty: true,
@@ -1149,6 +1265,10 @@
                 showCarNotFoundStep: false,
                 showNextStep: false,
                 showPrevStep: true,
+                popUpOpen: false,
+                inVaild: false,
+                modalFormData: { otp: "", phone: "" },
+                isAuthedUser: false,
                 baseUrl: "https://partner-api.cartrust.sa",
                 fetchVecheilManufacturers() {
                     const endpointUrl = `/api/v2/manufacturers`;
@@ -1171,7 +1291,8 @@
                             // Set isLoading to false after the API call is complete (whether success or error)
                             this.isLoading = false;
                         });
-                }, fetchVecheilModels(manufacturerId) {
+                },
+                fetchVecheilModels(manufacturerId) {
 
                     const endpointUrl = `/api/v2/models/manufacturer/${manufacturerId}?priced_models=${manufacturerId}`;
                     const fullUrl = this.baseUrl + endpointUrl;
@@ -1197,7 +1318,8 @@
                             // Set isLoading to false after the API call is complete (whether success or error)
                             this.isLoading = false;
                         });
-                }, fetchModelYears() {
+                },
+                fetchModelYears() {
                     const endpointUrl = `/api/v2/years`;
                     const fullUrl = this.baseUrl + endpointUrl;
 
@@ -1221,7 +1343,8 @@
                             // Set isLoading to false after the API call is complete (whether success or error)
                             this.isLoading = false;
                         });
-                }, fetchModelTrims(manufacturerId, modelId, year) {
+                },
+                fetchModelTrims(manufacturerId, modelId, year) {
                     const endpointUrl = `/api/v2/trims/make/${manufacturerId}/model/${modelId}/year/${year}`;
                     const fullUrl = this.baseUrl + endpointUrl;
 
@@ -1244,8 +1367,101 @@
                             // Set isLoading to false after the API call is complete (whether success or error)
                             this.isLoading = false;
                         });
-                }
+                },
+                checkAuth() {
+                    this.VecheilYear_id = this.VecheilYear_val.split('_')[1];
+                    this.VecheilTrim_id = this.VecheilTrim_val.split('_')[1];
+                    if (retrieveAuth().isAuthenticated) {
+                        paymentDetails.manufacturer_id = this.VecheilManufacturer_id;
+                        paymentDetails.model_id = this.VecheilModel_id;
+                        paymentDetails.year_id = this.VecheilYear_id;
+                        paymentDetails.trim_id = this.VecheilTrim_id;
+                        localStorage.setItem("paymentDetails",JSON.stringify(paymentDetails));
+                        location.href = "payment.html";
+                    } else {
+                        jQuery("#EnterPhoneModal").modal('show');
+                    }
 
+                },
+                checkLoggedUser() {
+                    if (retrieveAuth().isAuthenticated) {
+                        this.isAuthedUser = true;
+
+                    } else {
+                        this.isAuthedUser = false;
+                    }
+
+                },
+                postData() {
+                    const endpointUrl = `/api/v2/request-otp`;
+                    const fullUrl = this.baseUrl + endpointUrl;
+
+                    // Extract form data
+                    const formData = this.formData;
+
+                    // Make a POST request
+                    fetch(fullUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(formData),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            if (data.sent == true) {
+                                this.popUpOpen = true;
+                                this.inVaild = false;
+                                jQuery("#EnterOTPModal").modal("show");
+                                jQuery("#EnterPhoneModal").modal("hide");
+                                this.modalFormData.phone = this.formData.phone;
+                            } else {
+                                this.popUpOpen = false;
+                                this.inVaild = true;
+                            }
+
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            // Handle errors
+                        });
+                },
+
+                postOtpData() {
+                    const endpointUrl = `/api/v2/verify-otp`;
+                    const fullUrl = this.baseUrl + endpointUrl;
+
+                    // Extract form data
+                    formData = this.modalFormData;
+
+                    // Make a POST request
+                    fetch(fullUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+
+                        },
+                        body: JSON.stringify(formData),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            if (data.verified === true) {
+                                // success
+                                approve(data.access_token, data.user_id)
+                                //   console.log("Success:", retrieveAuth());
+                                location.href = "payment.html";
+                            } else {
+                                // fail
+                                reject();
+                            }
+
+
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            // Handle errors
+                        });
+                },
 
             }))
 

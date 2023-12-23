@@ -159,7 +159,9 @@ h6,
   background-color: $mainColor;
   padding: 4px;
 }
-
+.carousel-caption{
+  padding-top: 130px;
+}
 .carousel-item img {
   height: 100% !important;
 }
@@ -192,14 +194,14 @@ a.nav-link.dropdown-toggle.active::after {
 .text-white {
   color: #fff;
 
-  i {
-    border: 1px solid #fff;
-    border-radius: 50%;
-    height: 30px;
-    width: 30px;
-    line-height: 30px;
-    text-align: center;
-  }
+  // i {
+  //   border: 1px solid #fff;
+  //   border-radius: 50%;
+  //   height: 30px;
+  //   width: 30px;
+  //   line-height: 30px;
+  //   text-align: center;
+  // }
 }
 
 .socailMedia a {
@@ -244,6 +246,9 @@ a.nav-link.dropdown-toggle.active::after {
 
 .carousel-caption {
   text-align: left;
+  position: relative;
+  min-height: 100vh;
+  z-index: 1;
 
   h1 {
     font-size: 32px;
@@ -270,9 +275,10 @@ a.nav-link.dropdown-toggle.active::after {
   }
 }
 
-// .carousel-inner img{
-// transform: scaleX(-1);
-// }
+.carousel-inner .carousel-item>img{
+position: absolute;
+z-index: 0;
+}
 .carousel-control-prev,
 .carousel-control-next {
   width: 5%;
@@ -280,10 +286,10 @@ a.nav-link.dropdown-toggle.active::after {
 
 // start Car Forms ==>Esraa Ghareeb<==
 .carForm {
-  background: rgba(255, 255, 255, 0.8);
+  background: #fff;
 
   ::-webkit-scrollbar {
-    height: 0;
+    height: 2px;
 
   }
 
@@ -308,24 +314,29 @@ a.nav-link.dropdown-toggle.active::after {
       font-weight: 500;
       cursor: pointer;
     }
+
     &-input:checked+label {
       color: #0299f8;
     }
+
     &-input {
       opacity: 0;
       display: none;
     }
   }
-  .carColor{
+
+  .carColor {
     .form-check-input+label {
       border: 2px solid transparent;
       padding: 2px 7px;
       border-radius: 5px;
     }
+
     .form-check-input:checked+label {
       border-color: #0299f8;
     }
   }
+
   .vecheils-list {
 
     .vecheil-check {
@@ -344,6 +355,7 @@ a.nav-link.dropdown-toggle.active::after {
 
     .form-check-input:checked+label {
       color: #000;
+
       img {
         border-color: #0299f8;
       }
@@ -403,6 +415,64 @@ a.nav-link.dropdown-toggle.active::after {
 }
 
 // End Car Forms
+// Payment Section
+#Payment {
+  padding: 40px 0;
+  margin-top: -200px;
+
+  .payment {
+    &-sec {
+      margin: 40px 0;
+      background: #fff;
+      z-index: 11;
+      position: relative;
+      border: 1px solid #AAA;
+      .order-details,
+      .payment-method {
+        height: 100%;
+        border: 1px solid #AAA;
+        .form-control{
+          padding: 12px; 
+          margin: 13px 0;
+          border: 1px solid #aaa;
+        }
+      }
+
+      .payment-check {
+        .form-check {
+          padding: 10px;
+          margin: 13px 0;
+          border: 1px solid #aaa;
+          border-radius: 4px;
+          padding-inline-start: 3em;
+          label{
+          
+            color: #000;
+          }
+          .form-check-input {
+            float: inline-start;
+            height: 20px;
+            width: 20px;
+            margin-top: 0.4em;
+            border: 2px solid;
+            margin-inline-start: -2em;
+          }
+          .form-check-input:checked{
+            border: 3px solid #fff !important;
+            box-shadow: 0 0 0 1px #0299f8;
+          }
+          .form-check-input:checked+label {
+            color: #0299f8;
+          }
+        }
+      }
+      .card-num{ 
+        background: url(../img/card.svg) left 10px center/35px no-repeat;
+      }
+       
+    }
+  }
+}
 
 //About us
 #aboutUs {
@@ -549,7 +619,46 @@ a.nav-link.dropdown-toggle.active::after {
     }
   }
 }
-
+//About us
+#aboutUs {
+  background-color: #2C2D92;
+  color: #fff;
+  padding: 40px 0;
+  p{
+    text-align: left;
+  }
+  h2,h1{
+    color: #fff;
+  }
+}
+//services
+#photoServices{
+  img{
+    border-radius: 8px;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+  p{
+    font-size: 18px;
+    color: #000;
+  }
+  .soon{
+    color:#CF181D
+  }
+}
+#certification{
+  margin: 40px auto 0;
+  text-align: center;
+  background-color: #EEEEEE;
+  padding: 80px 0;
+  h1{
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  img{
+    padding: 16px;
+  }
+}
 //footer
 footer {
   position: relative;
@@ -755,7 +864,7 @@ form {
   }
 
   .carousel-item img {
-    height: 500px !important;
+    // height: 500px !important;
   }
 
   .carousel-caption h1 {
@@ -768,7 +877,7 @@ form {
   }
 
   .carousel-caption {
-    top: -1px;
+    top: -1px; 
   }
 
   .navbar .navbar-nav .nav-link.active::after {
@@ -778,7 +887,7 @@ form {
       padding: 0px 0;
 
       .pt-5 {
-        padding: 0 !important;
+        padding-top: 0 !important;
       }
 
       h5 {
@@ -873,7 +982,7 @@ form {
     font-size: 16px;
     align-items: center;
     padding: 12px !important;
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
   }
 
   #whyUs {
