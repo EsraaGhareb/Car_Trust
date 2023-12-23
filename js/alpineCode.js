@@ -36,5 +36,11 @@ function approve(access_token,user_id) {
         access_token:result.access_token
         
       }
+    }else{
+
+       return {
+        isAuthenticated : false,
+        access_token:""
+      }
     }
   }
