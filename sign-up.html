@@ -63,7 +63,7 @@
           <div
             class="w-100 vh-100 d-flex justify-content-center align-items-center text-center m-auto"
           >
-            <div x-data="{ formData: { first_name:'' , second_name:'', email:'' }}">
+            <div x-data="{ formData: { first_name:'' , last_name:'', email:'' }}">
               <img
                 class="img-fluid"
                 src="img/icons/logo-login.png"
@@ -120,16 +120,15 @@
           isLoading: false,
           popUpOpen: false,
           inVaild: false,
-          modalFormData: { otp: "", phone: "" },
           baseUrl: "https://partner-api.cartrust.sa",
         
           updateProfile(){
             const endpointUrl = `/api/v2/profile`;
             const fullUrl = this.baseUrl + endpointUrl;
-
-            // Extract form data
-            formData = this.FormData;
             
+            // Extract form data
+            const formData = this.formData;
+          
             // Make a POST request
             fetch(fullUrl, {
               method: "POST",
@@ -141,7 +140,6 @@
             })
               .then((response) => response.json())
               .then((data) => {
-               console.log(data);
                location.href="index-ar.html"; 
                 
               })
