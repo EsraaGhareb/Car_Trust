@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Car Trust</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600&family=Saira:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Alpine JS  -->
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script defer src="js/alpineCode.js"></script>
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="./scss/style.css" rel="stylesheet" />
+    <link href="./scss/style-ar.css" rel="stylesheet" />
+  </head>
+
+  <body class="login" x-cloak x-data="UpdateSignUp()">
+    <!-- Spinner Start -->
+    <div
+      id="spinner"
+      class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+    >
+      <!-- <div class="spinner-grow text-primary" role="status"></div> -->
+      <img class="img-fluid" src="./img/loadingLogo.gif" />
+    </div>
+    <!-- Spinner End -->
+
+    <div class="container-fluid p-0">
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <div
+            class="w-100 vh-100 d-flex justify-content-center align-items-center text-center m-auto"
+          >
+            <div x-data="{ formData: { first_name:'' , second_name:'', email:'' }}">
+              <img
+                class="img-fluid"
+                src="img/icons/logo-login.png"
+                style="height: 140px"
+              />
+              <h1 class="my-4">اهلا بك !</h1>
+              <p>يرجى إكمال البيانات الخاصه بك</p>
+
+              <form @submit.prevent="updateProfile">
+                <input type="hidden" value="PUT" x-model="formData._method">
+                <input type="text"  x-model="formData.first_name" class="form-control mb-3 text-right" placeholder="الإسم الأول">
+                <input type="text"  x-model="formData.last_name" class="form-control mb-3 text-right" placeholder="الإسم الثاني">
+                <input type="email"  x-model="formData.email" class="form-control mb-3 text-right" placeholder="البريد الإلكتروني">
+               
+                <button type="submit" class="btn btn-primary my-3">
+                  حفظ
+                  <i class="fas fa-arrow-left"></i>
+                </button>
+               
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <img class="img-fluid w-100" src="./img/icons/login.png" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
+      ><i class="bi bi-arrow-up"></i
+    ></a>
+
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.js"></script>
+    <script src="lib/parallax/parallax.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <script>
+      document.addEventListener("alpine:init", () => {
+        console.log("Alpine is here");
+        Alpine.data("UpdateSignUp", () => ({
+          isEmpty: true,
+          isLoading: false,
+          popUpOpen: false,
+          inVaild: false,
+          modalFormData: { otp: "", phone: "" },
+          baseUrl: "https://partner-api.cartrust.sa",
+        
+          updateProfile(){
+            const endpointUrl = `/api/v2/profile`;
+            const fullUrl = this.baseUrl + endpointUrl;
+
+            // Extract form data
+            formData = this.FormData;
+            
+            // Make a POST request
+            fetch(fullUrl, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + retrieveAuth().access_token
+              },
+              body: JSON.stringify(formData),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+               console.log(data);
+               location.href="index-ar.html"; 
+                
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                // Handle errors
+              });
+          }
+         
+        }));
+      });
+    </script>
+  </body>
+</html>

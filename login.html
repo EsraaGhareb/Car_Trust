@@ -53,7 +53,7 @@
       class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
     >
       <!-- <div class="spinner-grow text-primary" role="status"></div> -->
-      <img class="img-fluid" src="./img/logo.png" />
+      <img class="img-fluid" src="./img/loadingLogo.gif" />
     </div>
     <!-- Spinner End -->
 
@@ -74,29 +74,24 @@
 
               <form @submit.prevent="postData">
                 <input
-                  class="form-control mb-3 text-right"
+                  class="form-control mb-3 text-right rtl"
                   type="tel"
                   x-model="formData.phone"
                   placeholder="الهاتف المحمول"
                 />
                 <div class="row">
                   <div class="col-md-6 col-sm-12">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        value=""
-                        id="flexCheckDefault"
-                      />
+                    <div class="form-check ps-0 pe-0 gap-1 d-flex ">
+                      <input class="form-check-input float-end ms-0" type="checkbox" value="" id="flexCheckDefault">
                       <label class="form-check-label" for="flexCheckDefault">
                         الشروط والاحكام
                       </label>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-12">
-                    <div class="form-check">
+                    <div class="form-check  ps-0 pe-3">
                       <input
-                        class="form-check-input"
+                        class="form-check-input float-end"
                         type="checkbox"
                         value=""
                         id="flexCheckChecked"
@@ -248,9 +243,10 @@
               .then((data) => {
                 if (data.verified === true) {
                   // success
-                  approve(data.access_token,data.user_id)
+                  approve(data.access_token,data.user_id);
+                  fetchProfile(data.access_token , "index-ar");
                 //   console.log("Success:", retrieveAuth());
-                  location.href = "CarType-sooq-price.html";
+                  // location.href = "index-ar.html";
                 } else {
                   // fail
                  reject();
@@ -263,6 +259,7 @@
                 // Handle errors
               });
           },
+         
         }));
       });
     </script>

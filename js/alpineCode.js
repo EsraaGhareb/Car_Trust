@@ -1,5 +1,6 @@
 const isAuthenticated = false;
 const access_token= "";
+const baseUrl= "https://partner-api.cartrust.sa";
 const user_id= "";
 
 function approve(access_token,user_id) {
@@ -18,10 +19,7 @@ function approve(access_token,user_id) {
   }
 
   function reject() {
-    this.isAuthenticated = false;
-    this.access_token = "";
-    // clear localStorage
-    localStorage.removeItem("auth");
+  
   }
 
   function retrieveAuth() {
@@ -43,4 +41,55 @@ function approve(access_token,user_id) {
         access_token:""
       }
     }
-  }
+}
+function logOut(){
+  const endpointUrl = `/api/v2/logout`;
+  const fullUrl = baseUrl + endpointUrl;
+
+   // Make a POST request
+   fetch(fullUrl, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + retrieveAuth().access_token
+      },
+      
+  })
+      .then((response) => response.json())
+      .then((data) => {
+          
+        this.isAuthenticated = false;
+        this.access_token = "";
+        // clear localStorage
+        localStorage.removeItem("auth");
+        location.href = "login.html"
+      })
+      .catch((error) => {
+          console.error("Error:", error);
+          // Handle errors
+      });
+}
+ function fetchProfile(access_token , redirect_url) {
+    const endpointUrl = `/api/v2/profile`;
+    const fullUrl = baseUrl + endpointUrl;
+    fetch(fullUrl, { 
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + access_token
+          }
+        })
+        .then((res) => res.json())
+        .then((data) => {
+
+                if (data.profile_found == true) { 
+                    location.href= `${redirect_url}.html`;
+                }
+               else{
+                location.href = "sign-up.html"
+               }
+            
+        }).catch(error => {
+            console.error('Error fetching data:', error);
+        })
+        
+}

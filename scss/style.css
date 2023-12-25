@@ -67,6 +67,10 @@ body {
   margin-bottom: 30px;
 }
 
+.rtl {
+  direction: rtl !important;
+}
+
 h1,
 .h1,
 h2,
@@ -227,12 +231,8 @@ a.nav-link.dropdown-toggle.active::after {
 }
 .carousel-caption .caption-btn {
   background-color: #1CA3D5 !important;
-  border: none !important;
-  font-size: 28px;
-  display: flex;
-  justify-content: center;
-  align-items: end;
-  padding: 20px !important;
+  font-size: 20px;
+  padding: 15px 20px !important;
 }
 .carousel-caption .caption-btn:hover {
   background-color: transparent !important;
@@ -251,6 +251,7 @@ a.nav-link.dropdown-toggle.active::after {
 }
 
 .carForm {
+  display: none;
   background: #fff;
   /* Define the track (the area where the thumb doesn't cover) */
   /* Define the thumb (the draggable handle) */
@@ -379,10 +380,14 @@ a.nav-link.dropdown-toggle.active::after {
   background-color: black;
 }
 
+#profile,
 #Payment {
   padding: 40px 0;
   margin-top: -200px;
 }
+#profile .profile-sec,
+#profile .payment-sec,
+#Payment .profile-sec,
 #Payment .payment-sec {
   margin: 40px 0;
   background: #fff;
@@ -390,17 +395,40 @@ a.nav-link.dropdown-toggle.active::after {
   position: relative;
   border: 1px solid #AAA;
 }
+#profile .profile-sec .profile-info,
+#profile .profile-sec .order-details,
+#profile .profile-sec .payment-method,
+#profile .payment-sec .profile-info,
+#profile .payment-sec .order-details,
+#profile .payment-sec .payment-method,
+#Payment .profile-sec .profile-info,
+#Payment .profile-sec .order-details,
+#Payment .profile-sec .payment-method,
+#Payment .payment-sec .profile-info,
 #Payment .payment-sec .order-details,
 #Payment .payment-sec .payment-method {
   height: 100%;
   border: 1px solid #AAA;
 }
+#profile .profile-sec .profile-info .form-control,
+#profile .profile-sec .order-details .form-control,
+#profile .profile-sec .payment-method .form-control,
+#profile .payment-sec .profile-info .form-control,
+#profile .payment-sec .order-details .form-control,
+#profile .payment-sec .payment-method .form-control,
+#Payment .profile-sec .profile-info .form-control,
+#Payment .profile-sec .order-details .form-control,
+#Payment .profile-sec .payment-method .form-control,
+#Payment .payment-sec .profile-info .form-control,
 #Payment .payment-sec .order-details .form-control,
 #Payment .payment-sec .payment-method .form-control {
   padding: 12px;
   margin: 13px 0;
   border: 1px solid #aaa;
 }
+#profile .profile-sec .payment-check .form-check,
+#profile .payment-sec .payment-check .form-check,
+#Payment .profile-sec .payment-check .form-check,
 #Payment .payment-sec .payment-check .form-check {
   padding: 10px;
   margin: 13px 0;
@@ -408,9 +436,15 @@ a.nav-link.dropdown-toggle.active::after {
   border-radius: 4px;
   padding-inline-start: 3em;
 }
+#profile .profile-sec .payment-check .form-check label,
+#profile .payment-sec .payment-check .form-check label,
+#Payment .profile-sec .payment-check .form-check label,
 #Payment .payment-sec .payment-check .form-check label {
   color: #000;
 }
+#profile .profile-sec .payment-check .form-check .form-check-input,
+#profile .payment-sec .payment-check .form-check .form-check-input,
+#Payment .profile-sec .payment-check .form-check .form-check-input,
 #Payment .payment-sec .payment-check .form-check .form-check-input {
   float: inline-start;
   height: 20px;
@@ -419,13 +453,22 @@ a.nav-link.dropdown-toggle.active::after {
   border: 2px solid;
   margin-inline-start: -2em;
 }
+#profile .profile-sec .payment-check .form-check .form-check-input:checked,
+#profile .payment-sec .payment-check .form-check .form-check-input:checked,
+#Payment .profile-sec .payment-check .form-check .form-check-input:checked,
 #Payment .payment-sec .payment-check .form-check .form-check-input:checked {
   border: 3px solid #fff !important;
   box-shadow: 0 0 0 1px #0299f8;
 }
+#profile .profile-sec .payment-check .form-check .form-check-input:checked + label,
+#profile .payment-sec .payment-check .form-check .form-check-input:checked + label,
+#Payment .profile-sec .payment-check .form-check .form-check-input:checked + label,
 #Payment .payment-sec .payment-check .form-check .form-check-input:checked + label {
   color: #0299f8;
 }
+#profile .profile-sec .card-num,
+#profile .payment-sec .card-num,
+#Payment .profile-sec .card-num,
 #Payment .payment-sec .card-num {
   background: url(../img/card.svg) left 10px center/35px no-repeat;
 }
@@ -594,7 +637,7 @@ a.nav-link.dropdown-toggle.active::after {
 
 footer {
   position: relative;
-  background-image: url("/img/footerbg.png");
+  background-image: url("../img/footerBg.png");
   background-size: cover;
   background-position: center;
   color: #fff;
