@@ -344,6 +344,21 @@ a.nav-link.dropdown-toggle.active::after {
   border-radius: 5px;
 }
 
+/* Add your loading animation styles here */
+.loading-placeholder {
+  background-color: #eee;
+  animation: loadingAnimation 1s infinite alternate;
+  height: 50px;
+  width: 100px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+@keyframes loadingAnimation {
+  to {
+    background-color: #ddd;
+  }
+}
 .bg-red {
   background-color: red;
 }

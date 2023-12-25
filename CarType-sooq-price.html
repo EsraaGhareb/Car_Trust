@@ -172,19 +172,16 @@
                                         <form action="#">
                                             <div class="form-step-wrapper step-1" x-show="showPrevStep">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <h5>تفاصيل المركبه</h5>
-                                                    <a href="#"> الرجوع للقائمة <i class="bi bi-chevron-left"></i> </a>
+                                                    <h5>تفاصيل المركبه</h5> 
+                                                  
                                                 </div>
                                                 <div class="collapse-item">
                                                     <div class="collapse-top d-flex justify-content-between">
                                                         <h5 class="form-title">الشركة المصنعه</h5>
-                                                        <a data-bs-toggle="collapse" href="#collapseManufacturers"
-                                                            role="button" aria-expanded="false"
-                                                            aria-controls="collapseManufacturers">عرض الكل <i
-                                                                class="bi bi-chevron-down"></i></a>
+                                                        <a href="#">عرض الكل <i  class="bi bi-chevron-left"></i></a>
 
                                                     </div>
-                                                    <div class="collapse-body overflow-auto collapse show"
+                                                    <div class="collapse-body mb-3 overflow-auto"
                                                         id="collapseManufacturers">
                                                         <div class="d-flex gap-1 mt-3 vecheils-list">
                                                             <template x-if="!isEmpty">
@@ -196,7 +193,7 @@
                                                                             :id="`vecheilcheck-${index}`"
                                                                             :value="`${VecheilManufacturer.name}_${VecheilManufacturer.id}`"
                                                                             x-model="VecheilManufacturer_val"
-                                                                            x-on:change="fetchVecheilModels(VecheilManufacturer.id)">
+                                                                            x-on:change="fetchVecheilModels(VecheilManufacturer.id)" x-on:click=" loadingModels = true; showModel = true; showYear = false; showTrim = false; showBtns = false;" >
                                                                         <label class="form-check-label"
                                                                             :for="`vecheilcheck-${index}`">
                                                                             <img :alt="VecheilManufacturer.name"
@@ -217,17 +214,22 @@
                                                 <div class="collapse-item" x-show="showModel">
                                                     <div class="collapse-top d-flex justify-content-between">
                                                         <h5 class="form-title">الموديل</h5>
-                                                        <a data-bs-toggle="collapse" href="#collapseModels"
-                                                            role="button" aria-expanded="false"
-                                                            aria-controls="collapseModels">عرض الكل <i
-                                                                class="bi bi-chevron-down"></i></a>
+                                                        <a href="#">عرض الكل <i  class="bi bi-chevron-left"></i></a>
 
                                                     </div>
-                                                    <div class="collapse-body overflow-auto collapse show"
+                                                    <div class="collapse-body mb-3 overflow-auto"
                                                         id="collapseModels">
                                                         <div class="d-flex gap-1 my-3 models-list">
-                                                            <div x-show="isLoading">Loading...</div>
-                                                            <template x-if="!isEmpty">
+                                                            <div x-show="loadingModels">
+                                                                <div class="d-flex gap-2 " >
+                                                                    <div class="loading-placeholder"></div>
+                                                                    <div class="loading-placeholder"></div>
+                                                                    <div class="loading-placeholder"></div>
+                                                                    <div class="loading-placeholder"></div>
+                                                                    <div class="loading-placeholder"></div>
+                                                                </div>
+                                                            </div>
+                                                            <template x-if="!loadingModels">
                                                                 <template
                                                                     x-for="(VecheilModel , index) in VecheilModels">
                                                                     <div class="form-check model-check">
@@ -236,7 +238,7 @@
                                                                             :id="`vecheilModel-${index}`"
                                                                             :value="`${VecheilModel.name}_${VecheilModel.id}`"
                                                                             x-model="VecheilModel_val"
-                                                                            x-on:change="fetchModelYears()">
+                                                                            x-on:change="fetchModelYears()" x-on:click="loadingYears= true; showYear = true;  showTrim = false; showBtns = false;">
                                                                         <label class="form-check-label"
                                                                             :for="`vecheilModel-${index}`">
                                                                             <span x-text="VecheilModel.name"></span>
@@ -251,16 +253,22 @@
                                                 <div class="collapse-item" x-show="showYear">
                                                     <div class="collapse-top d-flex justify-content-between">
                                                         <h5 class="form-title">السنة</h5>
-                                                        <a data-bs-toggle="collapse" href="#collapseYears" role="button"
-                                                            aria-expanded="false" aria-controls="collapseYears">عرض الكل
-                                                            <i class="bi bi-chevron-down"></i></a>
+                                                        <a href="#">عرض الكل <i  class="bi bi-chevron-left"></i></a>
 
                                                     </div>
-                                                    <div class="collapse-body overflow-auto collapse show"
+                                                    <div class="collapse-body mb-3 overflow-auto"
                                                         id="collapseYears">
                                                         <div class="d-flex gap-1 my-3 years-list">
-                                                            <div x-show="isLoading">Loading...</div>
-                                                            <template x-if="!isEmpty">
+                                                            <div x-show="loadingYears">
+                                                                <div class="d-flex gap-2 " >
+                                                                    <div class="loading-placeholder"></div>
+                                                                    <div class="loading-placeholder"></div>
+                                                                    <div class="loading-placeholder"></div>
+                                                                    <div class="loading-placeholder"></div>
+                                                                    <div class="loading-placeholder"></div>
+                                                                </div>
+                                                            </div>
+                                                            <template x-if="!loadingYears">
                                                                 <template x-for="(VecheilYear , index) in VecheilYears">
                                                                     <div class="form-check year-check">
                                                                         <input class="form-check-input" type="radio"
@@ -268,7 +276,8 @@
                                                                             :id="`modelYear-${index}`"
                                                                             :value="`${VecheilYear.name}_${VecheilYear.id}`"
                                                                             x-model="VecheilYear_val"
-                                                                            x-on:change="fetchModelTrims(VecheilManufacturer_id,VecheilModel_id,`${VecheilYear.id}`)">
+                                                                            x-on:change="fetchModelTrims(VecheilManufacturer_id,VecheilModel_id,`${VecheilYear.id}`)"
+                                                                            x-on:click="showTrim= true; loadingTrims = true;">
                                                                         <label class="form-check-label"
                                                                             :for="`modelYear-${index}`">
                                                                             <span x-text="VecheilYear.name"></span>
@@ -283,16 +292,22 @@
                                                 <div class="collapse-item" x-show="showTrim">
                                                     <div class="collapse-top d-flex justify-content-between">
                                                         <h5 class="form-title">الطراز</h5>
-                                                        <a data-bs-toggle="collapse" href="#collapseTrims" role="button"
-                                                            aria-expanded="false" aria-controls="collapseTrims">عرض الكل
-                                                            <i class="bi bi-chevron-down"></i></a>
+                                                        <a href="#">عرض الكل <i  class="bi bi-chevron-left"></i></a>
 
                                                     </div>
-                                                    <div class="collapse-body overflow-auto collapse show"
+                                                    <div class="collapse-body mb-3 overflow-auto"
                                                         id="collapseTrims">
                                                         <div class="d-flex gap-1 my-3 years-list">
-                                                            <div x-show="isLoading">Loading...</div>
-                                                            <template x-if="!isEmpty">
+                                                            <div x-show="loadingTrims">
+                                                                <div class="d-flex gap-2 " >
+                                                                    <div class="loading-placeholder"></div>
+                                                                    <div class="loading-placeholder"></div>
+                                                                    <div class="loading-placeholder"></div>
+                                                                    <div class="loading-placeholder"></div>
+                                                                    <div class="loading-placeholder"></div>
+                                                                </div>
+                                                            </div>
+                                                            <template x-if="!loadingTrims">
                                                                 <template x-for="(VecheilTrim , index) in VecheilTrims">
                                                                     <div class="form-check model-trim">
                                                                         <input class="form-check-input" type="radio"
@@ -328,18 +343,21 @@
                                             </div>
                                             <div class="form-step-wrapper step-2" x-show="showNextStep">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <h5> المعلومات </h5>
-                                                    <a href="#"> الرجوع للقائمة <i class="bi bi-chevron-left"></i> </a>
-                                                </div>
+                                                    <h5> المعلومات </h5>  
+                                                </div> 
+                                                <div class="mb-3">
                                                 <input type="text" x-model="paymentDetails.mileage"
-                                                    placeholder="ادخل قراءه العداد بشكل صحيح" class="form-control mb-3">
+                                                    placeholder="ادخل قراءه العداد بشكل صحيح" class="form-control " pattern="[0-9]*" required>
+                                                    <i class="text-danger" x-show="showValidationMsg">هذا الحقل مطلوب</i>
+                                                </div>
+                                                   
                                                 <div class="carAccidentStatus mb-3">
                                                     <h5 class="form-title">الحوادث</h5>
                                                     <div class="d-flex gap-4 overflow-auto">
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="accidentCheck" id="no-accident" value="no"
-                                                                x-model="paymentDetails.accidents">
+                                                                x-model="paymentDetails.accidents" required>
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="no-accident">
@@ -362,7 +380,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="accidentCheck" id="low-accident" value="low"
-                                                                x-model="paymentDetails.accidents">
+                                                                x-model="paymentDetails.accidents" required>
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="low-accident">
@@ -384,7 +402,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="accidentCheck" id="mid-accident" value="medium"
-                                                                x-model="paymentDetails.accidents">
+                                                                x-model="paymentDetails.accidents" required>
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="mid-accident">
@@ -409,7 +427,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="accidentCheck" id="high-accident" value="major"
-                                                                x-model="paymentDetails.accidents">
+                                                                x-model="paymentDetails.accidents" required>
                                                             <label
                                                                 class="form-check-label d-flex gap-2 align-items-center"
                                                                 for="high-accident">
@@ -445,6 +463,7 @@
                                                             </label>
                                                         </div>
                                                     </div>
+                                                    <i class="text-danger" x-show="showValidationMsg">هذا الأختيار مطلوب</i>
 
                                                 </div>
                                                 <div class="carColor mb-3">
@@ -626,6 +645,7 @@
 
 
                                                     </div>
+                                                    <i class="text-danger" x-show="showValidationMsg">هذا الأختيار مطلوب</i>
 
                                                 </div>
                                                 <div class="CartrustChecked mb-3">
@@ -706,6 +726,7 @@
 
 
                                                     </div>
+                                                    <i class="text-danger" x-show="showValidationMsg">هذا الأختيار مطلوب</i>
 
                                                 </div>
                                                 <div class="carModifiedCheck mb-3">
@@ -736,7 +757,7 @@
 
 
                                                     </div>
-
+                                                    <i class="text-danger" x-show="showValidationMsg">هذا الأختيار مطلوب</i>
                                                 </div>
                                                 <div class="btns-submit-step">
                                                     <div class="d-flex gap-3 justify-content-center py-2 flex-wrap">
@@ -1263,9 +1284,12 @@
                 VecheilYears: {},
                 VecheilTrims: {},
                 isEmpty: true,
-                isLoading: false,
+                isLoading: true,
+                loadingModels: true,
                 showModel: false,
+                loadingYears: true,
                 showYear: false,
+                loadingTrims: true,
                 showTrim: false,
                 showBtns: false,
                 showCarNotFoundStep: false,
@@ -1275,6 +1299,8 @@
                 inVaild: false,
                 modalFormData: { otp: "", phone: "" },
                 isAuthedUser: false,
+                showValidationMsg: false,
+                 
                 baseUrl: "https://partner-api.cartrust.sa",
                 fetchVecheilManufacturers() {
                     const endpointUrl = `/api/v2/manufacturers`;
@@ -1283,8 +1309,7 @@
                         .then((res) => res.json())
                         .then((data) => {
 
-                            if (data.status == true) {
-                                this.isLoading = true;
+                            if (data.status == true) { 
                                 if (data.manufacturers != "" || data.manufacturers != null) {
                                     this.VecheilManufacturers = data.manufacturers;
                                     this.isEmpty = false;
@@ -1293,10 +1318,7 @@
                         }).catch(error => {
                             console.error('Error fetching data:', error);
                         })
-                        .finally(() => {
-                            // Set isLoading to false after the API call is complete (whether success or error)
-                            this.isLoading = false;
-                        });
+                        
                 },
                 fetchVecheilModels(manufacturerId) {
 
@@ -1306,24 +1328,22 @@
                     fetch(fullUrl)
                         .then((res) => res.json())
                         .then((data) => {
-                            if (data.status == true) {
-                                this.isLoading = true;
-
-                                if (data.models != "" || data.models != null) {
-                                    this.VecheilModels = data.models;
-                                    this.VecheilManufacturer_id = this.VecheilManufacturer_val.split('_')[1];
-                                    this.isEmpty = false;
-                                    this.showModel = true;
-
+                            // this.showModel = true;
+                            setTimeout(() => {
+                                if (data.status == true) { 
+                                    if (data.models != "" || data.models != null) {
+                                        this.VecheilModels = data.models;
+                                        this.VecheilManufacturer_id = this.VecheilManufacturer_val.split('_')[1];
+                                        this.isEmpty = false;
+                                    }
                                 }
-                            }
+                                this.loadingModels = false;
+                            }, 1000);
+                           
                         }).catch(error => {
                             console.error('Error fetching data:', error);
                         })
-                        .finally(() => {
-                            // Set isLoading to false after the API call is complete (whether success or error)
-                            this.isLoading = false;
-                        });
+                        
                 },
                 fetchModelYears() {
                     const endpointUrl = `/api/v2/years`;
@@ -1331,24 +1351,23 @@
 
                     fetch(fullUrl)
                         .then((res) => res.json())
-                        .then((data) => {
-                            if (data.status == true) {
-                                this.isLoading = true;
-
-                                if (data.years != "" || data.years != null) {
-                                    this.VecheilYears = data.years;
-                                    this.VecheilModel_id = this.VecheilModel_val.split('_')[1];
-                                    this.isEmpty = false;
-                                    this.showYear = true;
+                        .then((data) => { 
+                            setTimeout(() => {
+                                if (data.status == true) {  
+                                    if (data.years != "" || data.years != null) {
+                                        this.VecheilYears = data.years;
+                                        this.VecheilModel_id = this.VecheilModel_val.split('_')[1];
+                                        this.isEmpty = false; 
+                                    }
                                 }
-                            }
+                                this.loadingYears = false;
+                            }, 1000);
+
+                            
                         }).catch(error => {
                             console.error('Error fetching data:', error);
                         })
-                        .finally(() => {
-                            // Set isLoading to false after the API call is complete (whether success or error)
-                            this.isLoading = false;
-                        });
+                        
                 },
                 fetchModelTrims(manufacturerId, modelId, year) {
                     const endpointUrl = `/api/v2/trims/make/${manufacturerId}/model/${modelId}/year/${year}`;
@@ -1356,49 +1375,50 @@
 
                     fetch(fullUrl)
                         .then((res) => res.json())
-                        .then((data) => {
-                            if (data.status == true) {
-                                this.isLoading = true;
-
-                                if (data.trims != "" || data.trims != null) {
-                                    this.VecheilTrims = data.trims;
-                                    this.isEmpty = false;
-                                    this.showTrim = true;
+                        .then((data) => { 
+                            setTimeout(() => { 
+                                if (data.status == true) { 
+                                    if (data.trims != "" || data.trims != null) {
+                                        this.VecheilTrims = data.trims;
+                                        this.isEmpty = false; 
+                                    }
                                 }
-                            }
+                                this.loadingTrims = false;
+                            }, 1000);
                         }).catch(error => {
                             console.error('Error fetching data:', error);
                         })
-                        .finally(() => {
-                            // Set isLoading to false after the API call is complete (whether success or error)
-                            this.isLoading = false;
-                        });
+                        
                 },
                 checkAuth() {
+
                     this.VecheilYear_id = this.VecheilYear_val.split('_')[1];
                     this.VecheilTrim_id = this.VecheilTrim_val.split('_')[1];
-                   
-                    if (retrieveAuth().isAuthenticated) {
-                        paymentDetails.manufacturer_id = this.VecheilManufacturer_id;
-                        paymentDetails.model_id = this.VecheilModel_id;
-                        paymentDetails.year_id = this.VecheilYear_id;
-                        paymentDetails.trim_id = this.VecheilTrim_id;
-                        localStorage.setItem("paymentDetails",JSON.stringify(paymentDetails));
-                        location.href = "payment.html";
-                    } else {
-                        jQuery("#EnterPhoneModal").modal('show');
+                    if(paymentDetails.mileage != "" || paymentDetails.accidents != "" || paymentDetails.Service_Contract != "" || paymentDetails.certified != "" || paymentDetails.modified != "" || paymentDetails.warranty != "" ){ 
+                        this.showValidationMsg = false;
+                        if (retrieveAuth().isAuthenticated) {
+                            paymentDetails.manufacturer_id = this.VecheilManufacturer_id;
+                            paymentDetails.model_id = this.VecheilModel_id;
+                            paymentDetails.year_id = this.VecheilYear_id;
+                            paymentDetails.trim_id = this.VecheilTrim_id;
+                            localStorage.setItem("paymentDetails",JSON.stringify(paymentDetails));
+                            location.href = "payment.html"; 
+                        } else {
+                            jQuery("#EnterPhoneModal").modal('show');
+                        }
+                    }else{
+
+                        this.showValidationMsg = true; 
                     }
 
                 },
-                checkLoggedUser() {
-                   
+               
+                checkLoggedUser() { 
                     if (retrieveAuth().isAuthenticated) {
                         this.isAuthedUser = true;
-
                     } else {
                         this.isAuthedUser = false;
-                    }
-
+                    } 
                 },
                 logOut(){
                     const endpointUrl = `/api/v2/logout`;
