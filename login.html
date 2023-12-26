@@ -155,6 +155,8 @@
                   class="form-control text-center py-2"
                 />
               </div>
+              <i class="text-danger" x-show="otpInValid">رقم غير صحيح</i>
+              <br>
               <button
                 type="submit"
                 class="btn btn-primary btn-lg"
@@ -189,6 +191,7 @@
           isLoading: false,
           popUpOpen: false,
           inVaild: false,
+          otpInValid:false,
           modalFormData: { otp: "", phone: "" },
           baseUrl: "https://partner-api.cartrust.sa",
           postData() {
@@ -250,8 +253,9 @@
                 //   console.log("Success:", retrieveAuth());
                   // location.href = "index-ar.html";
                 } else {
+                  this.otpInValid = true;
                   // fail
-                 reject();
+                  reject();
                 }
                 
                 

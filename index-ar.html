@@ -257,6 +257,9 @@
                                                                     </div>
                                                                 </template>
                                                             </template>
+                                                            <template x-if="noModels">
+                                                                <p>لا يوجد موديلات</p>
+                                                            </template>
 
                                                         </div>
                                                     </div>
@@ -333,6 +336,9 @@
                                                                         </label>
                                                                     </div>
                                                                 </template>
+                                                            </template>
+                                                            <template x-if="noTrims">
+                                                                <p>لا يوجد طراز</p>
                                                             </template>
 
                                                         </div>
@@ -776,7 +782,7 @@
                                                             class="go-payment-btn btn btn-primary btn-lg"
                                                             x-on:click="checkAuth()">التالي <i
                                                                 class="bi bi-arrow-left"></i></button>
-                                                        <button class="btn btn-outline-dark btn-lg">
+                                                        <button class="btn btn-outline-dark btn-lg" x-on:click="showNextStep = false; showPrevStep = true;">
                                                             تراجع</button>
                                                     </div>
                                                 </div>
@@ -787,7 +793,7 @@
                                             <form action="#">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h5> لم تجد سيارتك </h5>
-                                                    <a href="#"> الرجوع للقائمة <i class="bi bi-chevron-left"></i> </a>
+                                                    <button class="btn btn-link" type="button" x-on:click="showCarNotFoundStep = false; showPrevStep = true;"> الرجوع للقائمة <i class="bi bi-chevron-left"></i> </button>
                                                 </div>
                                                 <input type="text" placeholder="الشركة المصنعة"
                                                     class="form-control py-3 mb-3">
@@ -1228,6 +1234,8 @@
                             <input type="text" placeholder="xxxx" name="otp" x-model="modalFormData.otp"
                                 class="form-control text-center py-2" />
                         </div>
+                        <i class="text-danger" x-show="otpInValid">رقم غير صحيح</i>
+                        <br>
                         <button type="submit" class="btn btn-primary btn-lg" x-on:click="popUpOpen=false">
                             تحقق
                         </button>
@@ -1292,6 +1300,7 @@
                 VecheilModel_id: "",
                 loadingModels: true,
                 showModel: false,
+                noModels: false,
                 VecheilYear_val: "",
                 VecheilYear_id: "",
                 VecheilYears: {},
@@ -1302,6 +1311,7 @@
                 VecheilTrims: {},
                 loadingTrims: true,
                 showTrim: false,
+                noTrims:false,
                 isEmpty: true,
                 isLoading: true,
                 showBtns: false,
@@ -1313,7 +1323,7 @@
                 modalFormData: { otp: "", phone: "" },
                 isAuthedUser: false,
                 showValidationMsg: false,
-                 
+                otpInValid: false,
                 baseUrl: "https://partner-api.cartrust.sa",
                 fetchVecheilManufacturers() {
                     const endpointUrl = `/api/v2/manufacturers`;
@@ -1351,7 +1361,15 @@
                                         this.VecheilModels = data.models;
                                         this.VecheilManufacturer_id = this.VecheilManufacturer_val.split('_')[1];
                                         this.isEmpty = false;
+                                    }else if((data.models).length <= 0) {
+                                        console.log("empty");
+                                        noModels = true
                                     }
+                                }
+                                else{
+                                    console.log("mm","empty");
+
+                                    noModels = true
                                 }
                                 this.loadingModels = false;
                             }, 1000);
@@ -1397,7 +1415,11 @@
                                     if (data.trims != "" || data.trims != null) {
                                         this.VecheilTrims = data.trims;
                                         this.isEmpty = false; 
+                                    }else{
+                                    this.noTrims = true;
                                     }
+                                }else{
+                                    this.noTrims = true;
                                 }
                                 this.loadingTrims = false;
                             }, 1000);
@@ -1495,6 +1517,7 @@
                                 fetchProfile(data.access_token , "index-ar")
                             } else {
                                 // fail
+                                this.otpInValid = true;
                                 reject();
                             }
 
