@@ -41,12 +41,12 @@
 
 </head>
 
-<body x-data="" x-cloak x-init="">
+<body x-data="GetEvaluationsReports()" x-cloak x-init="fetchMyEvaluations();checkLoggedUser();">
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <!-- <div class="spinner-grow text-primary" role="status"></div> -->
-        <dotlottie-player src="./img/intro.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+                <dotlottie-player src="./img/intro.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
 
     </div>
     <!-- Spinner End -->
@@ -72,7 +72,7 @@
                             <a href="#footer" class="nav-item nav-link">مواقعنا </a>
                             <a href="#aboutUs" class="nav-item nav-link"> من نحن </a>
                             <a href="#services" class="nav-item nav-link">خدماتنا </a>
-                            <a href="#footer" class="nav-item nav-link"> تواصل معنا</a>
+                            <a href="#footer" class="nav-item nav-link"> تواصل معنا</a> 
                             <a href="/reports.html" class="nav-item nav-link">  تقارير </a>
                         </div>
                         <div class="ms-auto d-flex align-items-center displayClass">
@@ -174,41 +174,41 @@
     <!-- Carousel End -->
 
 
-    <!--Profile Start-->
-    <section id="profile">
+    <!--Reports Start-->
+    <section id="Reports" class="py-5">
         <div class="container">
-            <div class="profile-sec p-4 rounded-2">
-                <form action="#">
-                    <div class="row gy-3">
-                        <div class="col-md-7 ">
-                            <div class="profile-info rounded-2 p-4 ">
-                                <form @submit.prevent="postData">
- 
-                                    <input type="text"  x-model="formData.first_name" class="form-control mb-3 text-right" placeholder="الإسم الأول">
-                                    <input type="text"  x-model="formData.second_name" class="form-control mb-3 text-right" placeholder="الإسم الثاني">
-                                    <input type="email"  x-model="formData.email" class="form-control mb-3 text-right" placeholder="البريد الإلكتروني">
-                                  
-                                    <div class="d-flex gap-2 justify-content-end">
-                                        <button type="submit" class="btn btn-primary my-3">
-                                            حفظ
-                                            <i class="fas fa-arrow-left"></i>
-                                        </button>
-                                        <button type="button" class="del-profile btn btn-danger my-3">
-                                            حذف الحساب 
-                                        </button> 
-                                    </div>
-                                  </form>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                             profile tabs
-                        </div>
+            <div class="row">
+                <div x-show="isLoading">
+                    <div class="d-flex gap-2 " >
+                        <div class="loading-placeholder"></div>
+                        <div class="loading-placeholder"></div>
+                        <div class="loading-placeholder"></div>
+                        <div class="loading-placeholder"></div>
+                        <div class="loading-placeholder"></div>
                     </div>
-                </form>
+                </div>
+                <template x-if="!isLoading">
+                    <template x-for="(evalution , index) in MyEvaluations">
+                        <div class="col-md-4">
+                          
+                            <div class="order-card shadow border p-3 d-flex gap-2 mb-3 align-content-center" :id="evalution.id">
+                                <img :src="evalution.make_logo" :data-src="evalution.make_logo" width="85px"
+                                    height="85px" class="lazyload  border rounded" alt="">
+                                <div class="card-details">
+                                    <h6 class="carMenufactor" x-text="evalution.make">  </h6>
+                                    <p class="carYear mb-1" x-text="evalution.year"> </p>
+                                    <p class="carTrim mb-1" x-text="evalution.trim"> </p>
+                                </div>
+                                <a :href="evalution.pdf_link" download class="fs-3 me-auto align-self-center"> <i class="bi bi-file-earmark-arrow-down-fill"></i> </a>
+                            </div>    
+
+                        </div>
+                    </template>
+                </template>
             </div>
         </div>
     </section>
-    <!--Profile End-->
+    <!--Reports End-->
 
 
 
@@ -311,6 +311,7 @@
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+ 
 
 
     <!-- JavaScript Libraries -->
@@ -327,18 +328,37 @@
     <script src="js/main.js"></script>
 
     <script>
+       
         document.addEventListener('alpine:init', () => {
             console.log("Alpine is here");
-            Alpine.data('getSelectedVecheilsInfo', () => ({
-                carSelected:{},
-                carEvalPrice:"",
-                isEmpty: true,
-                isLoading: false,
-                applePaySelected: false,
-                creditCardSelected: false,
+            Alpine.data('GetEvaluationsReports', () => ({
+                MyEvaluations:{}, 
+                isEmpty: true, 
+                isLoading: true,
                 isAuthedUser: false,
                 baseUrl: "https://partner-api.cartrust.sa",
-                 
+                fetchMyEvaluations() {
+                    const endpointUrl = `/api/v2/pg/evaluations`;
+                    const fullUrl = this.baseUrl + endpointUrl;
+                    fetch(fullUrl , {headers:{
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + retrieveAuth().access_token
+                    }})
+                    .then((res) => res.json())
+                        .then((data) => {
+                         
+                            setTimeout(() => {
+                                if(data.success){ 
+                                    this.MyEvaluations = data.response.data
+                                }
+                                this.isLoading = false;
+                            }, 100);
+                        }).catch(error => {
+                            console.error('Error fetching data:', error);
+                        })
+                        
+                },
+                
                 checkLoggedUser() {
                     if (retrieveAuth().isAuthenticated) {
                         this.isAuthedUser = true;
@@ -349,38 +369,6 @@
                     }
 
                 },
-                goPayment(){
-                    const endpointUrl = `/api/v2/payment/link`;
-                    const fullUrl = this.baseUrl + endpointUrl;
-
-                    // Extract form data
-                    const formData = {
-                        return_url : "https://cartrust.mohousab.com/app/auth",
-                        amount : parseInt(this.carEvalPrice),
-                        cart_id : this.carSelected.id,
-                        type : "E"
-                    } 
-                    // Make a POST request
-                    fetch(fullUrl, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + retrieveAuth().access_token
-                        },
-                        body: JSON.stringify(formData),
-                    })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            if(data.status){
-                                location.href=data.payment_link;
-                            }
-                                 
-                        })
-                        .catch((error) => {
-                            console.error("Error:", error);
-                            // Handle errors
-                        });
-                }
 
 
             }))

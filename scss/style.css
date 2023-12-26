@@ -446,7 +446,7 @@ a.nav-link.dropdown-toggle.active::after {
 #profile .payment-sec .payment-check .form-check .form-check-input,
 #Payment .profile-sec .payment-check .form-check .form-check-input,
 #Payment .payment-sec .payment-check .form-check .form-check-input {
-  float: inline-start;
+  float: right;
   height: 20px;
   width: 20px;
   margin-top: 0.4em;

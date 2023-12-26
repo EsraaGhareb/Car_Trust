@@ -39,7 +39,6 @@
     <link href="./scss/style.css" rel="stylesheet">
     <link href="./scss/style-ar.css" rel="stylesheet">
 
-
 </head>
 
 <body x-data="getVecheilsInfo()" x-cloak x-init="checkLoggedUser()">
@@ -47,7 +46,7 @@
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <!-- <div class="spinner-grow text-primary" role="status"></div> -->
-        <img class="img-fluid" src="./img/loadingLogo.gif" />
+        <dotlottie-player src="./img/intro.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
     </div>
     <!-- Spinner End -->
     <!-- Navbar Start -->
@@ -73,6 +72,7 @@
                             <a href="#aboutUs" class="nav-item nav-link"> من نحن </a>
                             <a href="#services" class="nav-item nav-link">خدماتنا </a>
                             <a href="#footer" class="nav-item nav-link"> تواصل معنا</a>
+                            <a href="/reports.html" class="nav-item nav-link">  تقارير </a>
                         </div>
                         <div class="ms-auto d-flex align-items-center displayClass">
                             <div class="nav-item dropdown mx-2">
@@ -1214,7 +1214,7 @@
     <!-- Modals -->
 
     <!--Enter OTP Modal -->
-    <div class="modal fade" id="EnterOTPModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="EnterOTPModal"  tabindex="-1"
         aria-labelledby="EnterOTPModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -1276,7 +1276,7 @@
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.js"></script>
     <script src="lib/parallax/parallax.min.js"></script>
-
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 
@@ -1290,20 +1290,20 @@
                 VecheilModels: {},
                 VecheilModel_val: "",
                 VecheilModel_id: "",
-                VecheilYear_val: "",
-                VecheilYear_id: "",
-                VecheilTrim_val: "",
-                VecheilTrim_id: "",
-                VecheilYears: {},
-                VecheilTrims: {},
-                isEmpty: true,
-                isLoading: true,
                 loadingModels: true,
                 showModel: false,
+                VecheilYear_val: "",
+                VecheilYear_id: "",
+                VecheilYears: {},
                 loadingYears: true,
                 showYear: false,
+                VecheilTrim_val: "",
+                VecheilTrim_id: "",
+                VecheilTrims: {},
                 loadingTrims: true,
                 showTrim: false,
+                isEmpty: true,
+                isLoading: true,
                 showBtns: false,
                 showCarNotFoundStep: false,
                 showNextStep: false,
@@ -1428,7 +1428,6 @@
                     }
 
                 },
-               
                 checkLoggedUser() { 
                     if (retrieveAuth().isAuthenticated) {
                         this.isAuthedUser = true;
@@ -1436,7 +1435,6 @@
                         this.isAuthedUser = false;
                     } 
                 },
-                
                 postData() {
                     const endpointUrl = `/api/v2/request-otp`;
                     const fullUrl = this.baseUrl + endpointUrl;
@@ -1471,7 +1469,6 @@
                             // Handle errors
                         });
                 },
-
                 postOtpData() {
                     const endpointUrl = `/api/v2/verify-otp`;
                     const fullUrl = this.baseUrl + endpointUrl;

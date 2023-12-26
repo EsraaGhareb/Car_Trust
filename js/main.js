@@ -7,7 +7,7 @@
             if ($('#spinner').length > 0) {
                 $('#spinner').removeClass('show');
             }
-        }, 10);
+        }, 100);
     };
     spinner();
     
@@ -107,4 +107,5 @@ let paymentDetails ={
     year_id: "",
     trim_id: "",
     plate_no: "",
+    source: "Website",
 };
