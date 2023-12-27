@@ -343,7 +343,7 @@
                                                 <div class="btns-submit-step" x-show="showBtns">
                                                     <div class="d-flex gap-3 justify-content-center py-2 flex-wrap">
                                                         <button type="button" class="btn btn-primary btn-lg"
-                                                            x-on:click="showNextStep = true; showPrevStep = false">
+                                                            x-on:click="showNextStep = true; showPrevStep = false; getOptionList()">
                                                             التالي <i class="bi bi-arrow-left"></i>
                                                         </button>
                                                         <button type="button" class="btn btn-outline-dark btn-lg"
@@ -482,67 +482,24 @@
                                                 <div class="carColor mb-3">
                                                     <h5 class="form-title">لون المركبة</h5>
                                                     <div class="d-flex gap-4 overflow-auto">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="colorCheck" id="white-car" value="white"
-                                                                x-model="paymentDetails.color">
-                                                            <label
-                                                                class="form-check-label d-flex gap-2 align-items-center "
-                                                                for="white-car">
-                                                                <i class="color-sq bg-white border border-dark"></i>
-                                                                ابيض
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="colorCheck" id="black-car" value="black"
-                                                                x-model="paymentDetails.color">
-                                                            <label
-                                                                class="form-check-label d-flex gap-2 align-items-center"
-                                                                for="black-car">
-                                                                <i class="color-sq bg-black"></i> اسود
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="colorCheck" id="gray-car" value="gray"
-                                                                x-model="paymentDetails.color">
-                                                            <label
-                                                                class="form-check-label d-flex gap-2 align-items-center"
-                                                                for="gray-car">
-                                                                <i class="color-sq bg-gray"></i> رمادي
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="colorCheck" id="blue-car" value="blue"
-                                                                x-model="paymentDetails.color">
-                                                            <label
-                                                                class="form-check-label d-flex gap-2 align-items-center"
-                                                                for="blue-car">
-                                                                <i class="color-sq bg-blue"></i> أزرق
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="colorCheck" id="red-car" value="red"
-                                                                x-model="paymentDetails.color">
-                                                            <label
-                                                                class="form-check-label d-flex gap-2 align-items-center"
-                                                                for="red-car">
-                                                                <i class="color-sq bg-red"></i> أحمر
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="colorCheck" id="green-car" value="green"
-                                                                x-model="paymentDetails.color">
-                                                            <label
-                                                                class="form-check-label d-flex gap-2 align-items-center"
-                                                                for="green-car">
-                                                                <i class="color-sq bg-green"></i> زيتي
-                                                            </label>
-                                                        </div>
+                                                        <template x-for="(color, index) in VecheilColors">
+                                                            <div class="form-check">
+                                                              <input
+                                                                class="form-check-input"
+                                                                type="radio"
+                                                                name="colorCheck"
+                                                                :id="`${color.title}-${color.id}-car`"
+                                                                x-value="color.title"
+                                                                x-model="paymentDetails.color"
+                                                                x-bind:checked="index === 0 ? false : paymentDetails.color === `${color.title}`"
+                                                              />
+                                                              <label :for="`${color.title}-${color.id}-car`" class="form-check-label d-flex gap-2 align-items-center text-nowrap">
+                                                                <i class="color-sq border border-dark" :style="`background-color:${color.color_code}`"></i>
+                                                                <span x-text="color.title_arabic"></span>
+                                                              </label>
+                                                            </div>
+                                                        </template>
+                                                       
 
                                                     </div>
 
@@ -550,50 +507,19 @@
                                                 <div class="carUsage mb-3">
                                                     <h5 class="form-title">سبب الاستخدام</h5>
                                                     <div class="d-flex gap-4 overflow-auto">
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="UsageCheck" id="personal-car" value="Personal"
-                                                                x-model="paymentDetails.purpose_of_use">
-                                                            <label
-                                                                class="form-check-label d-flex gap-2 align-items-center"
-                                                                for="personal-car">
-                                                                شخصي
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="UsageCheck" id="company-car" value="Company"
-                                                                x-model="paymentDetails.purpose_of_use">
-                                                            <label
-                                                                class="form-check-label d-flex gap-2 align-items-center"
-                                                                for="company-car">
-                                                                شركة
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="UsageCheck" id="rent-car" value="Rent"
-                                                                x-model="paymentDetails.purpose_of_use">
-                                                            <label
-                                                                class="form-check-label d-flex gap-2 align-items-center"
-                                                                for="rent-car">
-                                                                شخصي
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="UsageCheck" id="police-car" value="Police"
-                                                                x-model="paymentDetails.purpose_of_use">
-                                                            <label
-                                                                class="form-check-label d-flex gap-2 align-items-center"
-                                                                for="police-car">
-                                                                شخصي
-                                                            </label>
-                                                        </div>
+                                                        <template x-for="(perpose,index) in VecheilUsePerpose">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="UsageCheck" :id="`${perpose.id}-${perpose.title}-car`" :value="perpose.title"
+                                                                    x-model="paymentDetails.purpose_of_use"
+                                                                    x-bind:checked="index === 0 ? false : paymentDetails.purpose_of_use === `${perpose.title}`">
+                                                                <label
+                                                                    class="form-check-label d-flex gap-2 align-items-center" x-text="perpose.title_arabic"
+                                                                    :for="`${perpose.id}-${perpose.title}-car`">
+                                                                    
+                                                                </label>
+                                                            </div>
+                                                        </template>
 
                                                     </div>
 
@@ -601,30 +527,20 @@
                                                 <div class="carIncoming mb-3">
                                                     <h5 class="form-title">وارد السيارة</h5>
                                                     <div class="d-flex gap-4 overflow-auto">
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="IncomingCheck" id="saudiAgent-car" value="yes"
-                                                                x-model="paymentDetails.Service_Contract">
-                                                            <label
-                                                                class="form-check-label d-flex gap-2 align-items-center"
-                                                                for="saudiAgent-car">
-                                                                وارد الوكيل السعودي
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="IncomingCheck" id="notSaudiAgent-car" value="no"
-                                                                x-model="paymentDetails.Service_Contract">
-                                                            <label
-                                                                class="form-check-label d-flex gap-2 align-items-center"
-                                                                for="notSaudiAgent-car">
-                                                                غير وارد الوكيل السعودي
-                                                            </label>
-                                                        </div>
-
-
+                                                        <template x-for="(origin , index) in VecheilOrigins">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="IncomingCheck" :id="`Specification-car-${origin.id}`" :value="origin.title"
+                                                                    x-model="paymentDetails.origin" 
+                                                                    x-bind:checked="index === 0 ? false : paymentDetails.origin === `${origin.title}`">
+                                                                <label
+                                                                    class="form-check-label d-flex gap-2 align-items-center"
+                                                                    :for="`Specification-car-${origin.id}`" x-text="origin.title_arabic">
+                                                                    
+                                                                </label>
+                                                            </div>
+                                                        </template>
+                                                      
                                                     </div>
 
                                                 </div>
@@ -1312,6 +1228,9 @@
                 showTrim: false,
                 noTrims:false,
                 addNewTrim:"",
+                VecheilOrigins:"",
+                VecheilColors:"",
+                VecheilUsePerpose :"",
                 isEmpty: true,
                 isLoading: true,
                 showBtns: false,
@@ -1426,11 +1345,30 @@
                         })
                         
                 },
+                getOptionList(){
+                    const endpointUrl = `/api/v2/pg/options/list`;
+                    const fullUrl = this.baseUrl + endpointUrl;
+
+                    fetch(fullUrl)
+                        .then((res) => res.json())
+                        .then((data) => {  
+                                if (data.status == true) {  
+                                        this.VecheilOrigins = data.data.origins;
+                                        this.VecheilColors = data.data.colors;
+                                        this.VecheilUsePerpose = data.data.purpose_of_use;
+                                        this.isEmpty = false; 
+                                   
+                                } 
+                        
+                        }).catch(error => {
+                            console.error('Error fetching data:', error);
+                        })
+                },
                 checkAuth() {
 
                     this.VecheilYear_id = this.VecheilYear_val.split('_')[1];
                     this.VecheilTrim_id = this.VecheilTrim_val.split('_')[1];
-                    if(paymentDetails.mileage != "" && paymentDetails.accidents != "" && paymentDetails.Service_Contract != "" && paymentDetails.certified != "" && paymentDetails.modified != "" && paymentDetails.warranty != "" ){ 
+                    if(paymentDetails.mileage != "" && paymentDetails.accidents != "" && paymentDetails.origin != "" && paymentDetails.certified != "" && paymentDetails.modified != "" && paymentDetails.warranty != "" ){ 
                         this.showValidationMsg = false;
                         if (retrieveAuth().isAuthenticated) {
                             paymentDetails.manufacturer_id = this.VecheilManufacturer_id;
