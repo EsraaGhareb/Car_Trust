@@ -144,16 +144,21 @@
             </h1>
 
             <form @submit.prevent="postOtpData">
-              <div class="form-group mb-3 mx-auto w-50">
-                <input
-                  type="text"
-                  placeholder="xxxx"
-                  name="otp"
-                  x-model="modalFormData.otp"
-                  class="form-control text-center py-2"
-                />
-              </div>
-              <i class="text-danger" x-show="otpInValid">رقم غير صحيح</i>
+          
+                <div class="form-group mb-3 mx-auto w-50">
+                  <input
+                    type="text"
+                    placeholder="xxxx"
+                    name="otp"
+                    x-model="modalFormData.otp" 
+                    @input="otpInValid = modalFormData.otp.length > 4"
+                    class="form-control text-center py-2"
+                  />
+                </div>
+
+                <template x-if="otpInValid">
+                  <i class="text-danger">رقم غير صحيح</i>
+                </template>
               <br>
               <button
                 type="submit"
