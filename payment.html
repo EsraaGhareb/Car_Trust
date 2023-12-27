@@ -439,16 +439,16 @@
     <script src="js/main.js"></script>
 
     <script>
-       
+       console.log(paymentDetails);
         jQuery.noConflict();
-jQuery(document).ready(function ($) {
-   // Check if the URL contains #paymentsuccess
-    if (window.location.hash === '#successPayment') {
-        // Show the success modal
-        $('#successPaymentModal').modal('show');
-        // localStorage.removeItem("paymentDetails");
-    }
-});
+        jQuery(document).ready(function ($) {
+        // Check if the URL contains #paymentsuccess
+            if (window.location.hash === '#successPayment') {
+                // Show the success modal
+                $('#successPaymentModal').modal('show');
+                // localStorage.removeItem("paymentDetails");
+            }
+        });
         document.addEventListener('alpine:init', () => {
             console.log("Alpine is here");
             Alpine.data('getSelectedVecheilsInfo', () => ({

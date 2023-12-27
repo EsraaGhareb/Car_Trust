@@ -800,7 +800,7 @@
 
                                                 <div class="btns-submit-step">
                                                     <div class="d-flex gap-3 justify-content-center py-2">
-                                                        <button type="submit" class="btn btn-primary btn-lg">
+                                                        <button type="submit"  class="btn btn-primary btn-lg">
                                                             إرسال</button>
                                                     </div>
                                                 </div>
@@ -1510,8 +1510,7 @@
                             if (data.verified === true) {
                                 // success
                                 approve(data.access_token, data.user_id)
-                                //   console.log("Success:", retrieveAuth());
-                                // location.href = "payment.html";
+                             
                                 fetchProfile(data.access_token , "index-ar")
                             } else {
                                 // fail
@@ -1527,35 +1526,32 @@
                         });
                 },
                 AddVecheil(){
-                    const endpointUrl = `/api/v2/vehicle/add-update`;
+                    const endpointUrl = `/api/v2/missing/vehicle/combination`;
                     const fullUrl = this.baseUrl + endpointUrl;
 
                     // Extract form data
-                    formData = this.modalFormData;
+                    formData = {
+                        manufacturer:this.addNewManufacturer,
+                        model:this.addNewModel,
+                        year:this.addNewYear,
+                        trim:this.addNewTrim,
+                    };
 
                     // Make a POST request
                     fetch(fullUrl, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-
+                            "Authorization": "Bearer " + retrieveAuth().access_token
                         },
                         body: JSON.stringify(formData),
                     })
                         .then((response) => response.json())
                         .then((data) => {
-                            if (data.verified === true) {
-                                // success
-                                approve(data.access_token, data.user_id)
-                                //   console.log("Success:", retrieveAuth());
-                                // location.href = "payment.html";
-                                fetchProfile(data.access_token , "index-ar")
-                            } else {
-                                // fail
-                                this.otpInValid = true;
-                                reject();
-                            }
-
+                            if (data.success === true) { 
+                           location.href = "index-ar.html";
+                         
+                            } 
 
                         })
                         .catch((error) => {

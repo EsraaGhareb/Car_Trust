@@ -18,7 +18,7 @@
     //toggle button
     $(document).ready(function(){
       $(".toggleBtn").click(function(){
-        $(".carForm").show();
+        $(".carForm").toggle();
       });
     });
     // Fixed Navbar
