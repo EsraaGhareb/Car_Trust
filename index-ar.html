@@ -256,10 +256,8 @@
                                                                         </label>
                                                                     </div>
                                                                 </template>
-                                                            </template>
-                                                            <template x-if="noModels">
-                                                                <p>لا يوجد موديلات</p>
-                                                            </template>
+                                                            </template> 
+                                                            <p x-show="noModels">لا يوجد موديلات</p> 
 
                                                         </div>
                                                     </div>
@@ -336,10 +334,8 @@
                                                                         </label>
                                                                     </div>
                                                                 </template>
-                                                            </template>
-                                                            <template x-if="noTrims">
-                                                                <p>لا يوجد طراز</p>
-                                                            </template>
+                                                            </template> 
+                                                                <p x-show="noTrims">لا يوجد طراز</p> 
 
                                                         </div>
                                                     </div>
@@ -790,16 +786,16 @@
                                             </div>
                                         </form>
                                         <div class="form-step-wrapper step-2" x-show="showCarNotFoundStep">
-                                            <form action="#">
+                                            <form @submit.prevent="AddVecheil">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                                     <h5> لم تجد سيارتك </h5>
                                                     <button class="btn btn-link" type="button" x-on:click="showCarNotFoundStep = false; showPrevStep = true;"> الرجوع للقائمة <i class="bi bi-chevron-left"></i> </button>
                                                 </div>
                                                 <input type="text" placeholder="الشركة المصنعة"
-                                                    class="form-control py-3 mb-3">
-                                                <input type="text" placeholder="الموديل" class="form-control py-3 mb-3">
-                                                <input type="text" placeholder="السنة" class="form-control py-3 mb-3">
-                                                <input type="text" placeholder="طراز المركبة"
+                                                    class="form-control py-3 mb-3" x-model="addNewManufacturer">
+                                                <input type="text" placeholder="الموديل" x-model="addNewModel" class="form-control py-3 mb-3">
+                                                <input type="text" placeholder="السنة" x-model="addNewYear" class="form-control py-3 mb-3">
+                                                <input type="text" placeholder="طراز المركبة" x-model="addNewTrim"
                                                     class="form-control py-3 mb-3">
 
                                                 <div class="btns-submit-step">
@@ -1295,23 +1291,27 @@
                 VecheilManufacturers: {},
                 VecheilManufacturer_val: "",
                 VecheilManufacturer_id: "",
+                addNewManufacturer:"",
                 VecheilModels: {},
                 VecheilModel_val: "",
                 VecheilModel_id: "",
                 loadingModels: true,
                 showModel: false,
                 noModels: false,
+                addNewModel: "",
                 VecheilYear_val: "",
                 VecheilYear_id: "",
                 VecheilYears: {},
                 loadingYears: true,
                 showYear: false,
+                addNewYear:"",
                 VecheilTrim_val: "",
                 VecheilTrim_id: "",
                 VecheilTrims: {},
                 loadingTrims: true,
                 showTrim: false,
                 noTrims:false,
+                addNewTrim:"",
                 isEmpty: true,
                 isLoading: true,
                 showBtns: false,
@@ -1357,18 +1357,16 @@
                             // this.showModel = true;
                             setTimeout(() => {
                                 if (data.status == true) { 
-                                    if (data.models != "" || data.models != null) {
+                                    if (((data.models).length) != 0 && data.models != "" || data.models != null ) {
+                                        console.log((data.models).length);
                                         this.VecheilModels = data.models;
                                         this.VecheilManufacturer_id = this.VecheilManufacturer_val.split('_')[1];
                                         this.isEmpty = false;
-                                    }else if((data.models).length <= 0) {
-                                        console.log("empty");
+                                    }else { 
                                         noModels = true
                                     }
                                 }
-                                else{
-                                    console.log("mm","empty");
-
+                                else{ 
                                     noModels = true
                                 }
                                 this.loadingModels = false;
@@ -1412,7 +1410,7 @@
                         .then((data) => { 
                             setTimeout(() => { 
                                 if (data.status == true) { 
-                                    if (data.trims != "" || data.trims != null) {
+                                    if (((data.trims).length) != 0 && data.trims != "" || data.trims != null) {
                                         this.VecheilTrims = data.trims;
                                         this.isEmpty = false; 
                                     }else{
@@ -1528,6 +1526,43 @@
                             // Handle errors
                         });
                 },
+                AddVecheil(){
+                    const endpointUrl = `/api/v2/vehicle/add-update`;
+                    const fullUrl = this.baseUrl + endpointUrl;
+
+                    // Extract form data
+                    formData = this.modalFormData;
+
+                    // Make a POST request
+                    fetch(fullUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+
+                        },
+                        body: JSON.stringify(formData),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            if (data.verified === true) {
+                                // success
+                                approve(data.access_token, data.user_id)
+                                //   console.log("Success:", retrieveAuth());
+                                // location.href = "payment.html";
+                                fetchProfile(data.access_token , "index-ar")
+                            } else {
+                                // fail
+                                this.otpInValid = true;
+                                reject();
+                            }
+
+
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            // Handle errors
+                        });
+                }
 
             }))
 
