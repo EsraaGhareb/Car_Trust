@@ -41,7 +41,7 @@
 
 </head>
 
-<body x-data="getSelectedVecheilsInfo()" x-cloak x-init="checkLoggedUser();evaluateData();getPaymentStatus();">
+<body x-data="getSelectedVecheilsInfo()" x-cloak x-init="checkLoggedUser();getPaymentStatus();">
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -380,7 +380,8 @@
                         .then((data) => {  
                                 console.log("payment status ",data);
                                 if(data.status ){  
-                                    this.successPayment = true
+                                    this.successPayment = true;
+                                    this.evaluateData();
                                 } else{
                                     this.successPayment = false
                                     this.paymentMsg = data.message;

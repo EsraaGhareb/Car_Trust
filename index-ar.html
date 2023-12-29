@@ -67,7 +67,7 @@
                         </div>
                     </div> 
                     <a href="https://play.google.com/" class="me-auto"> حمل التطبيق</a>
-                    <button type="button" class="close btn fs-5" data-dismiss="alert" aria-label="Close">
+                    <button type="button" class="close btn fs-5 closeAppAlert" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -222,7 +222,7 @@
                                                                                 :id="`vecheilcheck-${index}`"
                                                                                 :value="`${VecheilManufacturer.name}_${VecheilManufacturer.id}`"
                                                                                 x-model="VecheilManufacturer_val"
-                                                                                x-on:change="fetchVecheilModels(VecheilManufacturer.id)" x-on:click=" loadingModels = true; showModel = true; showYear = false; showTrim = false; showBtns = false;" >
+                                                                                x-on:change="fetchVecheilModels(VecheilManufacturer.id , VecheilManufacturer.make_logo)" x-on:click=" loadingModels = true; showModel = true; showYear = false; showTrim = false; showBtns = false;" >
                                                                             <label class="form-check-label"
                                                                                 :for="`vecheilcheck-${index}`">
                                                                                 <img :alt="VecheilManufacturer.name"
@@ -1232,6 +1232,7 @@
                 VecheilManufacturers: {},
                 VecheilManufacturer_val: "",
                 VecheilManufacturer_id: "",
+                VecheilManufacturer_logo: "",
                 addNewManufacturer:"",
                 VecheilModels: {},
                 VecheilModel_val: "",
@@ -1291,8 +1292,8 @@
                         })
                         
                 },
-                fetchVecheilModels(manufacturerId) {
-
+                fetchVecheilModels(manufacturerId , manufacturerLogo) {
+                    this.VecheilManufacturer_logo = manufacturerLogo;
                     const endpointUrl = `/api/v2/models/manufacturer/${manufacturerId}?priced_models=${manufacturerId}`;
                     const fullUrl = this.baseUrl + endpointUrl;
 
@@ -1477,10 +1478,15 @@
                             paymentDetails.model_id = this.VecheilModel_id;
                             paymentDetails.year_id = this.VecheilYear_id;
                             paymentDetails.trim_id = this.VecheilTrim_id;
-                            paymentDetails.Service_Contract = paymentDetails.certified;
+                            paymentDetails.Service_Contract = paymentDetails.certified; 
+                            SelectedCarDetails.make_logo = this.VecheilManufacturer_logo; 
+                            SelectedCarDetails.make = (this.VecheilManufacturer_val).replace(/_+\d+$/, ''); 
+                            SelectedCarDetails.model = this.VecheilModel_val; 
+                            SelectedCarDetails.year = this.VecheilYear_val; 
+                            SelectedCarDetails.trim = this.VecheilTrim_val; 
+                            localStorage.setItem("SelectedCarDetails",JSON.stringify(SelectedCarDetails));
                             localStorage.setItem("paymentDetails",JSON.stringify(paymentDetails));
-                            this.CartCreate();
-                            // location.href = "payment.html"; 
+                            this.CartCreate(); 
                         } else {
                             jQuery("#EnterPhoneModal").modal('show');
                         }
@@ -1553,7 +1559,7 @@
                                 // success
                                 approve(data.access_token, data.user_id)
                              
-                                fetchProfile(data.access_token , "index-ar")
+                                fetchProfile(data.access_token , "payment")
                             } else {
                                 // fail
                                 this.otpInValid = true;

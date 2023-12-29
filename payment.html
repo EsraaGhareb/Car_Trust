@@ -41,7 +41,7 @@
 
 </head>
 
-<body x-data="getSelectedVecheilsInfo()" x-cloak x-init="evaluateData(); checkLoggedUser();">
+<body x-data="getSelectedVecheilsInfo()" x-cloak x-init="getSelectedCar(); checkLoggedUser();">
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -449,7 +449,7 @@
         document.addEventListener('alpine:init', () => {
             console.log("Alpine is here");  
             Alpine.data('getSelectedVecheilsInfo', () => ({
-                carSelected:{},
+                carSelected:{}, 
                 carEvalPrice: "",
                 evaluateReport:"",
                 card_info : JSON.parse(localStorage.getItem("card_info")),
@@ -471,39 +471,45 @@
                     }
 
                 },
-                evaluateData() {
-                    const endpointUrl = `/api/v2/pg/evaluate`;
-                    const fullUrl = this.baseUrl + endpointUrl;
+                getSelectedCar(){
+                    this.cart_id = this.card_info.cart_id;
+                    this.carSelected = JSON.parse(localStorage.getItem("SelectedCarDetails"));  
+                    this.carEvalPrice = localStorage.getItem("payablePrice");
+                    this.PriceTaxes = localStorage.getItem("priceTaxes");
+                }
+                // , evaluateData() {
+                //     const endpointUrl = `/api/v2/pg/evaluate`;
+                //     const fullUrl = this.baseUrl + endpointUrl;
 
-                    // Extract form data
-                    const formData = JSON.parse(localStorage.getItem("paymentDetails"));
+                //     // Extract form data
+                //     const formData = JSON.parse(localStorage.getItem("paymentDetails"));
                     
-                    // Make a POST request
-                    fetch(fullUrl, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + retrieveAuth().access_token
-                        },
-                        body: JSON.stringify(formData),
-                    })
-                        .then((response) => response.json())
-                        .then((data) => {
+                //     // Make a POST request
+                //     fetch(fullUrl, {
+                //         method: "POST",
+                //         headers: {
+                //             "Content-Type": "application/json",
+                //             "Authorization": "Bearer " + retrieveAuth().access_token
+                //         },
+                //         body: JSON.stringify(formData),
+                //     })
+                //         .then((response) => response.json())
+                //         .then((data) => {
                              
-                                this.cart_id = this.card_info.cart_id;
-                                this.carSelected = data.response; 
-                                this.evaluateReport = data.response.pdf_link;
-                                this.carEvalPrice = localStorage.getItem("payablePrice");
-                                this.PriceTaxes = localStorage.getItem("priceTaxes");
-                                // this.paymentEvaluateInfo();
-                                this.isEmpty = false;
+                //                 this.cart_id = this.card_info.cart_id;
+                //                 this.carSelected = data.response; 
+                //                 this.evaluateReport = data.response.pdf_link;
+                //                 this.carEvalPrice = localStorage.getItem("payablePrice");
+                //                 this.PriceTaxes = localStorage.getItem("priceTaxes");
+                //                 // this.paymentEvaluateInfo();
+                //                 this.isEmpty = false;
                               
-                        })
-                        .catch((error) => {
-                            console.error("Error:", error);
-                            // Handle errors
-                        });
-                },
+                //         })
+                //         .catch((error) => {
+                //             console.error("Error:", error);
+                //             // Handle errors
+                //         });
+                // },
                 
                 // paymentEvaluateInfo() {
                 //     const endpointUrl = `/api/v2/pg/billing/info`;
@@ -531,7 +537,7 @@
                 //         });
                 // },
                 
-                goPayment(){
+                ,goPayment(){
                     const endpointUrl = `/api/v2/payment/link`;
                     const fullUrl = this.baseUrl + endpointUrl;
 

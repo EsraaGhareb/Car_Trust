@@ -27,30 +27,41 @@
             if ($(this).scrollTop() > 45) {
                 $('.fixed-top').addClass('bg-dark shadow');
                 $('.fixed-top .app-alert').addClass('d-none');
-                $('.carousel').addClass('withAppAlert');
+                if($(".app-alert").hasClass("show")){
+                    $('.carousel').addClass('withAppAlert');
+                }
 
             } else {
                 $('.fixed-top').removeClass('bg-dark shadow');
-                $('.fixed-top .app-alert').removeClass('d-none');
-                // $('.carousel').removeClass('withAppAlert');
+                if(!($(".app-alert").hasClass("userRemovedAlert"))){
+                    $('.fixed-top .app-alert').removeClass('d-none');
+                }
+                
+                // 
 
             }
         } else {
             if ($(this).scrollTop() > 45) {
                 $('.fixed-top').addClass('bg-dark shadow').css('top', 0);
                 $('.fixed-top .app-alert').addClass('d-none');
-                $('.carousel').addClass('withAppAlert');
+                if($(".app-alert").hasClass("show")){
+                    $('.carousel').addClass('withAppAlert');
+                }
 
             } else {
                 $('.fixed-top').removeClass('bg-dark shadow').css('top', 0);
-                $('.fixed-top .app-alert').removeClass('d-none');
-                // $('.carousel').removeClass('withAppAlert');
+                if(!($(".app-alert").hasClass("userRemovedAlert"))){
+                    $('.fixed-top .app-alert').removeClass('d-none');
+                }
 
             }
         }
     });
     
-    
+    $(".closeAppAlert").on('click',function(){
+        $(this).parents(".app-alert").removeClass("fade show").addClass("d-none userRemovedAlert");
+        $('.carousel').removeClass('withAppAlert');
+    });
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
@@ -120,4 +131,12 @@ let paymentDetails ={
     trim_id: "",
     plate_no: "",
     source: "Website",
+};
+let SelectedCarDetails ={
+    make_logo:"",
+    make:"",
+    model:"",
+    year:"",
+    trim:"",
+    
 };
