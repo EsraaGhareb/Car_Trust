@@ -26,14 +26,21 @@
         if ($(window).width() < 992) {
             if ($(this).scrollTop() > 45) {
                 $('.fixed-top').addClass('bg-dark shadow');
+                $('.fixed-top .app-alert').addClass('d-none');
+
             } else {
                 $('.fixed-top').removeClass('bg-dark shadow');
+                $('.fixed-top .app-alert').removeClass('d-none');
+
             }
         } else {
             if ($(this).scrollTop() > 45) {
                 $('.fixed-top').addClass('bg-dark shadow').css('top', 0);
+                $('.fixed-top .app-alert').addClass('d-none');
+
             } else {
                 $('.fixed-top').removeClass('bg-dark shadow').css('top', 0);
+                $('.fixed-top .app-alert').removeClass('d-none');
             }
         }
     });
