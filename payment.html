@@ -472,10 +472,10 @@
 
                 },
                 getSelectedCar(){
+                    this.paymentEvaluateInfo(); 
                     this.cart_id = this.card_info.cart_id;
                     this.carSelected = JSON.parse(localStorage.getItem("SelectedCarDetails"));  
-                    this.carEvalPrice = localStorage.getItem("payablePrice");
-                    this.PriceTaxes = localStorage.getItem("priceTaxes");
+                  
                 }
                 // , evaluateData() {
                 //     const endpointUrl = `/api/v2/pg/evaluate`;
@@ -509,35 +509,33 @@
                 //             console.error("Error:", error);
                 //             // Handle errors
                 //         });
-                // },
+                // }
                 
-                // paymentEvaluateInfo() {
-                //     const endpointUrl = `/api/v2/pg/billing/info`;
-                //     const fullUrl = this.baseUrl + endpointUrl;
-                //     // Make a POST request
-                //     fetch(fullUrl, {
-                //         method: "POST",
-                //         headers: {
-                //             "Content-Type": "application/json",
-                //             "Authorization": "Bearer " + retrieveAuth().access_token
-                //         }, 
-                //     })
-                //         .then((response) => response.json())
-                //         .then((data) => {
-                //             // console.log(data) 
-                //             let payablePrice = (( data.response.payable_from_web).replace(/,/g, '.'));
-                //             this.PriceTaxes = Number((payablePrice*0.15).toFixed(2))
-                //             this.carEvalPrice = Math.round(+payablePrice + this.PriceTaxes); 
-                //             this.isEmpty = false;
+                ,paymentEvaluateInfo() {
+                    const endpointUrl = `/api/v2/pg/billing/info`;
+                    const fullUrl = this.baseUrl + endpointUrl;
+                    // Make a POST request
+                    fetch(fullUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + retrieveAuth().access_token
+                        }, 
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            // console.log(data) 
+                            let payablePrice = (( data.response.payable_from_web).replace(/,/g, '.'));
+                            this.PriceTaxes = Number((payablePrice*0.15).toFixed(2))
+                            this.carEvalPrice = Math.round(+payablePrice + this.PriceTaxes); 
+                            this.isEmpty = false;
                               
-                //         })
-                //         .catch((error) => {
-                //             console.error("Error:", error);
-                //             // Handle errors
-                //         });
-                // },
-                
-                ,goPayment(){
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            // Handle errors
+                        });
+                } ,goPayment(){
                     const endpointUrl = `/api/v2/payment/link`;
                     const fullUrl = this.baseUrl + endpointUrl;
 

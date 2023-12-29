@@ -187,7 +187,7 @@
                                 </div>
                                 <div class="col-lg-7 col-ms-12 col-sm-12">
                                     <div class="carForm rounded-3 p-3 mx-md-5 mt-4 mb-5"
-                                        x-init="fetchVecheilManufacturers()">
+                                        x-init="fetchVecheilManufacturers();">
                                         <form action="#">
                                             <div class="form-step-wrapper step-1" x-show="showPrevStep">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -222,7 +222,7 @@
                                                                                 :id="`vecheilcheck-${index}`"
                                                                                 :value="`${VecheilManufacturer.name}_${VecheilManufacturer.id}`"
                                                                                 x-model="VecheilManufacturer_val"
-                                                                                x-on:change="fetchVecheilModels(VecheilManufacturer.id , VecheilManufacturer.make_logo)" x-on:click=" loadingModels = true; showModel = true; showYear = false; showTrim = false; showBtns = false;" >
+                                                                                x-on:change="fetchVecheilModels(VecheilManufacturer.id , VecheilManufacturer.make_logo)" x-on:click="VecheilManufacturer_id = VecheilManufacturer.id; loadingModels = true; showModel = true; showYear = false; showTrim = false; showBtns = false;" >
                                                                             <label class="form-check-label"
                                                                                 :for="`vecheilcheck-${index}`">
                                                                                 <img :alt="VecheilManufacturer.name"
@@ -268,7 +268,7 @@
                                                                             :id="`vecheilModel-${index}`"
                                                                             :value="`${VecheilModel.name}_${VecheilModel.id}`"
                                                                             x-model="VecheilModel_val"
-                                                                            x-on:change="fetchModelYears()" x-on:click="loadingYears= true; showYear = true;  showTrim = false; showBtns = false;">
+                                                                            x-on:change="fetchModelYears()" x-on:click="VecheilModel_id = VecheilModel.id; loadingYears= true; showYear = true;  showTrim = false; showBtns = false;">
                                                                         <label class="form-check-label"
                                                                             :for="`vecheilModel-${index}`">
                                                                             <span x-text="VecheilModel.name"></span>
@@ -310,7 +310,7 @@
                                                                             :value="`${VecheilYear.name}_${VecheilYear.id}`"
                                                                             x-model="VecheilYear_val"
                                                                             x-on:change="fetchModelTrims(VecheilManufacturer_id,VecheilModel_id,`${VecheilYear.id}`)"
-                                                                            x-on:click="showTrim= true; loadingTrims = true;">
+                                                                            x-on:click="showTrim= true; loadingTrims = true; VecheilYear_id = VecheilYear.id;">
                                                                         <label class="form-check-label"
                                                                             :for="`modelYear-${index}`">
                                                                             <span x-text="VecheilYear.name"></span>
@@ -348,7 +348,7 @@
                                                                             :id="`trimCheck-${index}`"
                                                                             :value="`${VecheilTrim.name}_${VecheilTrim.id}`"
                                                                             x-model="VecheilTrim_val"
-                                                                            x-on:change="showBtns = true">
+                                                                            x-on:change="showBtns = true; VecheilTrim_id = VecheilTrim.id;">
                                                                         <label class="form-check-label"
                                                                             :for="`trimCheck-${index}`">
                                                                             <span x-text="VecheilTrim.name"></span>
@@ -365,7 +365,7 @@
                                                 <div class="btns-submit-step" x-show="showBtns">
                                                     <div class="d-flex gap-3 justify-content-center py-2 flex-wrap">
                                                         <button type="button" class="btn btn-primary btn-lg"
-                                                            x-on:click="showNextStep = true; showPrevStep = false; getOptionList(); paymentEvaluateInfo();">
+                                                            x-on:click="showNextStep = true; showPrevStep = false; getOptionList(); ">
                                                             التالي <i class="bi bi-arrow-left"></i>
                                                         </button>
                                                         <button type="button" class="btn btn-outline-dark btn-lg"
@@ -513,7 +513,8 @@
                                                                     :id="`vecheilColor-${index}`"
                                                                     :value="`${color.title}`"
                                                                     x-model="paymentDetails.color"
-                                                                     >
+                                                                    x-on:change="paymentDetails.color = color.title"
+                                                                     />
                                                                 <label class="form-check-label d-flex gap-2 align-items-center text-nowrap"
                                                                     :for="`vecheilColor-${index}`">
                                                                     <i class="color-sq border border-dark" :style="`background-color:${color.color_code}`"></i>
@@ -537,7 +538,8 @@
                                                                   :id="`vecheilPerpose-${index}`"
                                                                   :value="`${perpose.title}`"
                                                                   x-model="paymentDetails.purpose_of_use"
-                                                                   >
+                                                                  x-on:change="paymentDetails.purpose_of_use = perpose.title"
+                                                                   />
                                                               <label class="form-check-label d-flex gap-2 align-items-center text-nowrap"
                                                                   :for="`vecheilPerpose-${index}`">
                                                                   <span x-text="perpose.title_arabic"></span>
@@ -559,7 +561,8 @@
                                                                 :id="`vecheilSpecification-${index}`"
                                                                 :value="`${origin.title}`"
                                                                 x-model="paymentDetails.origin"
-                                                                 >
+                                                                x-on:change="paymentDetails.origin = origin.title"
+                                                                 />
                                                             <label class="form-check-label d-flex gap-2 align-items-center text-nowrap"
                                                                 :for="`vecheilSpecification-${index}`">
                                                                 <span x-text="origin.title_arabic"></span>
@@ -1299,12 +1302,11 @@
 
                     fetch(fullUrl)
                         .then((res) => res.json())
-                        .then((data) => {
-                            // this.showModel = true;
+                        .then((data) => { 
                             setTimeout(() => {
                                 if (data.status == true) { 
                                     if ((data.models).length != 0 && data.models != "" && data.models != null ) {
-                                        console.log((data.models).length);
+                                       
                                         this.noModels = false;
                                         this.VecheilModels = data.models;
                                         this.VecheilManufacturer_id = this.VecheilManufacturer_val.split('_')[1];
@@ -1399,35 +1401,8 @@
                         }).catch(error => {
                             console.error('Error fetching data:', error);
                         })
-                },
-                paymentEvaluateInfo() {
-                    const endpointUrl = `/api/v2/pg/billing/info`;
-                    const fullUrl = this.baseUrl + endpointUrl;
-                    // Make a POST request
-                    fetch(fullUrl, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + retrieveAuth().access_token
-                        }, 
-                    })
-                        .then((response) => response.json())
-                        .then((data) => { 
-                            let payablePrice = (( data.response.payable_from_web).replace(/,/g, '.'));
-                            this.payablePrice = Math.round(+payablePrice + Number((payablePrice*0.15).toFixed(2))); 
-                            localStorage.setItem("payablePrice", this.payablePrice); 
-                            localStorage.setItem("priceTaxes", Number((payablePrice*0.15).toFixed(2)) ); 
-                         
-                        })
-                        .catch((error) => {
-                            console.error("Error:", error);
-                            // Handle errors
-                        });
-                },
-                 
-                CartCreate() {
-                    
-                    // console.log("pay",this.payablePrice);
+                },CartCreate() {
+                     
                     const endpointUrl = `/api/v2/cart/create`;
                     const fullUrl = this.baseUrl + endpointUrl;
 
@@ -1435,7 +1410,7 @@
                     const formData = {
                         service_type: "evaluation",
                         payload: localStorage.getItem("paymentDetails"),
-                        total_payable: this.payablePrice,
+                        total_payable: "25",
                         service_amount: "180",
                         discount_amount:"",
                         promocod_id:"",
@@ -1452,41 +1427,43 @@
                         body: JSON.stringify(formData),
                     })
                         .then((response) => response.json())
-                        .then((data) => {  
-                            // console.log("data",data);    
+                        .then((data) => {     
                             localStorage.setItem("card_info", JSON.stringify(data)); 
-                            // console.log(localStorage.getItem("card_info"));
-                            if(this.payablePrice != ""){
+                            
+                            // if(this.payablePrice != ""){
                                 setTimeout(function(){
                                 location.href = "payment.html"; 
                                 },100)  
-                            }
+                            // }
                         })
                         .catch((error) => {  
                             console.error("Error:", error);
                             // Handle errors
                         });
                 },
+                FillCarData(){
+                    paymentDetails.manufacturer_id = this.VecheilManufacturer_id;
+                    paymentDetails.model_id = this.VecheilModel_id;
+                    paymentDetails.year_id = this.VecheilYear_id;
+                    paymentDetails.trim_id = this.VecheilTrim_id; 
+                    paymentDetails.Service_Contract = paymentDetails.certified; 
+                    SelectedCarDetails.make_logo = this.VecheilManufacturer_logo; 
+                    SelectedCarDetails.make = (this.VecheilManufacturer_val).replace(/_+\d+$/, ''); 
+                    SelectedCarDetails.model = this.VecheilModel_val; 
+                    SelectedCarDetails.year = this.VecheilYear_val; 
+                    SelectedCarDetails.trim = this.VecheilTrim_val; 
+                    localStorage.setItem("SelectedCarDetails",JSON.stringify(SelectedCarDetails));
+                    localStorage.setItem("paymentDetails",JSON.stringify(paymentDetails));
+                    
+                    this.CartCreate(); 
+                },
                 checkAuth() {
-
-                    this.VecheilYear_id = this.VecheilYear_val.split('_')[1];
-                    this.VecheilTrim_id = this.VecheilTrim_val.split('_')[1];
+ 
+                   
                     if(paymentDetails.mileage != "" && paymentDetails.accidents != "" && paymentDetails.origin != "" && paymentDetails.certified != "" && paymentDetails.modified != "" && paymentDetails.warranty != "" ){ 
                         this.showValidationMsg = false;
                         if (retrieveAuth().isAuthenticated) {
-                            paymentDetails.manufacturer_id = this.VecheilManufacturer_id;
-                            paymentDetails.model_id = this.VecheilModel_id;
-                            paymentDetails.year_id = this.VecheilYear_id;
-                            paymentDetails.trim_id = this.VecheilTrim_id;
-                            paymentDetails.Service_Contract = paymentDetails.certified; 
-                            SelectedCarDetails.make_logo = this.VecheilManufacturer_logo; 
-                            SelectedCarDetails.make = (this.VecheilManufacturer_val).replace(/_+\d+$/, ''); 
-                            SelectedCarDetails.model = this.VecheilModel_val; 
-                            SelectedCarDetails.year = this.VecheilYear_val; 
-                            SelectedCarDetails.trim = this.VecheilTrim_val; 
-                            localStorage.setItem("SelectedCarDetails",JSON.stringify(SelectedCarDetails));
-                            localStorage.setItem("paymentDetails",JSON.stringify(paymentDetails));
-                            this.CartCreate(); 
+                            this.FillCarData();
                         } else {
                             jQuery("#EnterPhoneModal").modal('show');
                         }
@@ -1557,9 +1534,9 @@
                         .then((data) => {
                             if (data.verified === true) {
                                 // success
-                                approve(data.access_token, data.user_id)
-                             
-                                fetchProfile(data.access_token , "payment")
+                                approve(data.access_token, data.user_id); 
+                                this.FillCarData();
+                                
                             } else {
                                 // fail
                                 this.otpInValid = true;
