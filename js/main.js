@@ -27,20 +27,25 @@
             if ($(this).scrollTop() > 45) {
                 $('.fixed-top').addClass('bg-dark shadow');
                 $('.fixed-top .app-alert').addClass('d-none');
+                $('.carousel').addClass('withAppAlert');
 
             } else {
                 $('.fixed-top').removeClass('bg-dark shadow');
                 $('.fixed-top .app-alert').removeClass('d-none');
+                // $('.carousel').removeClass('withAppAlert');
 
             }
         } else {
             if ($(this).scrollTop() > 45) {
                 $('.fixed-top').addClass('bg-dark shadow').css('top', 0);
                 $('.fixed-top .app-alert').addClass('d-none');
+                $('.carousel').addClass('withAppAlert');
 
             } else {
                 $('.fixed-top').removeClass('bg-dark shadow').css('top', 0);
                 $('.fixed-top .app-alert').removeClass('d-none');
+                // $('.carousel').removeClass('withAppAlert');
+
             }
         }
     });

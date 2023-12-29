@@ -153,7 +153,7 @@
 
     <!-- Carousel Start -->
     <div class="container-fluid p-0">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+        <div id="carouselExampleIndicators" class="carousel withAppAlert slide" data-bs-ride="carousel" data-bs-interval="false">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -340,7 +340,7 @@
                                                                     <div class="loading-placeholder"></div>
                                                                 </div>
                                                             </div>
-                                                            <template x-if="!loadingTrims && !noModels">
+                                                            <template x-if="!loadingTrims && !noTrims">
                                                                 <template x-for="(VecheilTrim , index) in VecheilTrims">
                                                                     <div class="form-check model-trim">
                                                                         <input class="form-check-input" type="radio"
@@ -502,25 +502,25 @@
 
                                                 </div>
                                                 <div class="carColor mb-3">
-                                                    <h5 class="form-title">لون المركبة</h5>
+                                                    <h5 class="form-title">لون المركبة</h5> 
+                                                        
                                                     <div class="d-flex gap-4 overflow-auto">
-                                                        <template x-for="(color, index) in VecheilColors">
-                                                            <div class="form-check">
-                                                              <input
-                                                                class="form-check-input"
-                                                                type="radio"
-                                                                name="colorCheck"
-                                                                :id="`${color.title}-${color.id}-car`"
-                                                                x-value="color.title"
-                                                                x-model="paymentDetails.color"
-                                                                 
-                                                              />
-                                                              <label :for="`${color.title}-${color.id}-car`" class="form-check-label d-flex gap-2 align-items-center text-nowrap">
-                                                                <i class="color-sq border border-dark" :style="`background-color:${color.color_code}`"></i>
-                                                                <span x-text="color.title_arabic"></span>
-                                                              </label>
+                                                        <template
+                                                            x-for="(color , index) in VecheilColors">
+                                                            <div class="form-check color-check">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="colorCheckRadio"
+                                                                    :id="`vecheilColor-${index}`"
+                                                                    :value="`${color.title}`"
+                                                                    x-model="paymentDetails.color"
+                                                                     >
+                                                                <label class="form-check-label d-flex gap-2 align-items-center text-nowrap"
+                                                                    :for="`vecheilColor-${index}`">
+                                                                    <i class="color-sq border border-dark" :style="`background-color:${color.color_code}`"></i>
+                                                                    <span x-text="color.title_arabic"></span>
+                                                                </label>
                                                             </div>
-                                                        </template>
+                                                        </template> 
                                                        
 
                                                     </div>
@@ -529,45 +529,43 @@
                                                 <div class="carUsage mb-3">
                                                     <h5 class="form-title">سبب الاستخدام</h5>
                                                     <div class="d-flex gap-4 overflow-auto">
-                                                        <template x-for="(perpose, index) in VecheilUsePerpose">
-                                                            <div class="form-check">
-                                                              <input
-                                                                class="form-check-input"
-                                                                type="radio"
-                                                                name="UsageCheck"
-                                                                :id="`${perpose.id}-${perpose.title}-car`"
-                                                                :value="perpose.title"
-                                                                x-model="paymentDetails.purpose_of_use"
-                                                                x-bind:checked="false"
-                                                              />
-                                                              <label
-                                                                class="form-check-label d-flex gap-2 align-items-center"
-                                                                x-text="perpose.title_arabic"
-                                                                :for="`${perpose.id}-${perpose.title}-car`"
-                                                              ></label>
-                                                            </div>
-                                                          </template>
-
+                                                        <template
+                                                          x-for="(perpose , index) in VecheilUsePerpose">
+                                                          <div class="form-check perpose-check">
+                                                              <input class="form-check-input" type="radio"
+                                                                  name="UsageCheck"
+                                                                  :id="`vecheilPerpose-${index}`"
+                                                                  :value="`${perpose.title}`"
+                                                                  x-model="paymentDetails.purpose_of_use"
+                                                                   >
+                                                              <label class="form-check-label d-flex gap-2 align-items-center text-nowrap"
+                                                                  :for="`vecheilPerpose-${index}`">
+                                                                  <span x-text="perpose.title_arabic"></span>
+                                                              </label>
+                                                          </div>
+                                                        </template>  
                                                     </div>
 
                                                 </div>
                                                 <div class="carIncoming mb-3">
                                                     <h5 class="form-title">وارد السيارة</h5>
                                                     <div class="d-flex gap-4 overflow-auto">
-                                                        <template x-for="(origin , index) in VecheilOrigins">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="IncomingCheck" :id="`Specification-car-${origin.id}`" :value="origin.title"
-                                                                    x-model="paymentDetails.origin" 
-                                                                    x-bind:checked="false"/>
-                                                                <label
-                                                                    class="form-check-label d-flex gap-2 align-items-center"
-                                                                    :for="`Specification-car-${origin.id}`" x-text="origin.title_arabic">
-                                                                    
-                                                                </label>
-                                                            </div>
-                                                        </template>
-                                                      
+                                                         
+                                                        <template
+                                                        x-for="(origin , index) in VecheilOrigins">
+                                                        <div class="form-check origin-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="IncomingCheck"
+                                                                :id="`vecheilSpecification-${index}`"
+                                                                :value="`${origin.title}`"
+                                                                x-model="paymentDetails.origin"
+                                                                 >
+                                                            <label class="form-check-label d-flex gap-2 align-items-center text-nowrap"
+                                                                :for="`vecheilSpecification-${index}`">
+                                                                <span x-text="origin.title_arabic"></span>
+                                                            </label>
+                                                        </div>
+                                                      </template> 
                                                     </div>
 
                                                 </div>
