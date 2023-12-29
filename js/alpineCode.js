@@ -61,7 +61,7 @@ function logOut(){
         this.isAuthenticated = false;
         this.access_token = "";
         // clear localStorage
-        localStorage.removeItem("auth");
+        localStorage.clear();
         location.href = "login.html"
       })
       .catch((error) => {

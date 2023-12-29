@@ -365,7 +365,7 @@
                                                 <div class="btns-submit-step" x-show="showBtns">
                                                     <div class="d-flex gap-3 justify-content-center py-2 flex-wrap">
                                                         <button type="button" class="btn btn-primary btn-lg"
-                                                            x-on:click="showNextStep = true; showPrevStep = false; getOptionList()">
+                                                            x-on:click="showNextStep = true; showPrevStep = false; getOptionList(); paymentEvaluateInfo();">
                                                             التالي <i class="bi bi-arrow-left"></i>
                                                         </button>
                                                         <button type="button" class="btn btn-outline-dark btn-lg"
@@ -1416,7 +1416,7 @@
                             this.payablePrice = Math.round(+payablePrice + Number((payablePrice*0.15).toFixed(2))); 
                             localStorage.setItem("payablePrice", this.payablePrice); 
                             localStorage.setItem("priceTaxes", Number((payablePrice*0.15).toFixed(2)) ); 
-
+                         
                         })
                         .catch((error) => {
                             console.error("Error:", error);
@@ -1425,7 +1425,8 @@
                 },
                  
                 CartCreate() {
-                    this.paymentEvaluateInfo(); 
+                    
+                    // console.log("pay",this.payablePrice);
                     const endpointUrl = `/api/v2/cart/create`;
                     const fullUrl = this.baseUrl + endpointUrl;
 
@@ -1433,7 +1434,7 @@
                     const formData = {
                         service_type: "evaluation",
                         payload: localStorage.getItem("paymentDetails"),
-                        total_payable: localStorage.getItem("payablePrice"),
+                        total_payable: this.payablePrice,
                         service_amount: "180",
                         discount_amount:"",
                         promocod_id:"",
@@ -1454,9 +1455,11 @@
                             // console.log("data",data);    
                             localStorage.setItem("card_info", JSON.stringify(data)); 
                             // console.log(localStorage.getItem("card_info"));
-                            setTimeout(function(){
-                            location.href = "payment.html"; 
-                            },100)
+                            if(this.payablePrice != ""){
+                                setTimeout(function(){
+                                location.href = "payment.html"; 
+                                },100)  
+                            }
                         })
                         .catch((error) => {  
                             console.error("Error:", error);
