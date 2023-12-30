@@ -513,7 +513,7 @@
                                                                     :id="`vecheilColor-${index}`"
                                                                     :value="`${color.title}`"
                                                                     x-model="paymentDetails.color"
-                                                                    x-on:change="paymentDetails.color = color.title"
+                                                                    x-on:change="paymentDetails.color = color.id"
                                                                      />
                                                                 <label class="form-check-label d-flex gap-2 align-items-center text-nowrap"
                                                                     :for="`vecheilColor-${index}`">
@@ -538,7 +538,7 @@
                                                                   :id="`vecheilPerpose-${index}`"
                                                                   :value="`${perpose.title}`"
                                                                   x-model="paymentDetails.purpose_of_use"
-                                                                  x-on:change="paymentDetails.purpose_of_use = perpose.title"
+                                                                  x-on:change="paymentDetails.purpose_of_use = perpose.id"
                                                                    />
                                                               <label class="form-check-label d-flex gap-2 align-items-center text-nowrap"
                                                                   :for="`vecheilPerpose-${index}`">
@@ -561,7 +561,7 @@
                                                                 :id="`vecheilSpecification-${index}`"
                                                                 :value="`${origin.title}`"
                                                                 x-model="paymentDetails.origin"
-                                                                x-on:change="paymentDetails.origin = origin.title"
+                                                                x-on:change="paymentDetails.origin = origin.id"
                                                                  />
                                                             <label class="form-check-label d-flex gap-2 align-items-center text-nowrap"
                                                                 :for="`vecheilSpecification-${index}`">
