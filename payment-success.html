@@ -73,7 +73,7 @@
                             <a href="#aboutUs" class="nav-item nav-link"> من نحن </a>
                             <a href="#services" class="nav-item nav-link">خدماتنا </a>
                             <a href="#footer" class="nav-item nav-link"> تواصل معنا</a>
-                            <a href="https://dozo-apps.com/Car_Trust/reports.html" class="nav-item nav-link" x-show="isAuthedUser">  تقارير </a>
+                            <a href="https://dozo-apps.com/Car_Trust/reports.html" class="nav-item nav-link" x-show="isAuthedUser">  التقييمات </a>
                         </div>
                         <div class="ms-auto d-flex align-items-center displayClass">
                             <div class="nav-item dropdown mx-2">
@@ -192,7 +192,7 @@
                             </div>
                     </div>
                 </div>
-                <div x-show="!successPayment">
+                <div x-show="failPayment">
                   <div class=" d-flex flex-column gap- j2ustify-content-center text-center">
                     <!-- <img src="./img/right.svg" data-src="./img/right.svg" class="lazyload mx-auto" alt=""> -->
                     <i class="bi bi-x-circle text-danger" style="font-size: 5rem;"></i>
@@ -235,7 +235,7 @@
                             <li>
                                 <a>
                                     <img class="img-fluid" src="./img/icons/arrow.png" />
-                                    <span>Info@Carttrust.Sa</span>
+                                    <span>Info@carttrust.Sa</span>
                                 </a>
                             </li>
                             <li>
@@ -296,7 +296,7 @@
                 </div>
                 <div class="copyright mt-3">
                     <div class="row">
-                        <p>كل الحقوق محفوظة لدى شركة ثقة المركبة للتجارة @ 2021</p>
+                        <p>كل الحقوق محفوظة لدى شركة ثقة المركبة للتجارة &copy; 2024</p>
                     </div>
                 </div>
             </div>
@@ -329,6 +329,7 @@
                 card_info : JSON.parse(localStorage.getItem("card_info")),
                 cart_id : "",
                 successPayment: false,
+                failPayment: false,
                 paymentMsg: "",
                 isAuthedUser: false,
                 baseUrl: "https://partner-api.cartrust.sa",  
@@ -383,7 +384,7 @@
                                     this.successPayment = true;
                                     this.evaluateData();
                                 } else{
-                                    this.successPayment = false
+                                    this.failPayment = false
                                     this.paymentMsg = data.message;
                                 }
 

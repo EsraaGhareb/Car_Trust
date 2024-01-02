@@ -93,3 +93,12 @@ function logOut(){
         })
         
 }
+function convertArabicToEnglish(arabicNumber) {
+  const arabicNumerals = '٠١٢٣٤٥٦٧٨٩';
+  const englishNumerals = '0123456789';
+
+  const arabicToEnglishMap = new Map([...arabicNumerals].map((numeral, index) => [numeral, englishNumerals[index]]));
+
+  return arabicNumber.replace(/[٠-٩]/g, (match) => arabicToEnglishMap.get(match));
+}
+

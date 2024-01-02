@@ -57,9 +57,8 @@
             <div class="alert alert-secondary alert-dismissible fade show rounded-0 app-alert p-2" role="alert">
                 <div class="d-flex gap-3 align-items-center">
                     <div class="d-flex gap-2 align-items-center">
-                        <img src="./img/favicon.ico" class="" alt="">
-                        <div>
-                            <h6>  كارترست</h6>
+                        <img src="./img/appLogo.jpeg" width="50px" alt="">
+                        <div> 
                             <div class="d-flex gap-1 " style="color: gold;">
                                 <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                             </div>
@@ -91,7 +90,7 @@
                             <a href="#aboutUs" class="nav-item nav-link"> من نحن </a>
                             <a href="#services" class="nav-item nav-link">خدماتنا </a>
                             <a href="#footer" class="nav-item nav-link"> تواصل معنا</a>
-                            <a href="https://dozo-apps.com/Car_Trust/reports.html" class="nav-item nav-link"  x-show="isAuthedUser">  تقارير </a>
+                            <a href="https://dozo-apps.com/Car_Trust/reports.html" class="nav-item nav-link"  x-show="isAuthedUser">  تقييماتي </a>
                         </div>
                         <div class="ms-auto d-flex align-items-center displayClass">
                             <div class="nav-item dropdown mx-2">
@@ -164,7 +163,7 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="Image" id="silder">
+                    <img class="w-100" src="img/Banners-Without-Logo/Arb-jpg/1600x1066_Arb.jpg" alt="Image" id="silder">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row">
@@ -381,8 +380,8 @@
                                                     <h5> المعلومات </h5>  
                                                 </div> 
                                                 <div class="mb-3">
-                                                <input type="text" x-model="paymentDetails.mileage"
-                                                    placeholder="ادخل قراءه العداد بشكل صحيح" class="form-control " pattern="[0-9]*" required>
+                                                <input type="number" x-model="paymentDetails.mileage"
+                                                    placeholder="ادخل قراءه العداد بشكل صحيح" class="form-control" min="0" pattern="[0-9]*" required>
                                                     <i class="text-danger" x-show="showValidationMsg">هذا الحقل مطلوب</i>
                                                 </div>
                                                    
@@ -891,13 +890,36 @@
                         المستعملة المتوفرة في مجموعتنا، ونقدم تقارير شاملة تشمل تاريخ الصيانة والخدمة، وحالة المحرك
                         والهيكل، وسجل الحوادث إن وجد، وأي معلومات أخرى ذات صلة. </p>
                     <ul class="fa-ul">
+                        
+                        <div class="info  wow fadeInUp" data-wow-delay="0.5s">
+                            <div>
+                                <i><img src="img/icons/USD-Dollar.png"></i>
+                            </div>
+                            <div>
+                                <p>
+                                    تقييم السيارات
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="info wow fadeInUp" data-wow-delay="0.5s">
+                            <div>
+                                <i><img src="img/icons/Search3.png"></i>
+                            </div>
+                            <div>
+                                <p>
+                                    فحص ما قبل الشراء
+                                </p>
+                            </div>
+                        </div>
+
                         <div class="info wow fadeInUp" data-wow-delay="0.5s">
                             <div>
                                 <i><img src="img/icons/car 2.png"></i>
                             </div>
                             <div>
                                 <p>
-                                    الفحص الحراري
+                                    ضمان السيارات
                                 </p>
                             </div>
                         </div>
@@ -910,17 +932,7 @@
                                     فحص 360 بإستخدام الذكاء الإصطناعي </p>
                             </div>
                         </div>
-                        <div class="info wow fadeInUp" data-wow-delay="0.5s">
-                            <div>
-                                <i><img src="img/icons/Search3.png"></i>
-                            </div>
-                            <div>
-                                <p>
-                                    فحص ما قبل الشراء
-                                </p>
-                            </div>
-                        </div>
-                        <div class="info wow fadeInUp" data-wow-delay="0.5s">
+                        <!-- <div class="info wow fadeInUp" data-wow-delay="0.5s">
                             <div>
                                 <i><img src="img/icons/Bullish.png"></i>
                             </div>
@@ -929,8 +941,8 @@
                                     خدمات الشركات
                                 </p>
                             </div>
-                        </div>
-                        <div class="info  wow fadeInUp" data-wow-delay="0.5s">
+                        </div> -->
+                        <!-- <div class="info  wow fadeInUp" data-wow-delay="0.5s">
                             <div>
                                 <i><img src="img/icons/Love.png"></i>
                             </div>
@@ -938,18 +950,7 @@
                                 <p>
                                     خدمات العملاء المميزين </p>
                             </div>
-                        </div>
-                        <div class="info  wow fadeInUp" data-wow-delay="0.5s">
-                            <div>
-                                <i><img src="img/icons/USD-Dollar.png"></i>
-                            </div>
-                            <div>
-                                <p>
-                                    تسعير المركبة
-                                </p>
-                            </div>
-                        </div>
-                        </li>
+                        </div>  -->
                     </ul>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12">
@@ -1012,7 +1013,7 @@
 
     </section>
     <!--vision end-->
-    <section id="photoServices">
+    <!-- <section id="photoServices">
         <div class="container">
              <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-12">
@@ -1043,7 +1044,7 @@
                 </div>
             </div>
         </div>
-    </section> 
+    </section>  -->
 
     <section id="certification">
         <div class="container">
@@ -1084,7 +1085,7 @@
                             <li>
                                 <a>
                                     <img class="img-fluid" src="./img/icons/arrow.png" />
-                                    <span>Info@Carttrust.Sa</span>
+                                    <span>Info@carttrust.Sa</span>
                                 </a>
                             </li>
                             <li>
@@ -1145,7 +1146,7 @@
                 </div>
                 <div class="copyright mt-3">
                     <div class="row">
-                        <p>كل الحقوق محفوظة لدى شركة ثقة المركبة للتجارة @ 2021</p>
+                        <p>كل الحقوق محفوظة لدى شركة ثقة المركبة للتجارة &copy; 2024</p>
                     </div>
                 </div>
             </div>
@@ -1447,6 +1448,7 @@
                     paymentDetails.year_id = this.VecheilYear_id;
                     paymentDetails.trim_id = this.VecheilTrim_id; 
                     paymentDetails.Service_Contract = paymentDetails.certified; 
+                    paymentDetails.mileage = convertArabicToEnglish(paymentDetails.mileage); 
                     SelectedCarDetails.make_logo = this.VecheilManufacturer_logo; 
                     SelectedCarDetails.make = (this.VecheilManufacturer_val).replace(/_+\d+$/, ''); 
                     SelectedCarDetails.model = this.VecheilModel_val; 
