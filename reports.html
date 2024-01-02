@@ -73,7 +73,7 @@
                             <a href="#aboutUs" class="nav-item nav-link"> من نحن </a>
                             <a href="#services" class="nav-item nav-link">خدماتنا </a>
                             <a href="#footer" class="nav-item nav-link"> تواصل معنا</a> 
-                            <a href="reports.html" class="nav-item nav-link" x-show="isAuthedUser">  التقييمات </a>
+                            <a href="https://dozo-apps.com/Car_Trust/reports.html" class="nav-item nav-link" x-show="isAuthedUser">  التقييمات </a>
                         </div>
                         <div class="ms-auto d-flex align-items-center displayClass">
                             <div class="nav-item dropdown mx-2">
@@ -187,8 +187,8 @@
                 </div>
             </div>
             <template x-if="!isLoading">
-                <!-- <nav aria-label="Page navigation">
-                    <ul class="pagination gap-2 mb-5 justify-content-center">
+                 <nav aria-label="Page navigation">
+                   <ul class="pagination gap-2 mb-5 justify-content-center">
                         <li class="page-item">
                             <button type="button" class="page-link rounded-0 fs-5" @click="fetchMyEvaluations(currentPage - 1);currentPage = currentPage-1; isLoading= true;" :disabled="currentPage === 1">&laquo; السابق</button>
                         </li>
@@ -196,28 +196,21 @@
                             <button type="button" class="page-link rounded-0 fs-5" @click="fetchMyEvaluations(currentPage + 1); currentPage = currentPage+1; isLoading= true;" :disabled="currentPage === totalPages">التالي &raquo;</button>
                         </li>
                     </ul>
-                     
-                </nav> -->
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                      <li class="page-item">
-                        <a class="page-link" @click="fetchMyEvaluations(currentPage - 1)" :disabled="currentPage === 1">&laquo; Previous</a>
-                      </li>
-                      <template x-for="group in pageGroups" :key="group">
-                        <template x-if="group === '...'">
-                          <li class="page-item disabled"><span class="page-link">...</span></li>
-                        </template>
-                        <template x-if="group !== '...'">
-                          <li class="page-item" :class="{ 'active': group === currentPage }">
-                            <a class="page-link" @click="fetchMyEvaluations(group)" x-text="group"></a>
+                   
+                    <!-- <ul class="pagination gap-2 mb-5 justify-content-center">
+                        <template x-for="(page, index) in displayedPages" :key="index">
+                          <li class="page-item" :class="{ 'active': page === currentPage }">
+                            <template x-if="page === '...'">
+                              <button type="button" class="page-link rounded-0 fs-5" @click="loadNextPages();fetchMyEvaluations(page); currentPage = page; isLoading= true;">...</button>
+                            </template>
+                            <template x-if="page !== '...'">
+                              <button type="button" class="page-link rounded-0 fs-5" @click="fetchMyEvaluations(page); currentPage = page; isLoading= true;" x-text="page"></button>
+                            </template>
                           </li>
                         </template>
-                      </template>
-                      <li class="page-item">
-                        <a class="page-link" @click="fetchMyEvaluations(currentPage + 1)" :disabled="currentPage === totalPages">Next &raquo;</a>
-                      </li>
-                    </ul>
-                </nav>
+                      </ul> -->
+                </nav> 
+                
             </template>
         </div>
     </section>
@@ -348,35 +341,43 @@
                 MyEvaluations:{}, 
                 currentPage: 1,
                 totalPages: 1,
-                pageGroups: [],
+                displayedPages: [],
                 isEmpty: true, 
                 isLoading: true,
                 noReports: false,
                 isAuthedUser: false,
                 baseUrl: "https://partner-api.cartrust.sa",
-                loadPageGroups() {
-                    const groups = [];
-                    let start = Math.max(1, this.currentPage - 2);
-                    let end = Math.min(this.totalPages, start + 4);
+                // loadNextPages() {
+                //     const nextStart = Math.min(this.totalPages, this.displayedPages[this.displayedPages.length - 1] + 1);
+                //     const nextEnd = Math.min(this.totalPages, nextStart + 4);
 
-                    if (this.totalPages > 5 && end === this.totalPages) {
-                        start = Math.max(1, end - 4);
-                    }
+                //     const pages = [];
+                //     for (let i = nextStart; i <= nextEnd; i++) {
+                //         pages.push(i);
+                //     }
 
-                    if (start > 1) {
-                        groups.push('...');
-                    }
+                //     this.displayedPages = [...this.displayedPages.slice(0, -1), ...pages, '...'];
+                // },
+                // updateDisplayedPages() {
+                //     const step = 10;
+                //     const start = Math.max(1, Math.ceil(this.currentPage / step) * step - step + 1);
+                //     const end = Math.min(this.totalPages, start + step - 1);
 
-                    for (let i = start; i <= end; i++) {
-                        groups.push(i);
-                    }
+                //     const pages = [];
+                //     for (let i = start; i <= end; i++) {
+                //         pages.push(i);
+                //     }
 
-                    if (end < this.totalPages) {
-                        groups.push('...');
-                    }
+                //     if (start > step) {
+                //         pages.unshift('...');
+                //     }
 
-                    this.pageGroups = groups;
-                },
+                //     if (end < this.totalPages) {
+                //         pages.push('...');
+                //     }
+
+                //     this.displayedPages = pages;
+                // },
                 fetchMyEvaluations(page) {
                     const endpointUrl = `/api/v2/pg/evaluations?page=${page}`;
                     const fullUrl = this.baseUrl + endpointUrl;
@@ -390,8 +391,10 @@
                             setTimeout(() => {
                                 if(data.success){ 
                                     this.MyEvaluations = data.response.data
-                                    this.totalPages = data.response.lastPage; 
+                                    this.totalPages = data.response.lastPage;
                                     this.noReports = false;
+                                    // this.updateDisplayedPages();
+                                   
 
                                 }else{
                                     this.noReports = true;
