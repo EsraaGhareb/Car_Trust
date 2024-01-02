@@ -366,7 +366,7 @@
                                                 <div class="btns-submit-step" x-show="showBtns">
                                                     <div class="d-flex gap-3 justify-content-center py-2 flex-wrap">
                                                         <button type="button" class="btn btn-primary btn-lg"
-                                                            x-on:click="showNextStep = true; showPrevStep = false; getOptionList(); ">
+                                                            x-on:click="showNextStep = true; showPrevStep = false; getOptionList(); paymentEvaluateInfo(); ">
                                                             التالي <i class="bi bi-arrow-left"></i>
                                                         </button>
                                                         <button type="button" class="btn btn-outline-dark btn-lg"
@@ -721,7 +721,7 @@
                                                     <div class="d-flex gap-3 justify-content-center py-2 flex-wrap">
                                                         <button type="button"
                                                             class="go-payment-btn btn btn-primary btn-lg"
-                                                            x-on:click="checkAuth()">التالي <i
+                                                            x-on:click="checkValidationAndAuth()">التالي <i
                                                                 class="bi bi-arrow-left"></i></button>
                                                         <button type="button" class="btn btn-outline-dark btn-lg" x-on:click="showNextStep = false; showPrevStep = true;">
                                                             تراجع</button>
@@ -730,7 +730,43 @@
 
                                             </div>
                                             <div class="form-step-wrapper step-3" x-show="showPaymentStep">
-                                                
+                                                <div class="order-details  rounded-2 p-4 d-flex justify-content-between flex-column h-100">
+                                                    <div>
+                                                        <h5> تفاصيل الطلب </h5>
+                                                        <template x-if="carSelected">
+                                                            <div class="order-card py-3 d-flex gap-2 border-bottom mb-3" :id="cart_id">
+                                                                <template x-if="carSelected.make_logo">
+                                                                    <img :src="carSelected.make_logo" :data-src="carSelected.make_logo" width="85px"
+                                                                        height="85px" class="lazyload  border rounded" alt="">
+                                                                </template>
+                                                                <div class="card-details text-dark">
+                                                                    <h6 class="carMenufactor" x-text="carSelected.make">  </h6>
+                                                                    <p class="carYear mb-1 text-black-50" x-text="carSelected.year"> </p>
+                                                                    <p class="carTrim mb-1 text-black-50" x-text="carSelected.trim"> </p>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                        <template x-if="!carSelected">
+                                                            <p>لا يوجد طلبات</p>
+                                                        </template>
+                                                        <template x-if="carSelected">
+                                                            <div>
+                                                                <h6 class="d-flex justify-content-between">
+                                                                    <span>ضريبة القيمة المضافة</span>
+                                                                    <span x-text="`${PriceTaxes} رس`"></span>
+                                                                </h6>
+                                                                <h5 class="d-flex justify-content-between">
+                                                                    <span>المجموع</span>
+                                                                    <span x-text="`${carEvalPrice} رس`"></span>
+                                                                </h5>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                    <template x-if="carSelected">
+                                                      <button type="button" class="btn btn-primary btn-lg mx-auto mt-5" x-text="`دفع قيمة ${carEvalPrice} رس`" x-on:click="goPayment()"></button>
+                     
+                                                    </template>
+                                                </div>
                                             </div>
                                         </form>
                                         <div class="form-step-wrapper step-2" x-show="showCarNotFoundStep">
@@ -1279,6 +1315,11 @@
                 isAuthedUser: false,
                 showValidationMsg: false,
                 otpInValid: false,
+                showPaymentStep:false,
+                carSelected:{}, 
+                cart_id:"",
+                carEvalPrice:"25",
+                PriceTaxes:"",
                 baseUrl: "https://partner-api.cartrust.sa",
                 fetchVecheilManufacturers() {
                     const endpointUrl = `/api/v2/manufacturers`;
@@ -1407,7 +1448,8 @@
                         }).catch(error => {
                             console.error('Error fetching data:', error);
                         })
-                },CartCreate() {
+                },
+                CartCreate() {
                      
                     const endpointUrl = `/api/v2/cart/create`;
                     const fullUrl = this.baseUrl + endpointUrl;
@@ -1416,7 +1458,7 @@
                     const formData = {
                         service_type: "evaluation",
                         payload: localStorage.getItem("paymentDetails"),
-                        total_payable: "25",
+                        total_payable: this.carEvalPrice,
                         service_amount: "180",
                         discount_amount:"",
                         promocod_id:"",
@@ -1434,12 +1476,17 @@
                     })
                         .then((response) => response.json())
                         .then((data) => {     
-                            localStorage.setItem("card_info", JSON.stringify(data)); 
-                            
+                            // localStorage.setItem("card_info", JSON.stringify(data)); 
+                            this.cart_id = data.cart_id;
                             // if(this.payablePrice != ""){
-                                setTimeout(function(){
-                                location.href = "payment.html"; 
-                                },100)  
+                                // setTimeout(function(){
+                                // location.href = "payment.html"; 
+                                this.showPaymentStep = true;
+                                this.showNextStep = false;
+                                this.showPrevStep = false;
+                                this.showCarNotFoundStep = false;
+                                console.log(this.cart_id , data.cart_id);  
+                                // },100)  
                             // }
                         })
                         .catch((error) => {  
@@ -1448,6 +1495,7 @@
                         });
                 },
                 FillCarData(){
+                    jQuery("#EnterOTPModal").modal("hide");
                     paymentDetails.manufacturer_id = this.VecheilManufacturer_id;
                     paymentDetails.model_id = this.VecheilModel_id;
                     paymentDetails.year_id = this.VecheilYear_id;
@@ -1459,14 +1507,13 @@
                     SelectedCarDetails.model = this.VecheilModel_val; 
                     SelectedCarDetails.year = this.VecheilYear_val; 
                     SelectedCarDetails.trim = this.VecheilTrim_val; 
-                    localStorage.setItem("SelectedCarDetails",JSON.stringify(SelectedCarDetails));
+                    // localStorage.setItem("SelectedCarDetails",JSON.stringify(SelectedCarDetails));
                     localStorage.setItem("paymentDetails",JSON.stringify(paymentDetails));
-                    
+                    this.carSelected = SelectedCarDetails;  
+                    console.log("nnnn",SelectedCarDetails , "iiii" , this.carSelected);
                     this.CartCreate(); 
                 },
-                checkAuth() {
- 
-                   
+                checkValidationAndAuth() {          
                     if(paymentDetails.mileage != "" && paymentDetails.accidents != "" && paymentDetails.origin != "" && paymentDetails.certified != "" && paymentDetails.modified != "" && paymentDetails.warranty != "" ){ 
                         this.showValidationMsg = false;
                         if (retrieveAuth().isAuthenticated) {
@@ -1590,8 +1637,66 @@
                             console.error("Error:", error);
                             // Handle errors
                         });
-                }
+                },
+                 paymentEvaluateInfo() {
+                    const endpointUrl = `/api/v2/pg/billing/info`;
+                    const fullUrl = this.baseUrl + endpointUrl;
+                    // Make a POST request
+                    fetch(fullUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + retrieveAuth().access_token
+                        }, 
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            
+                            let payablePrice = (( data.response.payable_from_web).replace(/,/g, '.'));
+                            this.PriceTaxes = Number((payablePrice*0.15).toFixed(2))
+                            this.carEvalPrice = Math.round(+payablePrice + this.PriceTaxes); 
+                            this.isEmpty = false;
+                            console.log(this.PriceTaxes , this.carEvalPrice);
+                              
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            // Handle errors
+                        });
+                }, 
+                
+                goPayment(){
+                    const endpointUrl = `/api/v2/payment/link`;
+                    const fullUrl = this.baseUrl + endpointUrl;
 
+                    // Extract form data
+                    const formData = { 
+                        return_url : `https://dozo-apps.com/Car_Trust/payment-success.html`,
+                        amount :  this.carEvalPrice,
+                        cart_id : this.cart_id,
+                        type : "E"
+                    } 
+                    // Make a POST request
+                    fetch(fullUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + retrieveAuth().access_token
+                        },
+                        body: JSON.stringify(formData),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            if(data.status){
+                                location.href=data.payment_link;
+                            }
+                                 
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            // Handle errors
+                        });
+                }
             }))
 
         })

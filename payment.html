@@ -398,28 +398,7 @@
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-  <!--Enter Success Payment Modal -->
-  <div class="modal fade" id="successPaymentModal"  tabindex="-1"
-  aria-labelledby="successPaymentModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <div class="modal-body d-flex flex-column gap-4 justify-content-center text-center">
-            <img src="./img/right.svg" data-src="./img/right.svg" class="lazyload mx-auto" alt="">
-                
-              <h1 class="modal-title fs-2" id="successPaymentModalLabel">
-                شكرا
-              </h1>
-              <p>تمت عملية الدفع بنجاح و جاري تحضير التقرير</p>
-                <div class="d-flex flex-wrap gap-3 align-items-center justify-content-center">
-                    <!-- <a :href="evaluateReport" class="btn btn-outline-primary" download target="_blank">تنزيل التقرير</a> -->
-                    <a href="reports.html" class="btn btn-primary" x-on:click="">
-                     التقييمات
-                    </a> 
-                </div>
-          </div>
-      </div>
-  </div>
-</div>
+ 
 
 
     <!-- JavaScript Libraries -->
@@ -435,7 +414,7 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 
-    <script>
+    <!-- <script>
       
        console.log(JSON.parse(localStorage.getItem("card_info")));
         document.addEventListener('alpine:init', () => {
@@ -463,12 +442,12 @@
                     }
 
                 },
-                getSelectedCar(){
-                    this.paymentEvaluateInfo(); 
-                    this.cart_id = this.card_info.cart_id;
-                    this.carSelected = JSON.parse(localStorage.getItem("SelectedCarDetails"));  
+                // getSelectedCar(){
+                //     this.paymentEvaluateInfo(); 
+                //     this.cart_id = this.card_info.cart_id;
+                //     this.carSelected = JSON.parse(localStorage.getItem("SelectedCarDetails"));  
                   
-                }
+                // }
                 // , evaluateData() {
                 //     const endpointUrl = `/api/v2/pg/evaluate`;
                 //     const fullUrl = this.baseUrl + endpointUrl;
@@ -503,68 +482,68 @@
                 //         });
                 // }
                 
-                ,paymentEvaluateInfo() {
-                    const endpointUrl = `/api/v2/pg/billing/info`;
-                    const fullUrl = this.baseUrl + endpointUrl;
-                    // Make a POST request
-                    fetch(fullUrl, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + retrieveAuth().access_token
-                        }, 
-                    })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            // console.log(data) 
-                            let payablePrice = (( data.response.payable_from_web).replace(/,/g, '.'));
-                            this.PriceTaxes = Number((payablePrice*0.15).toFixed(2))
-                            this.carEvalPrice = Math.round(+payablePrice + this.PriceTaxes); 
-                            this.isEmpty = false;
+                // ,paymentEvaluateInfo() {
+                //     const endpointUrl = `/api/v2/pg/billing/info`;
+                //     const fullUrl = this.baseUrl + endpointUrl;
+                //     // Make a POST request
+                //     fetch(fullUrl, {
+                //         method: "POST",
+                //         headers: {
+                //             "Content-Type": "application/json",
+                //             "Authorization": "Bearer " + retrieveAuth().access_token
+                //         }, 
+                //     })
+                //         .then((response) => response.json())
+                //         .then((data) => {
+                //             // console.log(data) 
+                //             let payablePrice = (( data.response.payable_from_web).replace(/,/g, '.'));
+                //             this.PriceTaxes = Number((payablePrice*0.15).toFixed(2))
+                //             this.carEvalPrice = Math.round(+payablePrice + this.PriceTaxes); 
+                //             this.isEmpty = false;
                               
-                        })
-                        .catch((error) => {
-                            console.error("Error:", error);
-                            // Handle errors
-                        });
-                } ,goPayment(){
-                    const endpointUrl = `/api/v2/payment/link`;
-                    const fullUrl = this.baseUrl + endpointUrl;
+                //         })
+                //         .catch((error) => {
+                //             console.error("Error:", error);
+                //             // Handle errors
+                //         });
+                // } ,goPayment(){
+                //     const endpointUrl = `/api/v2/payment/link`;
+                //     const fullUrl = this.baseUrl + endpointUrl;
 
-                    // Extract form data
-                    const formData = { 
-                        return_url : `https://dozo-apps.com/Car_Trust/payment-success.html`,
-                        amount :  this.carEvalPrice,
-                        cart_id : this.cart_id,
-                        type : "E"
-                    } 
-                    // Make a POST request
-                    fetch(fullUrl, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + retrieveAuth().access_token
-                        },
-                        body: JSON.stringify(formData),
-                    })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            if(data.status){
-                                location.href=data.payment_link;
-                            }
+                //     // Extract form data
+                //     const formData = { 
+                //         return_url : `https://dozo-apps.com/Car_Trust/payment-success.html`,
+                //         amount :  this.carEvalPrice,
+                //         cart_id : this.cart_id,
+                //         type : "E"
+                //     } 
+                //     // Make a POST request
+                //     fetch(fullUrl, {
+                //         method: "POST",
+                //         headers: {
+                //             "Content-Type": "application/json",
+                //             "Authorization": "Bearer " + retrieveAuth().access_token
+                //         },
+                //         body: JSON.stringify(formData),
+                //     })
+                //         .then((response) => response.json())
+                //         .then((data) => {
+                //             if(data.status){
+                //                 location.href=data.payment_link;
+                //             }
                                  
-                        })
-                        .catch((error) => {
-                            console.error("Error:", error);
-                            // Handle errors
-                        });
-                }
+                //         })
+                //         .catch((error) => {
+                //             console.error("Error:", error);
+                //             // Handle errors
+                //         });
+                // }
 
 
             }))
 
         })
-    </script>
+    </script> -->
 </body>
 
 </html>
