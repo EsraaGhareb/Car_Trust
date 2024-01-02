@@ -80,7 +80,7 @@ body, html{
     .carousel-indicators {
       display: none;
     }
-    .carousel-item img {
+    .carousel-item>img {
       height: 400px;
     }
     .carousel-caption h1 {

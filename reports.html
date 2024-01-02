@@ -187,7 +187,7 @@
                 </div>
             </div>
             <template x-if="!isLoading">
-                <nav aria-label="Page navigation">
+                <!-- <nav aria-label="Page navigation">
                     <ul class="pagination gap-2 mb-5 justify-content-center">
                         <li class="page-item">
                             <button type="button" class="page-link rounded-0 fs-5" @click="fetchMyEvaluations(currentPage - 1);currentPage = currentPage-1; isLoading= true;" :disabled="currentPage === 1">&laquo; السابق</button>
@@ -197,6 +197,26 @@
                         </li>
                     </ul>
                      
+                </nav> -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                      <li class="page-item">
+                        <a class="page-link" @click="fetchMyEvaluations(currentPage - 1)" :disabled="currentPage === 1">&laquo; Previous</a>
+                      </li>
+                      <template x-for="group in pageGroups" :key="group">
+                        <template x-if="group === '...'">
+                          <li class="page-item disabled"><span class="page-link">...</span></li>
+                        </template>
+                        <template x-if="group !== '...'">
+                          <li class="page-item" :class="{ 'active': group === currentPage }">
+                            <a class="page-link" @click="fetchMyEvaluations(group)" x-text="group"></a>
+                          </li>
+                        </template>
+                      </template>
+                      <li class="page-item">
+                        <a class="page-link" @click="fetchMyEvaluations(currentPage + 1)" :disabled="currentPage === totalPages">Next &raquo;</a>
+                      </li>
+                    </ul>
                 </nav>
             </template>
         </div>
@@ -328,11 +348,35 @@
                 MyEvaluations:{}, 
                 currentPage: 1,
                 totalPages: 1,
+                pageGroups: [],
                 isEmpty: true, 
                 isLoading: true,
                 noReports: false,
                 isAuthedUser: false,
                 baseUrl: "https://partner-api.cartrust.sa",
+                loadPageGroups() {
+                    const groups = [];
+                    let start = Math.max(1, this.currentPage - 2);
+                    let end = Math.min(this.totalPages, start + 4);
+
+                    if (this.totalPages > 5 && end === this.totalPages) {
+                        start = Math.max(1, end - 4);
+                    }
+
+                    if (start > 1) {
+                        groups.push('...');
+                    }
+
+                    for (let i = start; i <= end; i++) {
+                        groups.push(i);
+                    }
+
+                    if (end < this.totalPages) {
+                        groups.push('...');
+                    }
+
+                    this.pageGroups = groups;
+                },
                 fetchMyEvaluations(page) {
                     const endpointUrl = `/api/v2/pg/evaluations?page=${page}`;
                     const fullUrl = this.baseUrl + endpointUrl;

@@ -382,7 +382,7 @@
                                                     <h5> المعلومات </h5>  
                                                 </div> 
                                                 <div class="mb-3">
-                                                <input type="number" x-model="paymentDetails.mileage"
+                                                <input type="text" inputmode="numeric" x-model="paymentDetails.mileage"
                                                     placeholder="ادخل قراءه العداد بشكل صحيح" class="form-control" min="0" pattern="[0-9]*" required>
                                                     <i class="text-danger" x-show="showValidationMsg">هذا الحقل مطلوب</i>
                                                 </div>
@@ -737,7 +737,7 @@
                                                             <div class="order-card py-3 d-flex gap-2 border-bottom mb-3" :id="cart_id">
                                                                 <template x-if="carSelected.make_logo">
                                                                     <img :src="carSelected.make_logo" :data-src="carSelected.make_logo" width="85px"
-                                                                        height="85px" class="lazyload  border rounded" alt="">
+                                                                        height="85px" class="lazyload  border rounded order-img" alt="">
                                                                 </template>
                                                                 <div class="card-details text-dark">
                                                                     <h6 class="carMenufactor" x-text="carSelected.make">  </h6>

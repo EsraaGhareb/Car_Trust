@@ -442,6 +442,13 @@ input[type=number] {
   margin: 13px 0;
   border: 1px solid #aaa;
 }
+#profile .profile-sec .order-img,
+#profile .payment-sec .order-img,
+#Payment .profile-sec .order-img,
+#Payment .payment-sec .order-img {
+  width: 85px !important;
+  height: 85px !important;
+}
 #profile .profile-sec .payment-check .form-check,
 #profile .payment-sec .payment-check .form-check,
 #Payment .profile-sec .payment-check .form-check,
