@@ -378,8 +378,7 @@
                         "Authorization": "Bearer " + retrieveAuth().access_token
                     }})
                     .then((res) => res.json())
-                        .then((data) => {  
-                                console.log("payment status ",data);
+                        .then((data) => {   
                                 if(data.status ){  
                                     this.successPayment = true;
                                     this.evaluateData();

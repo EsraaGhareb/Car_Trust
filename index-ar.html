@@ -1481,16 +1481,12 @@
                         .then((data) => {     
                             localStorage.setItem("card_info", JSON.stringify(data)); 
                             this.cart_id = data.cart_id;
-                            // if(this.payablePrice != ""){
-                                // setTimeout(function(){
-                                // location.href = "payment.html"; 
+                           
                                 this.showPaymentStep = true;
                                 this.showNextStep = false;
                                 this.showPrevStep = false;
                                 this.showCarNotFoundStep = false;
-                                // console.log(this.cart_id , data.cart_id);  
-                                // },100)  
-                            // }
+                              
                         })
                         .catch((error) => {  
                             console.error("Error:", error);
@@ -1509,11 +1505,9 @@
                     SelectedCarDetails.make = (this.VecheilManufacturer_val).replace(/_+\d+$/, ''); 
                     SelectedCarDetails.model = this.VecheilModel_val; 
                     SelectedCarDetails.year = this.VecheilYear_val; 
-                    SelectedCarDetails.trim = this.VecheilTrim_val; 
-                    // localStorage.setItem("SelectedCarDetails",JSON.stringify(SelectedCarDetails));
+                    SelectedCarDetails.trim = this.VecheilTrim_val;  
                     localStorage.setItem("paymentDetails",JSON.stringify(paymentDetails));
-                    this.carSelected = SelectedCarDetails;  
-                    // console.log("nnnn",SelectedCarDetails , "iiii" , this.carSelected);
+                    this.carSelected = SelectedCarDetails;   
                     this.CartCreate(); 
                 },
                 checkValidationAndAuth() {          
@@ -1655,13 +1649,11 @@
                         }, 
                     })
                         .then((response) => response.json())
-                        .then((data) => {
-                            console.log("pay" , data)
+                        .then((data) => { 
                             let payablePrice = (( data.response.payable_from_web).replace(/,/g, '.'));
                             this.PriceTaxes = Number((payablePrice*0.15).toFixed(2))
                             this.carEvalPrice = Math.round(+payablePrice + this.PriceTaxes); 
-                            this.isEmpty = false;
-                            console.log("taxs",this.PriceTaxes , this.carEvalPrice);
+                            this.isEmpty = false; 
                               
                         })
                         .catch((error) => {
