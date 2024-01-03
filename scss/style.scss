@@ -72,9 +72,11 @@ body {
   font-size: 40px;
   margin-bottom: 30px;
 }
-.rtl{
+
+.rtl {
   direction: rtl !important;
 }
+
 h1,
 .h1,
 h2,
@@ -161,12 +163,15 @@ h6,
   background-color: $mainColor;
   padding: 4px;
 }
-.carousel-caption{
+
+.carousel-caption {
   padding-top: 130px;
 }
-.withAppAlert .carousel-caption{
+
+.withAppAlert .carousel-caption {
   padding-top: 230px;
 }
+
 .carousel-item>img {
   height: 100% !important;
 }
@@ -281,10 +286,11 @@ a.nav-link.dropdown-toggle.active::after {
   }
 }
 
-.carousel-inner .carousel-item>img{
-position: absolute;
-z-index: 0;
+.carousel-inner .carousel-item>img {
+  position: absolute;
+  z-index: 0;
 }
+
 .carousel-control-prev,
 .carousel-control-next {
   width: 5%;
@@ -299,23 +305,27 @@ z-index: 0;
     width: 14px;
     height: 3px;
   }
-  
+
   /* Define the track (the area where the thumb doesn't cover) */
   ::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Color of the track */
+    background-color: #f1f1f1;
+    /* Color of the track */
   }
-  
+
   /* Define the thumb (the draggable handle) */
   ::-webkit-scrollbar-thumb {
-    background-color: #888; /* Color of the thumb */
-    border-radius: 6px; /* Rounded corners of the thumb */
+    background-color: #888;
+    /* Color of the thumb */
+    border-radius: 6px;
+    /* Rounded corners of the thumb */
   }
-  
+
   /* Define the corners of the scrollbar */
   ::-webkit-scrollbar-corner {
-    background-color: #f1f1f1; /* Color of the corners */
+    background-color: #f1f1f1;
+    /* Color of the corners */
   }
-   
+
 
   .form-title {
     font-size: 18px;
@@ -417,6 +427,7 @@ z-index: 0;
     border-radius: 5px;
   }
 }
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -428,8 +439,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
- /* Add your loading animation styles here */
- .loading-placeholder {
+
+/* Add your loading animation styles here */
+.loading-placeholder {
   background-color: #eee;
   animation: loadingAnimation 1s infinite alternate;
   height: 50px;
@@ -443,6 +455,7 @@ input[type=number] {
     background-color: #ddd;
   }
 }
+
 .bg-red {
   background-color: red;
 }
@@ -469,6 +482,7 @@ input[type=number] {
 #Payment {
   padding: 40px 0;
   margin-top: -200px;
+
   .profile,
   .payment {
     &-sec {
@@ -477,21 +491,26 @@ input[type=number] {
       z-index: 11;
       position: relative;
       border: 1px solid #AAA;
+
       .profile-info,
       .order-details,
       .payment-method {
         height: 100%;
         border: 1px solid #AAA;
-        .form-control{
-          padding: 12px; 
+
+        .form-control {
+          padding: 12px;
           margin: 13px 0;
           border: 1px solid #aaa;
         }
       }
-.order-img{
-  width: 85px !important;
-  height:85px !important;
-}
+
+      .order-img {
+        width: 85px !important;
+        height: 85px !important;
+        object-fit: contain !important;
+      }
+
       .payment-check {
         .form-check {
           padding: 10px;
@@ -499,10 +518,12 @@ input[type=number] {
           border: 1px solid #aaa;
           border-radius: 4px;
           padding-inline-start: 3em;
-          label{
-          
+
+          label {
+
             color: #000;
           }
+
           .form-check-input {
             float: right;
             height: 20px;
@@ -511,19 +532,22 @@ input[type=number] {
             border: 2px solid;
             margin-inline-start: -2em;
           }
-          .form-check-input:checked{
+
+          .form-check-input:checked {
             border: 3px solid #fff !important;
             box-shadow: 0 0 0 1px #0299f8;
           }
+
           .form-check-input:checked+label {
             color: #0299f8;
           }
         }
       }
-      .card-num{ 
+
+      .card-num {
         background: url(../img/card.svg) left 10px center/35px no-repeat;
       }
-       
+
     }
   }
 }
@@ -673,46 +697,57 @@ input[type=number] {
     }
   }
 }
+
 //About us
 #aboutUs {
   background-color: #2C2D92;
   color: #fff;
   padding: 40px 0;
-  p{
+
+  p {
     text-align: left;
   }
-  h2,h1{
+
+  h2,
+  h1 {
     color: #fff;
   }
 }
+
 //services
-#photoServices{
-  img{
+#photoServices {
+  img {
     border-radius: 8px;
     margin-bottom: 8px;
     width: 100%;
   }
-  p{
+
+  p {
     font-size: 18px;
     color: #000;
   }
-  .soon{
-    color:#CF181D
+
+  .soon {
+    color: #CF181D
   }
 }
-#certification{
+
+#certification {
   margin: 40px auto 0;
   text-align: center;
   background-color: #EEEEEE;
   padding: 80px 0;
-  h1{
+
+  h1 {
     text-align: center;
     margin-bottom: 40px;
   }
-  img{
+
+  img {
     padding: 16px;
   }
 }
+
 //footer
 footer {
   position: relative;
@@ -931,7 +966,7 @@ form {
   }
 
   .carousel-caption {
-    top: -1px; 
+    top: -1px;
   }
 
   .navbar .navbar-nav .nav-link.active::after {
@@ -1059,14 +1094,16 @@ form {
   footer h5 {
     font-size: 24px;
   }
-  #services{
+
+  #services {
     .photos {
-      img{
+      img {
         width: 100%;
       }
     }
-    .photo3{
-        right: 75px !important;
+
+    .photo3 {
+      right: 75px !important;
     }
   }
 }

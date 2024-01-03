@@ -266,14 +266,18 @@ a.nav-link.dropdown-toggle.active::after {
   height: 3px;
 }
 .carForm ::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Color of the track */
+  background-color: #f1f1f1;
+  /* Color of the track */
 }
 .carForm ::-webkit-scrollbar-thumb {
-  background-color: #888; /* Color of the thumb */
-  border-radius: 6px; /* Rounded corners of the thumb */
+  background-color: #888;
+  /* Color of the thumb */
+  border-radius: 6px;
+  /* Rounded corners of the thumb */
 }
 .carForm ::-webkit-scrollbar-corner {
-  background-color: #f1f1f1; /* Color of the corners */
+  background-color: #f1f1f1;
+  /* Color of the corners */
 }
 .carForm .form-title {
   font-size: 18px;
@@ -448,6 +452,8 @@ input[type=number] {
 #Payment .payment-sec .order-img {
   width: 85px !important;
   height: 85px !important;
+  -o-object-fit: contain !important;
+     object-fit: contain !important;
 }
 #profile .profile-sec .payment-check .form-check,
 #profile .payment-sec .payment-check .form-check,
@@ -627,7 +633,8 @@ input[type=number] {
 #aboutUs p {
   text-align: left;
 }
-#aboutUs h2, #aboutUs h1 {
+#aboutUs h2,
+#aboutUs h1 {
   color: #fff;
 }
 

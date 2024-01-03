@@ -101,4 +101,3 @@ function convertArabicToEnglish(arabicNumber) {
 
   return arabicNumber.replace(/[٠-٩]/g, (match) => arabicToEnglishMap.get(match));
 }
-

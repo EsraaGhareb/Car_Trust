@@ -363,10 +363,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="btns-submit-step" x-show="showBtns">
+                                                <div class="btns-submit-step" x-show="showBtns"> 
                                                     <div class="d-flex gap-3 justify-content-center py-2 flex-wrap">
                                                         <button type="button" class="btn btn-primary btn-lg"
-                                                            x-on:click="showNextStep = true; showPrevStep = false; getOptionList(); paymentEvaluateInfo(); ">
+                                                            x-on:click="showNextStep = true; showPrevStep = false; getOptionList(); ">
                                                             التالي <i class="bi bi-arrow-left"></i>
                                                         </button>
                                                         <button type="button" class="btn btn-outline-dark btn-lg"
@@ -1431,6 +1431,9 @@
  
                 },
                 getOptionList(){
+                    if (retrieveAuth().isAuthenticated) {
+                        this.paymentEvaluateInfo();
+                    } 
                     const endpointUrl = `/api/v2/pg/options/list`;
                     const fullUrl = this.baseUrl + endpointUrl;
 
@@ -1476,7 +1479,7 @@
                     })
                         .then((response) => response.json())
                         .then((data) => {     
-                            // localStorage.setItem("card_info", JSON.stringify(data)); 
+                            localStorage.setItem("card_info", JSON.stringify(data)); 
                             this.cart_id = data.cart_id;
                             // if(this.payablePrice != ""){
                                 // setTimeout(function(){
@@ -1485,7 +1488,7 @@
                                 this.showNextStep = false;
                                 this.showPrevStep = false;
                                 this.showCarNotFoundStep = false;
-                                console.log(this.cart_id , data.cart_id);  
+                                // console.log(this.cart_id , data.cart_id);  
                                 // },100)  
                             // }
                         })
@@ -1510,7 +1513,7 @@
                     // localStorage.setItem("SelectedCarDetails",JSON.stringify(SelectedCarDetails));
                     localStorage.setItem("paymentDetails",JSON.stringify(paymentDetails));
                     this.carSelected = SelectedCarDetails;  
-                    console.log("nnnn",SelectedCarDetails , "iiii" , this.carSelected);
+                    // console.log("nnnn",SelectedCarDetails , "iiii" , this.carSelected);
                     this.CartCreate(); 
                 },
                 checkValidationAndAuth() {          
@@ -1590,6 +1593,8 @@
                                 // success
                                 approve(data.access_token, data.user_id); 
                                 this.FillCarData();
+                                this.paymentEvaluateInfo();
+                                this.checkLoggedUser();
                                 
                             } else {
                                 // fail
@@ -1651,12 +1656,12 @@
                     })
                         .then((response) => response.json())
                         .then((data) => {
-                            
+                            console.log("pay" , data)
                             let payablePrice = (( data.response.payable_from_web).replace(/,/g, '.'));
                             this.PriceTaxes = Number((payablePrice*0.15).toFixed(2))
                             this.carEvalPrice = Math.round(+payablePrice + this.PriceTaxes); 
                             this.isEmpty = false;
-                            console.log(this.PriceTaxes , this.carEvalPrice);
+                            console.log("taxs",this.PriceTaxes , this.carEvalPrice);
                               
                         })
                         .catch((error) => {
